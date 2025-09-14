@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Guest;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
@@ -33,6 +34,6 @@ class HomeController extends Controller
             // ->image(default: fn() => asset(setupData('favicon')))
             ->flipp('blog', 'your_flipp_id_here')
             ->twitterSite('@divafam');
-        return view('home');
+        return view('guest.home');
     }
 }
