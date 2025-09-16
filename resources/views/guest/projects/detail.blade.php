@@ -1,0 +1,179 @@
+@extends('layouts.app')
+@section('content')
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-bar text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-12">
+                    <h2 class="breadcrumb-title mb-2">Divafam Project</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center mb-0">
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Project Detail</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Breadcrumb -->
+    <section class="course-details-two">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card bg-light">
+                        <div class="card-body d-lg-flex align-items-center">
+                            <div class="position-relative">
+                                <a href="https://www.youtube.com/embed/1trvO6dqQUI" id="openVideoBtn" target="_blank">
+                                    <img class="img-fluid rounded-2" src="assets/img/projects/project-video-bg.jpg"
+                                        alt="DivaFam Project">
+                                    <div class="play-icon">
+                                        <i class="ti ti-player-play-filled fs-28"></i>
+                                    </div>
+                                </a>
+                            </div>
+                            <div id="videoModal">
+                                <div class="modal-content1">
+                                    <span class="close-btn" id="closeModal">&times;</span>
+                                    <iframe id="youtubeIframe" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                            <div class="w-100 ps-lg-4">
+                                <h3 class="mb-2">DivaFam Women Empowerment Initiative</h3>
+                                <p class="fs-14 mb-3">
+                                    This project focuses on empowering women in underserved communities
+                                    by providing vocational training, mentorship, and startup support for
+                                    small businesses.
+                                </p>
+                                <div class="d-flex align-items-center gap-2 gap-sm-3 gap-xl-4 flex-wrap my-3 my-sm-0">
+                                    <p class="fw-medium d-flex align-items-center mb-0">
+                                        <img class="me-2" src="assets/img/icons/people.svg" alt="Beneficiaries">250+
+                                        Beneficiaries
+                                    </p>
+                                    <p class="fw-medium d-flex align-items-center mb-0">
+                                        <img class="me-2" src="assets/img/icons/timer-start.svg" alt="Duration">Ongoing
+                                    </p>
+                                    <span class="badge badge-sm rounded-pill bg-success fs-12">Community Project</span>
+                                </div>
+                                <div class="d-sm-flex align-items-center justify-content-sm-between mt-3">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar avatar-lg">
+                                            <img class="rounded-circle" src="assets/img/avatar/divafam-founder.jpg"
+                                                alt="Founder">
+                                        </div>
+                                        <div class="ms-2">
+                                            <h5 class="fs-18 fw-semibold"><a href="#">Fuseini Abdul-Hafiz Wuninsu</a>
+                                            </h5>
+                                            <p class="fs-14">Project Coordinator</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex mt-sm-0 mt-2 align-items-center">
+                                        <i class="fa-solid fa-star text-warning me-1"></i>
+                                        <i class="fa-solid fa-star text-warning me-1"></i>
+                                        <i class="fa-solid fa-star text-warning me-1"></i>
+                                        <i class="fa-solid fa-star text-warning me-1"></i>
+                                        <i class="fa-solid fa-star-half-stroke text-warning me-1"></i>
+                                        <p class="fs-14"><span class="text-gray-9">4.5</span> (Community Impact Rating)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Overview -->
+            <div class="row mt-4">
+                <div class="col-lg-8">
+                    <div>
+                        <img src="assets/img/projects/project-details.jpg" alt="DivaFam Project Image"
+                            class="img-fluid mb-4">
+                    </div>
+                    <div class="project-page-content pt-0">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h5 class="mb-3">Overview</h5>
+                                <p>
+                                    The DivaFam Women Empowerment Initiative is designed to uplift women
+                                    by providing access to skills training in tailoring, catering, and digital literacy.
+                                    With the support of local sponsors and donors, we have created a safe
+                                    learning environment and provided startup kits for over 250 women.
+                                </p>
+                                <h6 class="mb-2">Key Achievements</h6>
+                                <ul class="custom-list mb-3">
+                                    <li class="list-item">250+ women trained in vocational skills</li>
+                                    <li class="list-item">60% of beneficiaries started small businesses</li>
+                                    <li class="list-item">Established community savings groups</li>
+                                    <li class="list-item">Ongoing mentorship program</li>
+                                </ul>
+                                <h6 class="mb-2">Supported By</h6>
+                                <p>
+                                    Special thanks to our sponsors and donors who made this project a success,
+                                    including community leaders, local businesses, and international partners.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Comment / Feedback -->
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="subs-title mb-3">Share Your Feedback</h5>
+                                <form class="project-feedback-form">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Name</label>
+                                                <input class="form-control" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Email</label>
+                                                <input class="form-control" type="email">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Comments</label>
+                                                <textarea class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-success">Submit Feedback</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <div class="project-sidebar mt-0">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h5 class="subs-title mb-4">Project Info</h5>
+                                <ul>
+                                    <li><strong>Status:</strong> Ongoing</li>
+                                    <li><strong>Start Date:</strong> March 2024</li>
+                                    <li><strong>Beneficiaries:</strong> 250+</li>
+                                    <li><strong>Location:</strong> Tamale, Ghana</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="subs-title mb-4">How You Can Help</h5>
+                                <p>Support our mission by donating or volunteering with DivaFam. Every contribution creates
+                                    impact.</p>
+                                <a href="donate.html" class="btn btn-primary w-100 mt-2">Donate Now</a>
+                                <a href="volunteer.html" class="btn btn-outline-success w-100 mt-2">Become a Volunteer</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+@endsection

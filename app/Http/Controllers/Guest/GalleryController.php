@@ -12,6 +12,17 @@ class GalleryController extends Controller
      */
     public function index(Request $request)
     {
+        seo()
+            ->site('DivaFam — Empowering Women Through Community and Connection')
+            ->title('Gallery - ' . config('app.name', 'DivaFam'))
+            ->description('Explore the visual journey of DivaFam’s impact through images of our community events, women-led initiatives, and sustainable farming projects.')
+            ->keywords('DivaFam gallery, women empowerment photos, sustainable farming images, community events, agricultural projects, youth training')
+            ->canonical(url()->current())
+            ->twitterCard('summary_large_image')
+            ->image(default: fn() => asset('images/gallery-banner.jpg'))
+            ->flipp('gallery', 'your_flipp_id_here')
+            ->twitterSite('@divafam');
+
         return view('guest.gallery');
     }
 }

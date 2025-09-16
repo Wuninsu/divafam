@@ -1,367 +1,246 @@
 @extends('layouts.app')
 @section('content')
-<!-- Breadcrumb -->
-<div class="breadcrumb-bar text-center">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 col-12">
-                <h2 class="breadcrumb-title mb-2">Blog Left Sidebar</h2>
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb justify-content-center mb-0">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Blog Left Sidebar</li>
-                    </ol>
-                </nav>
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-bar text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-12">
+                    <h2 class="breadcrumb-title mb-2">Divafam News</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center mb-0">
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">News</li>
+                        </ol>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- /Breadcrumb -->
+    <!-- /Breadcrumb -->
 
-<!-- blog -->
-<div class="content">
-    <div class="container">
-        <div class="row">
-            <!-- Blog Sidebar -->
-            <div class="col-lg-4 sidebar-left mt-4 mt-lg-0 theiaStickySidebar">
+    <!-- blog -->
+    <div class="content">
+        <div class="container">
 
-                <!-- Search -->
-                <div class="search-widget blog-search blog-widget">
-                    <div>
-                        <h5 class="mb-3 fs-18">Search</h5>
-                        <form class="search-form">
-                            <div class="position-relative">
-                                <input type="text" placeholder="Search..." class="form-control">
-                                <button type="submit" class="search-btn"><i
-                                        class="isax isax-search-normal-1"></i></button>
-                            </div>
-                        </form>
+            <div class="row">
+                <!-- Blog Sidebar -->
+                <div class="col-lg-4 sidebar-left mt-4 mt-lg-0 theiaStickySidebar">
+
+                    <!-- Search -->
+                    <div class="search-widget blog-search blog-widget">
+                        <div>
+                            <h5 class="mb-3 fs-18">Search</h5>
+                            <form class="search-form">
+                                <div class="position-relative">
+                                    <input type="text" placeholder="Search..." class="form-control">
+                                    <button type="submit" class="search-btn"><i
+                                            class="isax isax-search-normal-1"></i></button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </div>
-                <!-- /Search -->
+                    <!-- /Search -->
 
-                <!-- Categories -->
-                <div class="blog-widget">
-                    <h5 class="fs-18 mb-3">Categories</h5>
-                    <div class="categories-list">
-                        <h6><a href="javascript:void(0);"><i
-                                    class="isax isax-arrow-right-3 fs-14 text-secondary fw-bold"></i> Business<span
-                                    class="float-end">04</span> </a></h6>
-                        <h6><a href="javascript:void(0);"><i
-                                    class="isax isax-arrow-right-3 fs-14 text-secondary fw-bold"></i> Education<span
-                                    class="float-end">03</span> </a></h6>
-                        <h6><a href="javascript:void(0);"><i
-                                    class="isax isax-arrow-right-3 fs-14 text-secondary fw-bold"></i> Graphics
-                                Design<span class="float-end">14</span> </a></h6>
-                        <h6><a href="javascript:void(0);"><i
-                                    class="isax isax-arrow-right-3 fs-14 text-secondary fw-bold"></i> Programming<span
-                                    class="float-end">12</span> </a></h6>
-                        <h6><a href="javascript:void(0);"><i
-                                    class="isax isax-arrow-right-3 fs-14 text-secondary fw-bold"></i> Web Design<span
-                                    class="float-end">15</span></a></h6>
+                    <!-- Categories -->
+                    <div class="blog-widget">
+                        <h5 class="fs-18 mb-3">Categories</h5>
+                        <div class="categories-list">
+                            <h6 class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <input type="checkbox" id="category-agriculture" class="me-2">
+                                    <label for="category-agriculture" class="fs-14 text-secondary fw-bold">
+                                        Agriculture
+                                    </label>
+                                </div>
+                                <span class="badge rounded-pill bg-light text-dark">08</span>
+                            </h6>
+                            <h6 class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <input type="checkbox" id="category-community" class="me-2">
+                                    <label for="category-community" class="fs-14 text-secondary fw-bold">
+                                        Community Development
+                                    </label>
+                                </div>
+                                <span class="badge rounded-pill bg-light text-dark">05</span>
+                            </h6>
+                            <h6 class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <input type="checkbox" id="category-education" class="me-2">
+                                    <label for="category-education" class="fs-14 text-secondary fw-bold">
+                                        Education & Training
+                                    </label>
+                                </div>
+                                <span class="badge rounded-pill bg-light text-dark">06</span>
+                            </h6>
+                            <h6 class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <input type="checkbox" id="category-health" class="me-2">
+                                    <label for="category-health" class="fs-14 text-secondary fw-bold">
+                                        Farmer Health
+                                    </label>
+                                </div>
+                                <span class="badge rounded-pill bg-light text-dark">03</span>
+                            </h6>
+                            <h6 class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <input type="checkbox" id="category-climate" class="me-2">
+                                    <label for="category-climate" class="fs-14 text-secondary fw-bold">
+                                        Climate Awareness
+                                    </label>
+                                </div>
+                                <span class="badge rounded-pill bg-light text-dark">04</span>
+                            </h6>
+                            <h6 class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <input type="checkbox" id="category-water" class="me-2">
+                                    <label for="category-water" class="fs-14 text-secondary fw-bold">
+                                        Clean Water Projects
+                                    </label>
+                                </div>
+                                <span class="badge rounded-pill bg-light text-dark">02</span>
+                            </h6>
+                        </div>
                     </div>
-                </div>
-                <!-- /Categories -->
-
-                <!-- Latest Posts -->
-                <div class="blog-widget">
-                    <h5 class="fs-18 mb-3">Recent Blogs</h5>
-                    <ul class="recent-blog-list">
-                        <li>
-                            <div class="post-thumb">
-                                <a href="blog-details.html">
-                                    <img class="img-fluid" src="assets/img/blog/recent-blog-1.jpg" alt="Img">
-                                </a>
-                            </div>
-                            <div class="post-info">
-                                <h6 class="text-truncate line-clamb-2">
-                                    <a href="blog-details.html">Learn Webs Applications Development from Experts</a>
-                                </h6>
-                                <p class="d-flex align-items-center"><img class="img-fluid me-1"
-                                        src="assets/img/icons/calendar2.svg" alt="Img">20 Apr 2024</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="post-thumb">
-                                <a href="blog-details.html">
-                                    <img class="img-fluid" src="assets/img/blog/recent-blog-2.jpg" alt="Img">
-                                </a>
-                            </div>
-                            <div class="post-info">
-                                <h6 class="text-truncate line-clamb-2">
-                                    <a href="blog-details.html">Expand Your Career Opportunities With Python</a>
-                                </h6>
-                                <p class="d-flex align-items-center"><img class="img-fluid me-1"
-                                        src="assets/img/icons/calendar2.svg" alt="Img">16 Apr 2024</p>
-                            </div>
-                        </li>
-                        <li class="mb-0">
-                            <div class="post-thumb">
-                                <a href="blog-details.html">
-                                    <img class="img-fluid" src="assets/img/blog/recent-blog-3.jpg" alt="Img">
-                                </a>
-                            </div>
-                            <div class="post-info">
-                                <h6 class="text-truncate line-clamb-2">
-                                    <a href="blog-details.html">Learn Webs Applications Development from Experts</a>
-                                </h6>
-                                <p class="d-flex align-items-center"><img class="img-fluid me-1"
-                                        src="assets/img/icons/calendar2.svg" alt="Img">12 Apr 2024</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /Latest Posts -->
 
 
-                <!-- Tags -->
-                <div class="blog-widget">
-                    <h5 class="fs-18 mb-3">Latest Tags</h5>
-                    <div class="card-body">
-                        <ul class="latest-tags">
-                            <li><a href="javascript:void(0);" class="tag rounded-1 p-2 fs-10 fw-medium d-flex">HTML</a>
-                            </li>
-                            <li><a href="javascript:void(0);"
-                                    class="tag rounded-1 p-2 fs-10 fw-medium d-flex">Javascript</a></li>
-                            <li><a href="javascript:void(0);"
-                                    class="tag rounded-1 p-2 fs-10 fw-medium d-flex">Benefits</a></li>
-                            <li><a href="javascript:void(0);" class="tag rounded-1 p-2 fs-10 fw-medium d-flex">Web
-                                    Design</a></li>
-                            <li><a href="javascript:void(0);"
-                                    class="tag rounded-1 p-2 fs-10 fw-medium d-flex">Programming</a></li>
-                            <li><a href="javascript:void(0);" class="tag rounded-1 p-2 fs-10 fw-medium d-flex">Career
-                                    Growth</a></li>
-                            <li><a href="javascript:void(0);"
-                                    class="tag rounded-1 p-2 fs-10 fw-medium d-flex">Guidelines</a></li>
-                        </ul>
+                    <!-- /Categories -->
+
+                    <!-- Tags -->
+                    <div class="blog-widget">
+                        <h5 class="fs-18 mb-3">Latest Tags</h5>
+                        <div class="card-body">
+                            <ul class="latest-tags">
+                                <li><a href="javascript:void(0);"
+                                        class="tag rounded-1 p-2 fs-10 fw-medium d-flex">Sustainable Farming</a></li>
+                                <li><a href="javascript:void(0);" class="tag rounded-1 p-2 fs-10 fw-medium d-flex">Women
+                                        Empowerment</a></li>
+                                <li><a href="javascript:void(0);" class="tag rounded-1 p-2 fs-10 fw-medium d-flex">Youth
+                                        Training</a></li>
+                                <li><a href="javascript:void(0);" class="tag rounded-1 p-2 fs-10 fw-medium d-flex">Community
+                                        Development</a></li>
+                                <li><a href="javascript:void(0);" class="tag rounded-1 p-2 fs-10 fw-medium d-flex">Clean
+                                        Water</a></li>
+                                <li><a href="javascript:void(0);" class="tag rounded-1 p-2 fs-10 fw-medium d-flex">Climate
+                                        Action</a></li>
+                                <li><a href="javascript:void(0);" class="tag rounded-1 p-2 fs-10 fw-medium d-flex">Farmer
+                                        Health</a></li>
+                                <li><a href="javascript:void(0);" class="tag rounded-1 p-2 fs-10 fw-medium d-flex">Education
+                                        Access</a></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <!-- /Tags -->
 
-            </div>
-            <!-- /Blog Sidebar -->
-            <div class="col-lg-8">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="blog">
-                            <div class="blog-image">
-                                <a href="blog-details.html">
-                                    <img class="img-fluid" src="assets/img/blog/blog-7.jpg" alt="img">
-                                </a>
-                            </div>
-                            <div class="blog-item">
-                                <span class="badge bg-success mb-2">Education</span>
-                                <h5 class="mb-2"><a href="blog-details.html">Learn Web App Development from Experts
-                                        in 2024</a></h5>
-                                <p class="text-truncate line-clamb-2">Master the art of web application development
-                                    with expert-led courses that cover the latest tools, fram...</p>
-                                <div class="blog-info">
-                                    <div class="d-flex align-items-center flex-wrap justify-content-between">
-                                        <div class="d-flex align-items-center user-profile">
-                                            <a href="instructor-details.html" class="user-img"><img
-                                                    class="rounded-pill w-auto" src="assets/img/user/user-52.jpg"
-                                                    alt="img"></a>
-                                            <a href="instructor-details.html" class="user-name">John Miller</a>
+                    <!-- /Tags -->
+
+                </div>
+                <!-- /Blog Sidebar -->
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="blog">
+                                <div class="blog-image">
+                                    <a href="{{ route('news.show') }}">
+                                        <img class="img-fluid w-100" style="height: 250px; object-fit: cover;"
+                                            src="assets/diva/img-15.jpg" alt="img">
+                                    </a>
+                                </div>
+                                <div class="blog-item">
+                                    <span class="badge bg-success mb-2">Education</span>
+                                    <h5 class="mb-2"><a href="{{ route('news.show') }}">Empowering Youth Through
+                                            Sustainable
+                                            Farming</a></h5>
+                                    <p class="text-truncate line-clamb-2">Discover how Divafam is training young people in
+                                        modern, eco-friendly
+                                        farming practices to secure brighter futures for themselves and their communities...
+                                    </p>
+                                    <div class="blog-info">
+                                        <div class="d-flex align-items-center flex-wrap justify-content-between">
+                                            <div class="d-flex align-items-center user-profile">
+                                                <a href="#" class="user-img">
+                                                    <img class="rounded-pill w-auto"
+                                                        src="assets/img/user/local-author-1.jpg" alt="img">
+                                                </a>
+                                                <a href="#" class="user-name">Abena Owusu</a>
+                                            </div>
+                                            <ul class="d-flex align-items-center flex-wrap gap-2">
+                                                <li>
+                                                    <img class="me-1" src="assets/img/icons/calendar.svg"
+                                                        alt="img">
+                                                    <p>23 Apr 2024</p>
+                                                </li>
+                                            </ul>
                                         </div>
-                                        <ul class="d-flex align-items-center flex-wrap gap-2">
-                                            <li>
-                                                <img class="me-1" src="assets/img/icons/calendar.svg" alt="img">
-                                                <p>23 Apr 2024</p>
-                                            </li>
-                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="blog">
-                            <div class="blog-image">
-                                <a href="blog-details.html">
-                                    <img class="img-fluid" src="assets/img/blog/blog-8.jpg" alt="img">
-                                </a>
-                            </div>
-                            <div class="blog-item">
-                                <span class="badge bg-success mb-2">Guides</span>
-                                <h5 class="mb-2"><a href="blog-details.html">Expand Your Career Opportunities With
-                                        Python</a></h5>
-                                <p class="text-truncate line-clamb-2">Unlock limitless career opportunities by
-                                    mastering Python, one of the most versatile and in-demand ...</p>
-                                <div class="blog-info">
-                                    <div class="d-flex align-items-center flex-wrap justify-content-between">
-                                        <div class="d-flex align-items-center user-profile">
-                                            <a href="instructor-details.html" class="user-img"><img
-                                                    class="rounded-pill w-auto" src="assets/img/user/user-01.jpg"
-                                                    alt="img"></a>
-                                            <a href="instructor-details.html" class="user-name">Cedric Glenn</a>
+
+                        <div class="col-md-6">
+                            <div class="blog">
+                                <div class="blog-image">
+                                    <a href="{{ route('news.show') }}">
+                                        <img class="img-fluid w-100" style="height: 250px; object-fit: cover;"
+                                            src="assets/diva/img-8.jpg" alt="img">
+                                    </a>
+                                </div>
+                                <div class="blog-item">
+                                    <span class="badge bg-success mb-2">Guides</span>
+                                    <h5 class="mb-2"><a href="{{ route('news.show', ['id' => 2]) }}">Clean Water Projects
+                                            Transforming Rural
+                                            Lives</a></h5>
+                                    <p class="text-truncate line-clamb-2">Learn how borehole installations and water
+                                        initiatives are bringing
+                                        hope, health, and dignity to marginalized families in rural Ghana...</p>
+                                    <div class="blog-info">
+                                        <div class="d-flex align-items-center flex-wrap justify-content-between">
+                                            <div class="d-flex align-items-center user-profile">
+                                                <a href="#" class="user-img">
+                                                    <img class="rounded-pill w-auto"
+                                                        src="assets/img/user/local-author-2.jpg" alt="img">
+                                                </a>
+                                                <a href="#" class="user-name">Kwame Mensah</a>
+                                            </div>
+                                            <ul class="d-flex align-items-center flex-wrap gap-2">
+                                                <li>
+                                                    <img class="me-1" src="assets/img/icons/calendar.svg"
+                                                        alt="img">
+                                                    <p>20 Apr 2024</p>
+                                                </li>
+                                            </ul>
                                         </div>
-                                        <ul class="d-flex align-items-center flex-wrap gap-2">
-                                            <li>
-                                                <img class="me-1" src="assets/img/icons/calendar.svg" alt="img">
-                                                <p>20 Apr 2024</p>
-                                            </li>
-                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
-                    <div class="col-md-6">
-                        <div class="blog">
-                            <div class="blog-image">
-                                <a href="blog-details.html">
-                                    <img class="img-fluid" src="assets/img/blog/blog-9.jpg" alt="img">
-                                </a>
-                            </div>
-                            <div class="blog-item">
-                                <span class="badge bg-success mb-2">Technical</span>
-                                <h5 class="mb-2"><a href="blog-details.html">Learn Mobile Applications Development
-                                        from Experts</a></h5>
-                                <p class="text-truncate line-clamb-2">Elevate your skills with expert-led training in
-                                    mobile application development! Learn to design, develop ...</p>
-                                <div class="blog-info">
-                                    <div class="d-flex align-items-center flex-wrap justify-content-between">
-                                        <div class="d-flex align-items-center user-profile">
-                                            <a href="instructor-details.html" class="user-img"><img
-                                                    class="rounded-pill w-auto" src="assets/img/user/user-02.jpg"
-                                                    alt="img"></a>
-                                            <a href="instructor-details.html" class="user-name">John Reyes</a>
-                                        </div>
-                                        <ul class="d-flex align-items-center flex-wrap gap-2">
-                                            <li>
-                                                <img class="me-1" src="assets/img/icons/calendar.svg" alt="img">
-                                                <p>04 Apr 2024</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                    <!-- /pagination -->
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item prev">
+                                    <a class="page-link" href="javascript:void(0)" tabindex="-1"><i
+                                            class="fas fa-angle-left"></i></a>
+                                </li>
+                                <li class="page-item first-page active">
+                                    <a class="page-link" href="javascript:void(0)">1</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="javascript:void(0)">2</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="javascript:void(0)">3</a>
+                                </li>
+                                <li class="page-item next">
+                                    <a class="page-link" href="javascript:void(0)"><i class="fas fa-angle-right"></i></a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="blog">
-                            <div class="blog-image">
-                                <a href="blog-details.html">
-                                    <img class="img-fluid" src="assets/img/blog/blog-10.jpg" alt="img">
-                                </a>
-                            </div>
-                            <div class="blog-item">
-                                <span class="badge bg-success mb-2">Guides</span>
-                                <h5 class="mb-2"><a href="blog-details.html">Complete PHP Programming Career
-                                        Guideline</a></h5>
-                                <p class="text-truncate line-clamb-2">Master PHP programming with our comprehensive
-                                    career guideline! Learn the fundamentals, explore ...</p>
-                                <div class="blog-info">
-                                    <div class="d-flex align-items-center flex-wrap justify-content-between">
-                                        <div class="d-flex align-items-center user-profile">
-                                            <a href="instructor-details.html" class="user-img"><img
-                                                    class="rounded-pill w-auto" src="assets/img/user/user-03.jpg"
-                                                    alt="img"></a>
-                                            <a href="instructor-details.html" class="user-name">Donald Vesely</a>
-                                        </div>
-                                        <ul class="d-flex align-items-center flex-wrap gap-2">
-                                            <li>
-                                                <img class="me-1" src="assets/img/icons/calendar.svg" alt="img">
-                                                <p>24 Mar 2024</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="blog">
-                            <div class="blog-image">
-                                <a href="blog-details.html">
-                                    <img class="img-fluid" src="assets/img/blog/blog-11.jpg" alt="img">
-                                </a>
-                            </div>
-                            <div class="blog-item">
-                                <span class="badge bg-success mb-2">Education</span>
-                                <h5 class="mb-2"><a href="blog-details.html">The Complete JavaScript Course for
-                                        Beginners</a></h5>
-                                <p class="text-truncate line-clamb-2">Dive into the world of JavaScript with our
-                                    complete beginner-friendly course! Learn essential concepts...</p>
-                                <div class="blog-info">
-                                    <div class="d-flex align-items-center flex-wrap justify-content-between">
-                                        <div class="d-flex align-items-center user-profile">
-                                            <a href="instructor-details.html" class="user-img"><img
-                                                    class="rounded-pill w-auto" src="assets/img/user/user-05.jpg"
-                                                    alt="img"></a>
-                                            <a href="instructor-details.html" class="user-name">Richard Garza</a>
-                                        </div>
-                                        <ul class="d-flex align-items-center flex-wrap gap-2">
-                                            <li>
-                                                <img class="me-1" src="assets/img/icons/calendar.svg" alt="img">
-                                                <p>16 Mar 2024</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="blog">
-                            <div class="blog-image">
-                                <a href="blog-details.html">
-                                    <img class="img-fluid" src="assets/img/blog/blog-12.jpg" alt="img">
-                                </a>
-                            </div>
-                            <div class="blog-item">
-                                <span class="badge bg-success mb-2">Guides</span>
-                                <h5 class="mb-2"><a href="blog-details.html">Programming Content Guideline For
-                                        Beginners</a></h5>
-                                <p class="text-truncate line-clamb-2">Kickstart your programming journey with
-                                    beginner-friendly guidelines designed to simplify coding ...</p>
-                                <div class="blog-info">
-                                    <div class="d-flex align-items-center flex-wrap justify-content-between">
-                                        <div class="d-flex align-items-center user-profile">
-                                            <a href="instructor-details.html" class="user-img"><img
-                                                    class="rounded-pill w-auto" src="assets/img/user/user-06.jpg"
-                                                    alt="img"></a>
-                                            <a href="instructor-details.html" class="user-name">Lewis Devine</a>
-                                        </div>
-                                        <ul class="d-flex align-items-center flex-wrap gap-2">
-                                            <li>
-                                                <img class="me-1" src="assets/img/icons/calendar.svg" alt="img">
-                                                <p>10 Mar 2024</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- /pagination -->
                 </div>
-                <!-- /pagination -->
-                <div class="row align-items-center">
-                    <div class="col-md-12">
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item prev">
-                                <a class="page-link" href="javascript:void(0)" tabindex="-1"><i
-                                        class="fas fa-angle-left"></i></a>
-                            </li>
-                            <li class="page-item first-page active">
-                                <a class="page-link" href="javascript:void(0)">1</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="javascript:void(0)">2</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="javascript:void(0)">3</a>
-                            </li>
-                            <li class="page-item next">
-                                <a class="page-link" href="javascript:void(0)"><i class="fas fa-angle-right"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- /pagination -->
             </div>
         </div>
     </div>
-</div>
-<!-- blog -->
+    <!-- blog -->
 @endsection

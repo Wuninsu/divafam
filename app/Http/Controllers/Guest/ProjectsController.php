@@ -12,6 +12,17 @@ class ProjectsController extends Controller
      */
     public function index()
     {
+        seo()
+            ->site('DivaFam — Empowering Women Through Community and Connection')
+            ->title('Our Projects - ' . config('app.name', 'DivaFam'))
+            ->description('Discover the impactful projects by DivaFam that support women and youth, from sustainable farming programs to clean water initiatives and educational efforts.')
+            ->keywords('DivaFam projects, women empowerment projects, sustainable farming, clean water initiatives, youth programs, community development')
+            ->canonical(url()->current())
+            ->twitterCard('summary_large_image')
+            ->image(default: fn() => asset('images/projects-banner.jpg'))
+            ->flipp('projects', 'your_flipp_id_here')
+            ->twitterSite('@divafam');
+
         return view('guest.projects');
     }
 
@@ -36,7 +47,7 @@ class ProjectsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('guest.projects.detail');
     }
 
     /**

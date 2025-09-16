@@ -12,6 +12,17 @@ class BlogsController extends Controller
      */
     public function index()
     {
+        seo()
+            ->site('DivaFam — Empowering Women Through Community and Connection')
+            ->title('Blog - ' . config('app.name', 'DivaFam'))
+            ->description('Explore the latest blog posts by DivaFam. Read inspiring stories, community updates, and insights on women’s empowerment, agriculture, and sustainability.')
+            ->keywords('DivaFam blog, women empowerment blog, sustainable farming blog, community stories, agriculture, women in agriculture')
+            ->canonical(url()->current())
+            ->twitterCard('summary_large_image')
+            ->image(default: fn() => asset('images/blog-banner.jpg'))
+            ->flipp('blog', 'your_flipp_id_here')
+            ->twitterSite('@divafam');
+
         return view('guest.blogs');
     }
 
@@ -36,7 +47,7 @@ class BlogsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('guest.blogs.detail');
     }
 
     /**

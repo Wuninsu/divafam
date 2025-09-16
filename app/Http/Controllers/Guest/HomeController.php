@@ -31,9 +31,10 @@ class HomeController extends Controller
             ->keywords('DivaFam, women community, female empowerment, sisterhood, wellness for women, support groups, self-care, mental health, inspirational women, connection')
             ->canonical(url()->current())
             ->twitterCard('summary_large_image')
-            // ->image(default: fn() => asset(setupData('favicon')))
+            ->image(default: fn() => asset(setup_data('favicon')))
             ->flipp('blog', 'your_flipp_id_here')
             ->twitterSite('@divafam');
+
         return view('guest.home');
     }
 }

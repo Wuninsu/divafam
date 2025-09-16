@@ -12,12 +12,17 @@ Route::middleware('guest')->group(function () {
     Route::get('/gallery', [App\Http\Controllers\Guest\GalleryController::class, 'index'])->name('gallery');
     Route::get('/testimonials', [App\Http\Controllers\Guest\TestimonialController::class, 'index'])->name('testimonials');
 
+    Route::get('/terms', [App\Http\Controllers\Guest\TermsController::class, 'index'])->name('terms');
+    Route::get('/privacy', [App\Http\Controllers\Guest\PrivacyController::class, 'index'])->name('privacy');
+
+
+
     // Blog routes
     Route::controller(App\Http\Controllers\Guest\BlogsController::class)->group(function () {
         Route::get('/news', 'index')->name('news.index');
         Route::get('/news/create', 'create')->name('news.create');
         Route::post('/news', 'store')->name('news.store');
-        Route::get('/news/{id}', 'show')->name('news.show');
+        Route::get('/news/{id?}', 'show')->name('news.show');
     });
 
     // Project routes
@@ -25,8 +30,12 @@ Route::middleware('guest')->group(function () {
         Route::get('/projects', 'index')->name('projects.index');
         Route::get('/projects/create', 'create')->name('projects.create');
         Route::post('/projects', 'store')->name('projects.store');
-        Route::get('/projects/{id}', 'show')->name('projects.show');
+        Route::get('/projects/{id?}', 'show')->name('projects.show');
     });
 
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\Main\DashboardController::class, 'index'])->name('dashboard');
 });
 Auth::routes();
