@@ -10,7 +10,7 @@ class RoleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function roles()
     {
         return view('main.roles');
     }
@@ -18,9 +18,9 @@ class RoleController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function permissions()
     {
-        //
+        return view('main.permissions');
     }
 
     /**

@@ -108,7 +108,18 @@ Route::middleware('auth')->group(function () {
 
     // Users & Roles
     Route::resource('users', UserController::class);
-    Route::resource('roles', RoleController::class);
+    Route::controller(App\Http\Controllers\Main\UserController::class)->group(function () {
+        Route::get('/users', 'index')->name('users.index');
+        Route::get('/users/create', 'create')->name('users.create');
+        Route::post('/users', 'store')->name('users.store');
+        Route::get('/users/{user?}', 'show')->name('users.show');
+        Route::get('/users/manage-permissions/{user?}', 'show')->name('users.manage-permissions');
+    });
+    // Roles & Permissions routes
+    Route::controller(App\Http\Controllers\Main\RoleController::class)->group(function () {
+        Route::get('/roles', 'roles')->name('roles.index');
+        Route::get('/permissions', 'permissions')->name('permissions.index');
+    });
 
     // Settings
     Route::resource('settings', SettingController::class)->only(['index', 'update']);

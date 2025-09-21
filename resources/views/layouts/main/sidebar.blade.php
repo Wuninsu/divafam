@@ -7,7 +7,7 @@
                 {{-- Dashboard --}}
                 <li class="nav-item">
                     <div class="nav-item-wrapper">
-                        <a class="nav-link active label-1" href="{{ route('dashboard') }}">
+                        <a class="nav-link label-1 {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
                             <div class="d-flex align-items-center">
                                 <span class="nav-link-icon"><span data-feather="home"></span></span>
                                 <span class="nav-link-text">Dashboard</span>
@@ -112,24 +112,37 @@
                     </div>
                 </li>
 
-                {{-- Users & Roles --}}
+                {{-- Users, Roles & Permissions --}}
+                @php
+                $isRolesActive = request()->routeIs(['users.*','permissions.*', 'roles.*']);
+                @endphp
                 <li class="nav-item">
-
                     <div class="nav-item-wrapper">
-                        <a class="nav-link dropdown-indicator label-1" href="#nv-users" data-bs-toggle="collapse"
-                            aria-expanded="false" aria-controls="nv-users">
+                        <a class="nav-link dropdown-indicator label-1 {{ $isRolesActive ? '' : 'collapsed'}}"
+                            href="#nv-users" data-bs-toggle="collapse"
+                            aria-expanded="{{$isRolesActive ? 'true' : 'false'}}" aria-controls="nv-users">
                             <div class="d-flex align-items-center">
-                                <div class="dropdown-indicator-icon-wrapper"><span class="fas fa-caret-right"></span>
+                                <div class="dropdown-indicator-icon-wrapper"><span
+                                        class="fas fa-caret-{{$isRolesActive ? 'down' : 'right'}}"></span>
                                 </div>
                                 <span class="nav-link-icon"><span data-feather="users"></span></span>
                                 <span class="nav-link-text">Users</span>
                             </div>
                         </a>
                         <div class="parent-wrapper label-1">
-                            <ul class="nav collapse parent" id="nv-users" data-bs-parent="#navbarVerticalNav">
-                                <li class="nav-item"><a class="nav-link" href="{{ route('users.index') }}">All Users</a>
+                            <ul class="nav collapse parent {{$isRolesActive ? 'show' : ''}}" id="nv-users"
+                                data-bs-parent="#navbarVerticalNav">
+                                <li class="nav-item"><a
+                                        class="nav-link {{ request()->routeIs('roles.index') ? 'active' : '' }}"
+                                        href="{{ route('roles.index') }}">Roles</a>
                                 </li>
-                                <li class="nav-item"><a class="nav-link" href="{{ route('roles.index') }}">Roles</a>
+                                <li class="nav-item"><a
+                                        class="nav-link {{ request()->routeIs('users.index') ? 'active' : '' }}"
+                                        href="{{ route('users.index') }}">All Users</a>
+                                </li>
+                                <li class="nav-item"><a
+                                        class="nav-link {{ request()->routeIs('permissions.index') ? 'active' : '' }}"
+                                        href="{{ route('permissions.index') }}">Permissions</a>
                                 </li>
                             </ul>
                         </div>
