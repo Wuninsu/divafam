@@ -139,14 +139,14 @@
                         <div class="col-md-6">
                             <div class="blog">
                                 <div class="blog-image">
-                                    <a href="{{ route('news.show') }}">
+                                    <a href="{{ route('guest.news.show', ['id' => 2]) }}">
                                         <img class="img-fluid w-100" style="height: 250px; object-fit: cover;"
                                             src="assets/diva/img-15.jpg" alt="img">
                                     </a>
                                 </div>
                                 <div class="blog-item">
                                     <span class="badge bg-success mb-2">Education</span>
-                                    <h5 class="mb-2"><a href="{{ route('news.show') }}">Empowering Youth Through
+                                    <h5 class="mb-2"><a href="{{ route('guest.news.show', ['id' => 2]) }}">Empowering Youth Through
                                             Sustainable
                                             Farming</a></h5>
                                     <p class="text-truncate line-clamb-2">Discover how Divafam is training young people in
@@ -178,14 +178,14 @@
                         <div class="col-md-6">
                             <div class="blog">
                                 <div class="blog-image">
-                                    <a href="{{ route('news.show') }}">
+                                    <a href="{{ route('guest.news.show', ['id' => 2]) }}">
                                         <img class="img-fluid w-100" style="height: 250px; object-fit: cover;"
                                             src="assets/diva/img-8.jpg" alt="img">
                                     </a>
                                 </div>
                                 <div class="blog-item">
                                     <span class="badge bg-success mb-2">Guides</span>
-                                    <h5 class="mb-2"><a href="{{ route('news.show', ['id' => 2]) }}">Clean Water Projects
+                                    <h5 class="mb-2"><a href="{{ route('guest.news.show', ['id' => 2]) }}">Clean Water Projects
                                             Transforming Rural
                                             Lives</a></h5>
                                     <p class="text-truncate line-clamb-2">Learn how borehole installations and water

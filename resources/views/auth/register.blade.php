@@ -103,8 +103,8 @@
             <input class="form-check-input @error('termsService') is-invalid @enderror" id="termsService"
                 type="checkbox" name="termsService" {{ old('termsService') ? 'checked' : '' }} />
             <label class="form-label fs-9 text-transform-none" for="termsService">
-                I accept the <a href="{{ route('terms') }}">terms </a>and
-                <a href="{{ route('privacy') }}">privacy policy</a>
+                I accept the <a href="{{ route('guest.terms') }}">terms </a>and
+                <a href="{{ route('guest.privacy') }}">privacy policy</a>
             </label>
             @error('termsService')
             <div class="invalid-feedback d-block">
@@ -114,7 +114,7 @@
         </div>
 
         <!-- Sign Up button -->
-        <button type="submit" class="btn btn-primary w-100 mb-3">Sign Up</button>
+        <button type="submit" class="btn btn-success w-100 mb-3">Sign Up</button>
 
         <!-- Sign Up Link -->
         <div class="text-center">

@@ -3,123 +3,154 @@
         <!-- scrollbar removed-->
         <div class="navbar-vertical-content">
             <ul class="navbar-nav flex-column" id="navbarVerticalNav">
+
+                {{-- Dashboard --}}
                 <li class="nav-item">
                     <div class="nav-item-wrapper">
-                        <a class="nav-link active label-1" href="{{route('dashboard')}}" role="button" data-bs-toggle=""
-                            aria-expanded="false">
+                        <a class="nav-link active label-1" href="{{ route('dashboard') }}">
                             <div class="d-flex align-items-center">
-                                <span class="nav-link-icon">
-                                    <span data-feather="home"></span>
-                                </span>
-                                <span class="nav-link-text-wrapper">
-                                    <span class="nav-link-text">Dashboard</span>
-                                </span>
+                                <span class="nav-link-icon"><span data-feather="home"></span></span>
+                                <span class="nav-link-text">Dashboard</span>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+
+                {{-- Content Management --}}
+                <li class="nav-item">
+                    {{-- Posts --}}
+                    <div class="nav-item-wrapper">
+                        <a class="nav-link dropdown-indicator label-1" href="#nv-posts" data-bs-toggle="collapse"
+                            aria-expanded="false" aria-controls="nv-posts">
+                            <div class="d-flex align-items-center">
+                                <div class="dropdown-indicator-icon-wrapper"><span class="fas fa-caret-right"></span>
+                                </div>
+                                <span class="nav-link-icon"><span data-feather="file-text"></span></span>
+                                <span class="nav-link-text">Posts</span>
+                            </div>
+                        </a>
+                        <div class="parent-wrapper label-1">
+                            <ul class="nav collapse parent" id="nv-posts" data-bs-parent="#navbarVerticalNav">
+                                <li class="nav-item"><a class="nav-link" href="{{ route('posts.index') }}">All Posts</a>
+                                </li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('posts.create') }}">Add New</a>
+                                </li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('tags.index') }}">Tags</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    {{-- Pages --}}
+                    <div class="nav-item-wrapper">
+                        <a class="nav-link" href="{{ route('pages.index') }}">
+                            <div class="d-flex align-items-center">
+                                <span class="nav-link-icon"><span data-feather="book-open"></span></span>
+                                <span class="nav-link-text">Pages</span>
                             </div>
                         </a>
                     </div>
 
-                    <div class="nav-item-wrapper"><a class="nav-link dropdown-indicator label-1" href="#nv-pricing"
-                            role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="nv-pricing">
+                    {{-- Media --}}
+                    <div class="nav-item-wrapper">
+                        <a class="nav-link" href="{{ route('media.index') }}">
                             <div class="d-flex align-items-center">
-                                <div class="dropdown-indicator-icon-wrapper"><span
-                                        class="fas fa-caret-right dropdown-indicator-icon"></span></div><span
-                                    class="nav-link-icon"><span data-feather="tag"></span></span><span
-                                    class="nav-link-text">Pricing</span>
+                                <span class="nav-link-icon"><span data-feather="image"></span></span>
+                                <span class="nav-link-text">Media</span>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+
+                {{-- Projects & Trainings --}}
+                <li class="nav-item">
+                    {{-- Projects --}}
+                    <div class="nav-item-wrapper">
+                        <a class="nav-link" href="{{ route('programs.index') }}">
+                            <div class="d-flex align-items-center">
+                                <span class="nav-link-icon"><span data-feather="briefcase"></span></span>
+                                <span class="nav-link-text">Projects</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    {{-- Trainings --}}
+                    <div class="nav-item-wrapper">
+                        <a class="nav-link dropdown-indicator label-1" href="#nv-trainings" data-bs-toggle="collapse"
+                            aria-expanded="false" aria-controls="nv-trainings">
+                            <div class="d-flex align-items-center">
+                                <div class="dropdown-indicator-icon-wrapper"><span class="fas fa-caret-right"></span>
+                                </div>
+                                <span class="nav-link-icon"><span data-feather="layers"></span></span>
+                                <span class="nav-link-text">Trainings</span>
                             </div>
                         </a>
                         <div class="parent-wrapper label-1">
-                            <ul class="nav collapse parent" data-bs-parent="#navbarVerticalCollapse" id="nv-pricing">
-                                <li class="collapsed-nav-item-title d-none">Pricing</li>
-                                <li class="nav-item"><a class="nav-link"
-                                        href="static/pages/pricing/pricing-column.html">
-                                        <div class="d-flex align-items-center"><span class="nav-link-text">Pricing
-                                                column</span></div>
-                                    </a><!-- more inner pages-->
+                            <ul class="nav collapse parent" id="nv-trainings" data-bs-parent="#navbarVerticalNav">
+                                <li class="nav-item"><a class="nav-link" href="{{ route('trainings.index') }}">All
+                                        Trainings</a>
                                 </li>
-                                <li class="nav-item"><a class="nav-link" href="static/pages/pricing/pricing-grid.html">
-                                        <div class="d-flex align-items-center"><span class="nav-link-text">Pricing
-                                                grid</span></div>
-                                    </a><!-- more inner pages-->
+                                <li class="nav-item"><a class="nav-link"
+                                        href="{{ route('participants.index') }}">Participants</a>
+                                </li>
+                                <li class="nav-item"><a class="nav-link"
+                                        href="{{ route('communities.index') }}">Communities</a>
                                 </li>
                             </ul>
                         </div>
-                    </div><!-- parent pages-->
-                    <div class="nav-item-wrapper"><a class="nav-link label-1" href="static/pages/notifications.html"
-                            role="button" data-bs-toggle="" aria-expanded="false">
-                            <div class="d-flex align-items-center"><span class="nav-link-icon"><span
-                                        data-feather="bell"></span></span><span class="nav-link-text-wrapper"><span
-                                        class="nav-link-text">Notifications</span></span></div>
-                        </a></div><!-- parent pages-->
-                    <div class="nav-item-wrapper"><a class="nav-link label-1" href="static/pages/members.html"
-                            role="button" data-bs-toggle="" aria-expanded="false">
-                            <div class="d-flex align-items-center"><span class="nav-link-icon"><span
-                                        data-feather="users"></span></span><span class="nav-link-text-wrapper"><span
-                                        class="nav-link-text">Members</span></span></div>
-                        </a></div><!-- parent pages-->
-                    <div class="nav-item-wrapper"><a class="nav-link label-1" href="static/pages/timeline.html"
-                            role="button" data-bs-toggle="" aria-expanded="false">
-                            <div class="d-flex align-items-center"><span class="nav-link-icon"><span
-                                        data-feather="clock"></span></span><span class="nav-link-text-wrapper"><span
-                                        class="nav-link-text">Timeline</span></span></div>
-                        </a></div><!-- parent pages-->
-
+                    </div>
                 </li>
 
+                {{-- Events --}}
                 <li class="nav-item">
-                    <p class="navbar-vertical-label">Pages</p>
+                    <div class="nav-item-wrapper">
+                        <a class="nav-link" href="{{ route('events.index') }}">
+                            <div class="d-flex align-items-center">
+                                <span class="nav-link-icon"><span data-feather="calendar"></span></span>
+                                <span class="nav-link-text">Events</span>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+
+                {{-- Users & Roles --}}
+                <li class="nav-item">
+
+                    <div class="nav-item-wrapper">
+                        <a class="nav-link dropdown-indicator label-1" href="#nv-users" data-bs-toggle="collapse"
+                            aria-expanded="false" aria-controls="nv-users">
+                            <div class="d-flex align-items-center">
+                                <div class="dropdown-indicator-icon-wrapper"><span class="fas fa-caret-right"></span>
+                                </div>
+                                <span class="nav-link-icon"><span data-feather="users"></span></span>
+                                <span class="nav-link-text">Users</span>
+                            </div>
+                        </a>
+                        <div class="parent-wrapper label-1">
+                            <ul class="nav collapse parent" id="nv-users" data-bs-parent="#navbarVerticalNav">
+                                <li class="nav-item"><a class="nav-link" href="{{ route('users.index') }}">All Users</a>
+                                </li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('roles.index') }}">Roles</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+
+                {{-- Settings --}}
+                <li class="nav-item">
+                    <p class="navbar-vertical-label">System</p>
                     <hr class="navbar-vertical-line" />
 
                     <div class="nav-item-wrapper">
-                        <a class="nav-link dropdown-indicator label-1" href="#nv-customization" role="button"
-                            data-bs-toggle="collapse" aria-expanded="false" aria-controls="nv-customization">
+                        <a class="nav-link" href="{{ route('settings.index') }}">
                             <div class="d-flex align-items-center">
-                                <div class="dropdown-indicator-icon-wrapper">
-                                    <span class="fas fa-caret-right dropdown-indicator-icon"></span>
-                                </div>
-                                <span class="nav-link-icon"><span data-feather="settings"></span>
-                                </span>
-                                <span class="nav-link-text">Customization</span>
+                                <span class="nav-link-icon"><span data-feather="settings"></span></span>
+                                <span class="nav-link-text">Settings</span>
                             </div>
                         </a>
-                        <div class="parent-wrapper label-1">
-                            <ul class="nav collapse parent" data-bs-parent="#navbarVerticalCollapse"
-                                id="nv-customization">
-                                <li class="collapsed-nav-item-title d-none">Customization</li>
-                                <li class="nav-item"><a class="nav-link"
-                                        href="static/documentation/customization/configuration.html">
-                                        <div class="d-flex align-items-center"><span
-                                                class="nav-link-text">Configuration</span></div>
-                                    </a><!-- more inner pages-->
-                                </li>
-                                <li class="nav-item"><a class="nav-link"
-                                        href="static/documentation/customization/styling.html">
-                                        <div class="d-flex align-items-center"><span
-                                                class="nav-link-text">Styling</span></div>
-                                    </a><!-- more inner pages-->
-                                </li>
-                                <li class="nav-item"><a class="nav-link"
-                                        href="static/documentation/customization/color.html">
-                                        <div class="d-flex align-items-center"><span class="nav-link-text">Color</span>
-                                        </div>
-                                    </a><!-- more inner pages-->
-                                </li>
-                                <li class="nav-item"><a class="nav-link"
-                                        href="static/documentation/customization/dark-mode.html">
-                                        <div class="d-flex align-items-center"><span class="nav-link-text">Dark
-                                                mode</span></div>
-                                    </a><!-- more inner pages-->
-                                </li>
-                                <li class="nav-item"><a class="nav-link"
-                                        href="static/documentation/customization/plugin.html">
-                                        <div class="d-flex align-items-center"><span class="nav-link-text">Plugin</span>
-                                        </div>
-                                    </a><!-- more inner pages-->
-                                </li>
-                            </ul>
-                        </div>
                     </div>
-
                 </li>
+
             </ul>
         </div>
     </div>

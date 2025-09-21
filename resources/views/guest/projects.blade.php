@@ -150,12 +150,12 @@
                                 <div class="course-content">
                                     <div class="d-flex justify-content-between mb-2">
                                         <div class="d-flex align-items-center">
-                                            <a href="{{ route('projects.show', ['id' => 3]) }}" class="avatar avatar-sm">
+                                            <a href="{{ route('guest.projects.show', ['id' => 3]) }}" class="avatar avatar-sm">
                                                 <img src="assets/img/user/user-29.jpg" alt="Coordinator"
                                                     class="img-fluid avatar avatar-sm rounded-circle">
                                             </a>
                                             <div class="ms-2">
-                                                <a href="{{ route('projects.show', ['id' => 3]) }}"
+                                                <a href="{{ route('guest.projects.show', ['id' => 3]) }}"
                                                     class="link-default fs-14">Brenda
                                                     Slaton</a>
                                             </div>
@@ -165,11 +165,11 @@
                                             Women Empowerment
                                         </span>
                                     </div>
-                                    <h6 class="title mb-2"><a href="{{ route('projects.show', ['id' => 3]) }}">DivaFam Skills
+                                    <h6 class="title mb-2"><a href="{{ route('guest.projects.show', ['id' => 3]) }}">DivaFam Skills
                                             Training for
                                             Women</a></h6>
                                     <div class="d-flex align-items-center justify-content-between">
-                                        <a href="{{ route('projects.show', ['id' => 3]) }}"
+                                        <a href="{{ route('guest.projects.show', ['id' => 3]) }}"
                                             class="btn btn-dark btn-sm d-inline-flex align-items-center">View Project<i
                                                 class="isax isax-arrow-right-3 ms-1"></i></a>
                                     </div>

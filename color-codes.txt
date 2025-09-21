@@ -1,0 +1,2 @@
+light-green: #75D97C
+dark-green: #008825

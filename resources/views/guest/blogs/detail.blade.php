@@ -25,7 +25,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <!-- Blog Sidebar -->
-                <div class="col-lg-4 sidebar-left mt-4 mt-lg-0 theiaStickySidebar">
+                {{-- <div class="col-lg-4 sidebar-left mt-4 mt-lg-0 theiaStickySidebar">
                     <!-- Search -->
                     <div class="search-widget blog-search blog-widget">
                         <div>
@@ -96,22 +96,22 @@
                         </ul>
                     </div>
                     <!-- /Recent Posts -->
-                </div>
+                </div> --}}
                 <!-- /Blog Sidebar -->
 
                 <!-- Blog Content -->
-                <div class="col-lg-8">
-                    <img class="img-fluid rounded-2" src="assets/img/blog/divafam-farming.jpg" alt="img">
+                <div class="col-lg-10">
+                    <img class="img-fluid rounded-2" src="{{asset('assets/diva/img-8.jpg')}}" alt="no-image">
                     <div class="blog-info my-3">
                         <ul class="d-flex align-items-center flex-wrap gap-2">
                             <li>
                                 <div class="avatar avatar-sm rounded-pill me-2 flex-shrink-0">
                                     <span>
-                                        <a href="author-details.html"><img class="rounded-pill w-auto"
-                                                src="assets/img/user/local-author-1.jpg" alt="img"></a>
+                                        <a href="#"><img class="rounded-pill w-auto"
+                                                src="assets/diva/img-8.jpg" alt="img"></a>
                                     </span>
                                 </div>
-                                <p><a href="author-details.html">Abena Owusu</a></p>
+                                <p><a href="#">Abena Owusu</a></p>
                             </li>
                             <li>
                                 <img class="me-1" src="assets/img/icons/calendar.svg" alt="img">

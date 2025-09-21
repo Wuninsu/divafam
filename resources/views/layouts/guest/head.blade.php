@@ -9,8 +9,8 @@
     <x-seo::meta />
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="assets/img/favicon.png">
-    <link rel="apple-touch-icon" href="assets/img/apple-icon.png">
+    <link rel="shortcut icon" href="{{asset(setup_data('favicon'))}}">
+    <link rel="apple-touch-icon" href="{{asset(setup_data('favicon'))}}">
 
     <!-- Theme Settings Js -->
     <script src="{{ asset('assets/js/theme-script.js') }}"></script>

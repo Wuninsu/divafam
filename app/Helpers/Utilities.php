@@ -1,61 +1,51 @@
 <?php
-
-use App\Models\Errand;
-use App\Models\Order;
-use App\Models\OrdersModel;
-use App\Models\ProductsModel;
-use App\Models\RiderRating;
-use App\Models\Setup;
+use App\Models\Setting;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-
-
-if (!function_exists('unreadNotificationsCount')) {
-    function unreadNotificationsCount(): int
+if (!function_exists('generateUsername')) {
+    function generateUsername($name)
     {
-        $user = Auth::user();
+        // Step 1: Clean the name (remove spaces, make it lowercase)
+        $baseUsername = strtolower(str_replace(' ', '', $name));  // Remove spaces and make lowercase
 
-        if (!$user) {
-            return 0; // if no logged-in user
+        // Step 2: Shorten the username to the first 6 characters of the cleaned name
+        $baseUsername = substr($baseUsername, 0, 6);  // Limit to first 6 characters
+
+        // Step 3: Generate random numbers and letters
+        $randomNumber = rand(100, 9999);  // Random 3 to 4 digit number
+        $randomChar = chr(rand(97, 122)); // Random lowercase letter (a-z)
+
+        // Step 4: Create the base username
+        $username = $baseUsername . $randomNumber . $randomChar;
+
+        // Step 5: Ensure the username is unique
+        // Check if the username already exists in the database
+        while (User::where('username', $username)->exists()) {
+            // If the username exists, regenerate the random part and try again
+            $randomNumber = rand(100, 9999);  // New random 3 to 4 digit number
+            $randomChar = chr(rand(97, 122)); // New random lowercase letter
+            $username = $baseUsername . $randomNumber . $randomChar;
         }
 
-        return $user->unreadNotifications()->count();
+        return $username;
     }
 }
+// if (!function_exists('unreadNotificationsCount')) {
+//     function unreadNotificationsCount(): int
+//     {
+//         $user = Auth::user();
 
-if (!function_exists('satisfaction_rate')) {
-    function satisfaction_rate(): int
-    {
-        $completedErrands = Errand::where('status', 'delivered')->count();
-        $completedOrders = Order::where('status', 'delivered')->count();
+//         if (!$user) {
+//             return 0; // if no logged-in user
+//         }
 
-        $totalErrands = Errand::count();
-        $totalOrders = Order::count();
+//         return $user->unreadNotifications()->count();
+//     }
+// }
 
-        $totalCompleted = $completedErrands + $completedOrders;
-        $totalTasks = $totalErrands + $totalOrders;
-
-        return $totalTasks > 0
-            ? round(($totalCompleted / $totalTasks) * 100)
-            : 0;
-    }
-}
-
-if (!function_exists('average_rate')) {
-    function average_rate(): int
-    {
-        $averageRating = RiderRating::avg('rating');
-
-        $avg = round(($averageRating / 5) * 100);
-
-        return $avg ? $avg : 0;
-    }
-}
 
 function get_total_users(string $role)
 {
@@ -64,38 +54,38 @@ function get_total_users(string $role)
 }
 
 
-if (!function_exists('setup_data')) {
+if (!function_exists('setting_data')) {
     function setup_data($key): ?string
     {
-        $setup = \App\Models\Setup::setupData();
+        $setup = \App\Models\Setting::settingData();
         return $setup[$key] ?? '';
     }
 }
-if (!function_exists('generateSmsMessage')) {
-    /**
-     * Generate an SMS message from a template and replace placeholders.
-     *
-     * @param string $templateKey The key or identifier of the template.
-     * @param array $data The data to replace in the template.
-     * @return string|null The generated SMS message or null if template not found.
-     */
-    function generateSmsMessage(string $templateKey, array $data): ?string
-    {
-        $template = \App\Models\SmsTemplate::where('name', $templateKey)->first();
+// if (!function_exists('generate_sms_message')) {
+//     /**
+//      * Generate an SMS message from a template and replace placeholders.
+//      *
+//      * @param string $templateKey The key or identifier of the template.
+//      * @param array $data The data to replace in the template.
+//      * @return string|null The generated SMS message or null if template not found.
+//      */
+//     function generate_sms_message(string $templateKey, array $data): ?string
+//     {
+//         $template = \App\Models\SmsTemplate::where('name', $templateKey)->first();
 
-        if (!$template) {
-            return false;
-        }
-        $message = $template->template;
+//         if (!$template) {
+//             return false;
+//         }
+//         $message = $template->template;
 
-        // Replace placeholders with data
-        foreach ($data as $key => $value) {
-            $message = str_replace("{{$key}}", $value, $message);
-        }
+//         // Replace placeholders with data
+//         foreach ($data as $key => $value) {
+//             $message = str_replace("{{$key}}", $value, $message);
+//         }
 
-        return $message;
-    }
-}
+//         return $message;
+//     }
+// }
 
 
 if (!function_exists('clearLivewireTemp')) {
@@ -182,7 +172,7 @@ function deleteImage($imageModel, $column): bool
 if (!function_exists('paginationLimit')) {
     function paginationLimit()
     {
-        $settings = Setup::setupData();
+        $settings = Setting::setupData();
         return $settings['pagination_limit'] ?? 7;
     }
 }
@@ -202,31 +192,6 @@ if (!function_exists('intWithStyle')) {
         $formatted = floor($divided * 10) / 10; // keep one decimal without rounding up
 
         return $formatted . $suffix[$power];
-    }
-}
-
-if (!function_exists('generateInvoiceNumber')) {
-    function generateInvoiceNumber(string $column = 'invoice_number', string $prefix = 'INV-', int $length = 5)
-    {
-        $data = DB::table('invoices')
-            ->whereNotNull($column)
-            ->orderBy($column, 'desc')
-            ->first();
-
-        if (!$data) {
-            $last_number = "1";
-            $og_length = $length - strlen($last_number);
-        } else {
-            $code = preg_replace('/[^0-9]/', '', $data->$column);
-            $increment_last_number = ((int) $code) + 1;
-            $last_number = (string) $increment_last_number;
-            $og_length = $length - strlen($last_number);
-        }
-
-        // Ensure at least 0 is passed to str_repeat
-        $zeros = str_repeat("0", max(0, $og_length));
-
-        return $prefix . $zeros . $last_number;
     }
 }
 

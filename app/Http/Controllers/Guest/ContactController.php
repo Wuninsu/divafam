@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -24,5 +25,45 @@ class ContactController extends Controller
             ->twitterSite('@divafam');
 
         return view('guest.contact-us');
+    }
+
+    // Handle the form submission and send email
+    // Handle the form submission and send email
+    public function sendContact(Request $request)
+    {
+        // Validate the incoming request
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'message' => 'required|string|max:1000',
+        ]);
+
+        // Send the email
+        $data = [
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'message' => $validated['message'],
+        ];
+
+        // // Use a closure to pass data to the email view
+        // Mail::send('emails.contact', $data, function ($message) {
+        //     $message->to('info@divafarms.org')
+        //         ->subject('New Contact Form Submission');
+        // });
+
+        // Prepare email content
+        $emailContent = "New Contact Form Submission\n\n";
+        $emailContent .= "Name: " . $validated['name'] . "\n";
+        $emailContent .= "Email: " . $validated['email'] . "\n\n";
+        $emailContent .= "Message:\n" . $validated['message'];
+
+        // Send the email as plain text
+        Mail::raw($emailContent, function ($message) {
+            $message->to('info@divafarms.org')  // Change this to your recipient email
+                ->subject('New Contact Form Submission');
+        });
+
+        // Redirect back with success message
+        return redirect('/contact')->with('success', 'Your message has been sent!');
     }
 }

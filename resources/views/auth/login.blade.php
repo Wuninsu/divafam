@@ -82,7 +82,7 @@
             </div>
 
             <!-- Sign In Button -->
-            <button type="submit" class="btn btn-primary w-100 mb-3">Sign In</button>
+            <button type="submit" class="btn btn-success w-100 mb-3">Sign In</button>
 
             <!-- Sign Up Link -->
             <div class="text-center">

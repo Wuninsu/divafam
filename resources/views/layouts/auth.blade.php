@@ -12,12 +12,12 @@
     <!-- ===============================================-->
     <!--    Favicons-->
     <!-- ===============================================-->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('static/img/favicons/apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('static/img/favicons/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('static/img/favicons/favicon-16x16.png') }}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('static/img/favicons/favicon.ico') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset(setup_data('favicon')) }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset(setup_data('favicon_32')) }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset(setup_data('favicon_16')) }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset(setup_data('favicon')) }}">
     <link rel="manifest" href="{{ asset('static/img/favicons/manifest.json') }}">
-    <meta name="msapplication-TileImage" content="{{ asset('static/img/favicons/mstile-150x150.png') }}">
+    <meta name="msapplication-TileImage" content="{{ asset(setup_data('favicon')) }}">
     <meta name="theme-color" content="#ffffff">
 
     <script src="{{ asset('vendors/simplebar/simplebar.min.js') }}"></script>
@@ -62,7 +62,7 @@
         <div class="container">
             <div class="row flex-center min-vh-100 py-5">
                 <div class="col-sm-10 col-md-8 col-lg-5 col-xl-5 col-xxl-3">
-
+                    <a class="fs-9 fw-bold" href="/"> <i class="fa fa-angle-left"></i> HOME </a>
                     @yield('content')
 
                 </div>
