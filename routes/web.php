@@ -1,45 +1,59 @@
 <?php
 
 use App\Http\Controllers\Guest\ContactController;
+use App\Http\Controllers\TrixController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-Route::middleware('guest')->group(function () {
 
-    // Static pages
-    Route::get('/', [App\Http\Controllers\Guest\HomeController::class, 'index'])->name('guest.home');
-    Route::get('/home', [App\Http\Controllers\Guest\HomeController::class, 'index'])->name('guest.home.redirect');
-    Route::get('/about-us', [App\Http\Controllers\Guest\AboutController::class, 'index'])->name('guest.about');
-    Route::get('/contact-us', [App\Http\Controllers\Guest\ContactController::class, 'index'])->name('guest.contact');
-    Route::get('/gallery', [App\Http\Controllers\Guest\GalleryController::class, 'index'])->name('guest.gallery');
-    Route::get('/testimonials', [App\Http\Controllers\Guest\TestimonialController::class, 'index'])->name('guest.testimonials');
-    Route::post('/send-contact', [ContactController::class, 'sendContact'])->name('guest.send.contact');
-    Route::get('/terms', [App\Http\Controllers\Guest\TermsController::class, 'index'])->name('guest.terms');
-    Route::get('/privacy', [App\Http\Controllers\Guest\PrivacyController::class, 'index'])->name('guest.privacy');
+Route::get('trix', [TrixController::class, 'index'])->name('trix.index');
+Route::post('trix/upload', [TrixController::class, 'upload'])->name('trix.upload');
+Route::post('trix/store', [TrixController::class, 'store'])->name('trix.store');
 
-    // Blog routes
-    Route::controller(App\Http\Controllers\Guest\DonationController::class)->group(function () {
-        Route::get('/donations/donate', 'donate')->name('guest.donations.donate');
-        Route::get('/donations/donors', 'donors')->name('guest.donations.donors');
-    });
+Route::get('trix/show/{id}', [TrixController::class, 'show'])->name('trix.show');
+
+Route::get('trix/edit/{id}', [TrixController::class, 'edit'])->name('trix.edit');
+Route::post('trix/update/{id}', [TrixController::class, 'update'])->name('trix.update');
+
+Route::get('trix/delete/{id}', [TrixController::class, 'destroy'])->name('trix.delete');
 
 
-    // Blog routes
-    Route::controller(App\Http\Controllers\Guest\BlogsController::class)->group(function () {
-        Route::get('/news', 'index')->name('guest.news.index');
-        Route::get('/news/create', 'create')->name('guest.news.create');
-        Route::post('/news', 'store')->name('guest.news.store');
-        Route::get('/news/{id?}', 'show')->name('guest.news.show');
-    });
 
-    // Project routes
-    Route::controller(App\Http\Controllers\Guest\ProjectsController::class)->group(function () {
-        Route::get('/projects', 'index')->name('guest.projects.index');
-        Route::get('/projects/create', 'create')->name('guest.projects.create');
-        Route::post('/projects', 'store')->name('guest.projects.store');
-        Route::get('/projects/{id?}', 'show')->name('guest.projects.show');
-    });
 
+// Route::middleware('guest')->group(function () {
+
+// Static pages
+Route::get('/', [App\Http\Controllers\Guest\HomeController::class, 'index'])->name('guest.home');
+Route::get('/home', [App\Http\Controllers\Guest\HomeController::class, 'index'])->name('guest.home.redirect');
+Route::get('/about-us', [App\Http\Controllers\Guest\AboutController::class, 'index'])->name('guest.about');
+Route::get('/contact-us', [App\Http\Controllers\Guest\ContactController::class, 'index'])->name('guest.contact');
+Route::get('/gallery', [App\Http\Controllers\Guest\GalleryController::class, 'index'])->name('guest.gallery');
+Route::get('/testimonials', [App\Http\Controllers\Guest\TestimonialController::class, 'index'])->name('guest.testimonials');
+Route::post('/send-contact', [ContactController::class, 'sendContact'])->name('guest.send.contact');
+Route::get('/terms', [App\Http\Controllers\Guest\TermsController::class, 'index'])->name('guest.terms');
+Route::get('/privacy', [App\Http\Controllers\Guest\PrivacyController::class, 'index'])->name('guest.privacy');
+
+// Blog routes
+Route::controller(App\Http\Controllers\Guest\DonationController::class)->group(function () {
+    Route::get('/donations/donate', 'donate')->name('guest.donations.donate');
+    Route::get('/donations/donors', 'donors')->name('guest.donations.donors');
 });
+
+
+// Blog routes
+Route::controller(App\Http\Controllers\Guest\BlogsController::class)->group(function () {
+    Route::get('/news', 'index')->name('guest.news.index');
+    Route::get('/news/{slug?}', 'show')->name('guest.news.show');
+});
+
+// Project routes
+Route::controller(App\Http\Controllers\Guest\ProjectsController::class)->group(function () {
+    Route::get('/projects', 'index')->name('guest.projects.index');
+    Route::get('/projects/create', 'create')->name('guest.projects.create');
+    Route::post('/projects', 'store')->name('guest.projects.store');
+    Route::get('/projects/{project?}', 'show')->name('guest.projects.show');
+});
+
+// });
 
 
 use Illuminate\Support\Facades\Mail;
@@ -75,6 +89,7 @@ use App\Http\Controllers\Main\{
     RoleController,
     SettingController
 };
+use App\Http\Controllers\SocialAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,17 +101,33 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Posts, Tags & Categories
-    Route::resource('posts', PostController::class);
+    Route::controller(PostController::class)->group(function () {
+        Route::get('/posts', 'index')->name('posts.index');
+        Route::get('/posts/create', 'create')->name('posts.create');
+        Route::post('/posts', 'store')->name('posts.store');
+        Route::get('/posts/{post?}/show', 'show')->name('posts.show');
+        Route::get('/posts/edit/{post?}', 'edit')->name('posts.edit');
+        Route::put('/posts/{post?}', 'update')->name('posts.update');
+    });
     Route::resource('tags', TagController::class);
 
     // Pages
     Route::resource('pages', PageController::class);
 
+
     // Media
     Route::resource('media', MediaController::class);
 
     // Projects & Trainings
-    Route::resource('programs', ProgramController::class);
+    Route::controller(ProgramController::class)->group(function () {
+        Route::get('/programs', 'index')->name('programs.index');
+        Route::get('/programs/create', 'create')->name('programs.create');
+        Route::post('/programs', 'store')->name('programs.store');
+        Route::get('/programs/{project?}/show', 'show')->name('programs.show');
+        Route::get('/programs/{project?}', 'edit')->name('programs.edit');
+        Route::post('/programs/{project?}', 'update')->name('programs.update');
+    });
+
     Route::resource('trainings', TrainingController::class);
     Route::resource('participants', ParticipantController::class);
 
@@ -107,13 +138,14 @@ Route::middleware('auth')->group(function () {
     Route::resource('events', EventController::class);
 
     // Users & Roles
-    Route::resource('users', UserController::class);
+    // Route::resource('users', UserController::class);
     Route::controller(App\Http\Controllers\Main\UserController::class)->group(function () {
         Route::get('/users', 'index')->name('users.index');
         Route::get('/users/create', 'create')->name('users.create');
         Route::post('/users', 'store')->name('users.store');
         Route::get('/users/{user?}', 'show')->name('users.show');
-        Route::get('/users/manage-permissions/{user?}', 'show')->name('users.manage-permissions');
+        Route::get('/users/{user?}', 'edit')->name('users.edit');
+        Route::get('/users/manage-user-permissions/{user?}', 'managePermission')->name('users.manage-user-permission');
     });
     // Roles & Permissions routes
     Route::controller(App\Http\Controllers\Main\RoleController::class)->group(function () {
@@ -121,8 +153,14 @@ Route::middleware('auth')->group(function () {
         Route::get('/permissions', 'permissions')->name('permissions.index');
     });
 
-    // Settings
-    Route::resource('settings', SettingController::class)->only(['index', 'update']);
-
+    // Settings    // Roles & Permissions routes
+    Route::controller(App\Http\Controllers\Main\SettingController::class)->group(function () {
+        Route::get('/settings', 'index')->name('settings.index');
+        Route::get('/restore', 'restore')->name('restore.index');
+    });
 });
+
+Route::get('login/{provider}', [SocialAuthController::class, 'redirect'])->name('social.login');
+Route::get('login/{provider}/callback', [SocialAuthController::class, 'callback']);
+
 Auth::routes();

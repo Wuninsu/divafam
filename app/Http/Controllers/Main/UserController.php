@@ -15,12 +15,16 @@ class UserController extends Controller
         return view('main.users.index');
     }
 
+    public function managePermission($user)
+    {
+        return view('main.users.manage-permissions', ['user' => $user]);
+    }
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view('main.users.create');
     }
 
     /**
@@ -39,12 +43,14 @@ class UserController extends Controller
         //
     }
 
+
+
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($user)
     {
-        //
+        return view('main.users.edit', ['user' => $user]);
     }
 
     /**

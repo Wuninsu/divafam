@@ -172,7 +172,7 @@ function deleteImage($imageModel, $column): bool
 if (!function_exists('paginationLimit')) {
     function paginationLimit()
     {
-        $settings = Setting::setupData();
+        $settings = Setting::settingData();
         return $settings['pagination_limit'] ?? 7;
     }
 }

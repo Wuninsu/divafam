@@ -7,7 +7,8 @@
                 {{-- Dashboard --}}
                 <li class="nav-item">
                     <div class="nav-item-wrapper">
-                        <a class="nav-link label-1 {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
+                        <a class="nav-link label-1 {{ request()->routeIs('dashboard') ? 'active' : '' }}"
+                            href="{{ route('dashboard') }}">
                             <div class="d-flex align-items-center">
                                 <span class="nav-link-icon"><span data-feather="home"></span></span>
                                 <span class="nav-link-text">Dashboard</span>
@@ -18,7 +19,25 @@
 
                 {{-- Content Management --}}
                 <li class="nav-item">
+                    {{-- Tags --}}
+                    <div class="nav-item-wrapper">
+                        <a class="nav-link" href="{{ route('tags.index') }}">
+                            <div class="d-flex align-items-center">
+                                <span class="nav-link-icon"><span data-feather="file-text"></span></span>
+                                <span class="nav-link-text">Posts</span>
+                            </div>
+                        </a>
+                    </div>
                     {{-- Posts --}}
+                    <div class="nav-item-wrapper">
+                        <a class="nav-link" href="{{ route('posts.index') }}">
+                            <div class="d-flex align-items-center">
+                                <span class="nav-link-icon"><span data-feather="file-text"></span></span>
+                                <span class="nav-link-text">Posts</span>
+                            </div>
+                        </a>
+                    </div>
+
                     <div class="nav-item-wrapper">
                         <a class="nav-link dropdown-indicator label-1" href="#nv-posts" data-bs-toggle="collapse"
                             aria-expanded="false" aria-controls="nv-posts">
@@ -65,7 +84,8 @@
                 <li class="nav-item">
                     {{-- Projects --}}
                     <div class="nav-item-wrapper">
-                        <a class="nav-link" href="{{ route('programs.index') }}">
+                        <a class="nav-link {{ request()->routeIs('programs.*') ? 'active' : '' }}"
+                            href="{{ route('programs.index') }}">
                             <div class="d-flex align-items-center">
                                 <span class="nav-link-icon"><span data-feather="briefcase"></span></span>
                                 <span class="nav-link-text">Projects</span>

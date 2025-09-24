@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class ProjectsController extends Controller
@@ -23,7 +24,7 @@ class ProjectsController extends Controller
             ->flipp('projects', 'your_flipp_id_here')
             ->twitterSite('@divafam');
 
-        return view('guest.projects');
+        return view('guest.projects.index');
     }
 
     /**
@@ -45,9 +46,27 @@ class ProjectsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $project)
     {
-        return view('guest.projects.detail');
+        $project = Project::with('user')->where('slug', $project)->firstOrFail();
+
+        // Load project SEO data (if exists)
+        $seo = $project->seo;
+
+        seo()
+            ->site('DivaFam — Empowering Women Through Community and Connection')
+            ->title('Project Detail- ' . $project->title . ' | ' . config('app.name', 'DivaFam'))
+            ->description($seo?->meta_description ?? $project->short_description ?? '')
+            ->keywords($seo?->meta_keywords ?? $project->tags ?? '')
+            ->canonical(url()->current())
+            ->twitterCard('summary_large_image')
+            ->image(default: fn() => $project->cover_image
+                ? asset('storage/' . $project->cover_image)
+                : asset(setup_data('favicon')))
+            ->flipp('blog', 'your_flipp_id_here')
+            ->twitterSite('@divafam');
+
+        return view('guest.projects.detail', compact('project'));
     }
 
     /**

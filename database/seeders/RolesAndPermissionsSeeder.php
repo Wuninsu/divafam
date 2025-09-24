@@ -2,8 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RolesAndPermissionsSeeder extends Seeder
 {
@@ -12,6 +16,207 @@ class RolesAndPermissionsSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        // Clear cache
+        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+
+        // 🔹 Entities based on your schemas
+        $entities = [
+            'user',
+            'usermeta',
+            'page',
+            'tag',
+            'post',
+            'project',
+            'training',
+            'community',
+            'participant',
+            'media',
+            'event',
+            'setting',
+        ];
+
+        $actions = ['view', 'create', 'update', 'delete'];
+
+        // Create CRUD permissions
+        foreach ($entities as $entity) {
+            foreach ($actions as $action) {
+                Permission::firstOrCreate(['name' => "$action $entity"]);
+            }
+        }
+
+        // 🔹 Special permissions
+        $specialPermissions = [
+            'assign role',
+            'assign permission',
+            'manage system settings',
+            'manage site options',
+            'manage users',
+            'manage permissions',
+            'manage roles',
+            'manage recycle bin',
+            'restore from recycle bin',
+            'force delete from recycle bin',
+        ];
+
+        foreach ($specialPermissions as $perm) {
+            Permission::firstOrCreate(['name' => $perm]);
+        }
+
+        // 🔹 Roles
+        $dev = Role::firstOrCreate(['name' => 'dev']);
+        $admin = Role::firstOrCreate(['name' => 'admin']);
+        $director = Role::firstOrCreate(['name' => 'director']);
+        $secretary = Role::firstOrCreate(['name' => 'secretary']);
+        $editor = Role::firstOrCreate(['name' => 'editor']);
+        $donor = Role::firstOrCreate(['name' => 'donor']);
+        $participant = Role::firstOrCreate(['name' => 'participant']);
+
+        // 🔹 Assign permissions to roles
+        $dev->syncPermissions(Permission::all());
+
+        $admin->syncPermissions(
+            Permission::whereNotIn('name', [
+                'assign role',
+                'assign permission',
+                'manage system settings'
+            ])->get()
+        );
+
+        $director->syncPermissions([
+            'view project',
+            'create project',
+            'update project',
+            'delete project',
+            'view training',
+            'create training',
+            'update training',
+            'delete training',
+            'view community',
+            'create community',
+            'update community',
+            'delete community',
+            'view event',
+            'create event',
+            'update event',
+            'delete event',
+        ]);
+
+        $secretary->syncPermissions([
+            'view participant',
+            'create participant',
+            'update participant',
+            'delete participant',
+            'view training',
+            'create training',
+            'update training',
+            'view event',
+            'create event',
+            'update event',
+            'view page',
+            'create page',
+            'update page',
+        ]);
+
+        $editor->syncPermissions([
+            'view post',
+            'create post',
+            'update post',
+            'delete post',
+            'view project',
+            'create project',
+            'update project',
+            'view page',
+            'create page',
+            'update page',
+            'view tag',
+            'create tag',
+            'update tag',
+        ]);
+
+        $donor->syncPermissions([
+            'view project',
+            'view community',
+            'view training',
+            'view event',
+        ]);
+
+        $participant->syncPermissions([
+            'view project',
+            'view training',
+            'view event',
+            'view participant',
+            'update participant', // only their own
+        ]);
+
+        // 🔹 Example users
+        $devUser = User::firstOrCreate(
+            ['email' => 'dev@divafam.org', 'username' => 'dev'],
+            [
+                'name' => 'System Developer',
+                'password' => Hash::make('test1234'),
+                'phone' => '0500000000',
+            ]
+        );
+        $devUser->assignRole($dev);
+
+        $adminUser = User::firstOrCreate(
+            ['email' => 'admin@divafam.org', 'username' => 'admin'],
+            [
+                'name' => 'Administrator',
+                'password' => Hash::make('test1234'),
+                'phone' => '0500000001',
+            ]
+        );
+        $adminUser->assignRole($admin);
+
+        $directorUser = User::firstOrCreate(
+            ['email' => 'director@divafam.org', 'username' => 'director'],
+            [
+                'name' => 'Director User',
+                'password' => Hash::make('test1234'),
+                'phone' => '0500000002',
+            ]
+        );
+        $directorUser->assignRole($director);
+
+        $secretaryUser = User::firstOrCreate(
+            ['email' => 'secretary@divafam.org', 'username' => 'secretary'],
+            [
+                'name' => 'Secretary User',
+                'password' => Hash::make('test1234'),
+                'phone' => '0500000003',
+            ]
+        );
+        $secretaryUser->assignRole($secretary);
+
+        $editorUser = User::firstOrCreate(
+            ['email' => 'editor@divafam.org', 'username' => 'editor'],
+            [
+                'name' => 'Editor User',
+                'password' => Hash::make('test1234'),
+                'phone' => '0500000004',
+            ]
+        );
+        $editorUser->assignRole($editor);
+
+        $donorUser = User::firstOrCreate(
+            ['email' => 'donor@divafam.org', 'username' => 'donor'],
+            [
+                'name' => 'Donor User',
+                'password' => Hash::make('test1234'),
+                'phone' => '0500000005',
+            ]
+        );
+        $donorUser->assignRole($donor);
+
+        $participantUser = User::firstOrCreate(
+            ['email' => 'participant@divafam.org', 'username' => 'participant'],
+            [
+                'name' => 'Participant User',
+                'password' => Hash::make('test1234'),
+                'phone' => '0500000006',
+            ]
+        );
+        $participantUser->assignRole($participant);
     }
 }

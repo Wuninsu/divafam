@@ -13,3 +13,6 @@
 <script src="{{ asset('static/vendors/flatpickr/flatpickr.min.js') }}"></script>
 <script src="{{ asset('static/js/phoenix.js') }}"></script>
 <script src="{{ asset('static/js/dashboards/projectmanagement-dashboard.js') }}"></script>
+
+
+@livewireScripts

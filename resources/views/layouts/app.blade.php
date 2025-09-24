@@ -52,7 +52,7 @@
     <!-- Custom Script -->
     <script src="{{ asset('assets/js/script.js') }}"></script>
 
-   <script>
+    <script>
         (function() {
             const darkMode = localStorage.getItem("darkMode");
             const themeClass = darkMode === "enabled" ? "dark-mode" : "light-mode";
@@ -130,7 +130,9 @@
             document.body.scrollTop = 0; // For Safari
             document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
         };
-    </script> 
+    </script>
+
+    @stack('scripts')
 </body>
 
 </html>

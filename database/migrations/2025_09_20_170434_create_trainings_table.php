@@ -12,9 +12,11 @@ return new class extends Migration {
     {
         Schema::create('trainings', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->unique();
             $table->foreignId('project_id')->nullable()->constrained('projects')->nullOnDelete();
             $table->foreignId('community_id')->nullable()->constrained()->nullOnDelete();
             $table->string('title');
+            $table->string('slug')->nullable();
             $table->text('description')->nullable();
             $table->date('start_date');
             $table->date('end_date');

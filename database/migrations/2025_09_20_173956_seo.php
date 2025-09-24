@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('seo', function (Blueprint $table) {
+        Schema::create('seos', function (Blueprint $table) {
             $table->id();
             $table->morphs('seoable'); // seoable_id & seoable_type
             $table->string('meta_title')->nullable();
@@ -25,6 +25,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('seo');
+        Schema::dropIfExists('seos');
     }
 };

@@ -25,4 +25,16 @@ class Category extends Model
     {
         return $this->hasMany(Post::class);
     }
+
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
+
+    public function activePosts()
+    {
+        return $this->hasMany(Post::class)->where('is_active', true);
+    }
+
 }

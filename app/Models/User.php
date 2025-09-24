@@ -57,6 +57,11 @@ class User extends Authenticatable
         ];
     }
 
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
+
     protected $guarded = ['uuid'];
 
     public static function boot()
@@ -130,5 +135,15 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function leadingProjects()
+    {
+        return $this->belongsToMany(Project::class, 'project_leads');
+    }
+
+    public function postLikes()
+    {
+        return $this->hasMany(PostLike::class);
     }
 }

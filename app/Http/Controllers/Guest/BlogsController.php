@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class BlogsController extends Controller
@@ -23,31 +24,35 @@ class BlogsController extends Controller
             ->flipp('blog', 'your_flipp_id_here')
             ->twitterSite('@divafam');
 
-        return view('guest.blogs');
+        return view('guest.blogs.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $slug)
     {
-        return view('guest.blogs.detail');
+        $post = Post::with(['author', 'tags', 'category', 'likes.user'])
+            ->withCount('likes')
+            ->where('slug', $slug)->firstOrFail();
+
+        // Load post SEO data (if exists)
+        $seo = $post->seo;
+
+        seo()
+            ->site('DivaFam — Empowering Women Through Community and Connection')
+            ->title('News Detail - ' . $post->title . ' | ' . config('app.name', 'DivaFam'))
+            ->description($seo?->meta_description ?? $post->short_description ?? '')
+            ->keywords($seo?->meta_keywords ?? $post->tags ?? '')
+            ->canonical(url()->current())
+            ->twitterCard('summary_large_image')
+            ->image(default: fn() => $post->cover_image
+                ? asset($post->cover_image)
+                : asset(setup_data('favicon')))
+            ->flipp('blog', 'your_flipp_id_here')
+            ->twitterSite('@divafam');
+        return view('guest.blogs.detail', compact('post'));
     }
 
     /**

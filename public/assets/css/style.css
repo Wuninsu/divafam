@@ -33582,58 +33582,72 @@ textarea:focus {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    background-color: #008825; /* Use first green color */
+    background-color: #008825;
+    /* Use first green color */
     color: #fff;
     border: none;
     padding: 15px;
     border-radius: 50%;
     font-size: 24px;
     cursor: pointer;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Softer shadow */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    /* Softer shadow */
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0s 0.3s, transform 0.3s ease; /* Add smooth transform for movement */
+    transition: opacity 0.3s ease, visibility 0s 0.3s, transform 0.3s ease;
+    /* Add smooth transform for movement */
     z-index: 9999;
-    width: 60px; /* Set width */
-    height: 60px; /* Set height */
+    width: 60px;
+    /* Set width */
+    height: 60px;
+    /* Set height */
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth background transition */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    /* Smooth background transition */
 }
 
 /* Show the button when scrolled down */
 .back-to-top-btn.show {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0); /* Ensure it doesn't jump */
-    transition: opacity 0.3s ease, visibility 0s 0s, transform 0.3s ease; /* Make sure it transitions smoothly */
+    transform: translateY(0);
+    /* Ensure it doesn't jump */
+    transition: opacity 0.3s ease, visibility 0s 0s, transform 0.3s ease;
+    /* Make sure it transitions smoothly */
 }
 
 /* Hover effect */
 .back-to-top-btn:hover {
-    background-color: #75D97C; /* Use second green color for hover effect */
-    transform: translateY(-5px); /* Slight elevation on hover */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Slight increase in shadow */
-    animation: glow 1.5s infinite alternate; /* Glowing effect */
+    background-color: #75d97c;
+    /* Use second green color for hover effect */
+    transform: translateY(-5px);
+    /* Slight elevation on hover */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    /* Slight increase in shadow */
+    animation: glow 1.5s infinite alternate;
+    /* Glowing effect */
 }
 
 /* FontAwesome Icon Size Adjustment */
 .back-to-top-btn i {
-    font-size: 30px; /* Adjust icon size */
+    font-size: 30px;
+    /* Adjust icon size */
 }
 
 /* Glowing effect */
 @keyframes glow {
     0% {
-        box-shadow: 0 0 10px #008825, 0 0 20px #008825, 0 0 30px #008825, 0 0 40px #75D97C;
+        box-shadow: 0 0 10px #008825, 0 0 20px #008825, 0 0 30px #008825,
+            0 0 40px #75d97c;
     }
 
     100% {
-        box-shadow: 0 0 15px #008825, 0 0 25px #008825, 0 0 35px #008825, 0 0 50px #75D97C;
+        box-shadow: 0 0 15px #008825, 0 0 25px #008825, 0 0 35px #008825,
+            0 0 50px #75d97c;
     }
 }
-
 
 /* Hover caption style */
 .gallery-item {
@@ -34076,5 +34090,154 @@ textarea:focus {
         flex: 1 1 100%;
         /* 1 image per row */
         max-width: 100%;
+    }
+}
+
+.comment-section {
+    padding: 0;
+    border-radius: 15px;
+}
+
+/* Main comment box */
+.comment-box {
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: transform 0.2s;
+    border: 1px solid #e9ecef;
+}
+
+.comment-box:hover {
+    transform: translateY(-2px);
+}
+
+.user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.comment-input {
+    border-radius: 20px;
+    padding: 15px 20px;
+    border: 2px solid #e9ecef;
+    transition: all 0.3s;
+    resize: vertical;
+}
+
+.comment-input:focus {
+    box-shadow: none;
+    border-color: #86b7fe;
+}
+
+.btn-comment {
+    border-radius: 20px;
+    padding: 8px 25px;
+    background: #0d6efd;
+    border: none;
+    transition: all 0.3s;
+    color: white;
+}
+
+.btn-comment:hover {
+    background: #0b5ed7;
+    transform: translateY(-1px);
+}
+
+.comment-actions {
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+.comment-actions a {
+    color: #6c757d;
+    text-decoration: none;
+    margin-right: 15px;
+    transition: color 0.2s;
+}
+
+.comment-actions a:hover {
+    color: #0d6efd;
+}
+
+.comment-time {
+    color: #adb5bd;
+    font-size: 0.85rem;
+}
+
+/* Indented replies */
+.reply-section {
+    margin-left: 60px;
+    border-left: 2px solid #e9ecef;
+    padding-left: 20px;
+}
+
+/* RESPONSIVENESS */
+@media (max-width: 768px) {
+    .reply-section {
+        margin-left: 20px;
+        padding-left: 15px;
+    }
+
+    .user-avatar {
+        width: 40px;
+        height: 40px;
+    }
+
+    .comment-input {
+        padding: 10px 15px;
+        font-size: 0.95rem;
+    }
+
+    .btn-comment {
+        padding: 6px 20px;
+        font-size: 0.9rem;
+    }
+
+    .comment-actions {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .comment-box {
+        padding: 15px;
+    }
+
+    .reply-section {
+        margin-left: 15px;
+        padding-left: 10px;
+    }
+
+    .comment-actions a {
+        margin-right: 10px;
+    }
+}
+.reply-section {
+    margin-top: 1rem;
+    padding-left: 1rem;
+    border-left: 2px solid #e9ecef;
+}
+
+/* Limit nesting depth visually */
+.reply-section .reply-section {
+    margin-left: 0;
+    padding-left: 1rem;
+    border-left: 1px dashed #dee2e6;
+}
+
+/* On small screens */
+@media (max-width: 768px) {
+    .reply-section {
+        margin-left: 0;
+        padding-left: 0.75rem;
+        border-left: 1px solid #e9ecef;
+    }
+
+    .reply-section .reply-section {
+        padding-left: 0.75rem;
+        border-left: 1px dashed #dee2e6;
     }
 }

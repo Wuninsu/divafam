@@ -12,7 +12,12 @@ class SettingController extends Controller
      */
     public function index()
     {
-        return view('main.settings');
+        return view('main.settings.index');
+    }
+
+    public function restore()
+    {
+        return view('main.settings.restore');
     }
 
     /**

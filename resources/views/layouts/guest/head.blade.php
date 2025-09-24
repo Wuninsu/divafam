@@ -39,7 +39,8 @@
 
     <!-- owl carousel css file -->
     <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css') }}">
-
+<!-- In your <head> -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- style.css file -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
