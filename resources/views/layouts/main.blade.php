@@ -39,12 +39,11 @@
                                                 class="dropdown-header text-body-highlight fs-9 border-bottom border-translucent py-2 lh-sm">
                                                 Recently Searched </h6>
                                             <div class="py-2">
-                                                <a class="dropdown-item"
-                                                    href="#">
+                                                <a class="dropdown-item" href="#">
                                                     <div class="d-flex align-items-center">
                                                         <div class="fw-normal text-body-highlight title"><span
                                                                 class="fa-solid fa-clock-rotate-left"
-                                                                data-fa-transform="shrink-2"></span> Store Macbook</div>
+                                                                data-fa-transform="shrink-2"></span> Project 1</div>
                                                     </div>
                                                 </a>
                                             </div>
@@ -61,7 +60,7 @@
                     </div>
                 </div>
             </div>
-            <div class="support-chat-container">
+            {{-- <div class="support-chat-container">
                 <div class="container-fluid support-chat">
                     <div class="card bg-body-emphasis">
                         <div class="card-header d-flex flex-between-center px-4 py-3 border-bottom border-translucent">
@@ -139,7 +138,7 @@
                             class="ping-icon-bg"></span><span class="fa-solid fa-circle ping-icon"></span></span><span
                         class="fa-solid fa-headset text-primary fs-8 d-sm-none"></span><span
                         class="fa-solid fa-chevron-down text-primary fs-7"></span></button>
-            </div>
+            </div> --}}
 
             <footer class="footer position-absolute">
                 <div class="row g-0 justify-content-between align-items-center h-100">
@@ -164,6 +163,7 @@
     <!--    JavaScripts-->
     <!-- ===============================================-->
     @include('layouts.main.footer')
+    @yield('scripts')
 </body>
 
 </html>

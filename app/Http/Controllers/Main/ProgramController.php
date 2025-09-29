@@ -206,7 +206,7 @@ class ProgramController extends Controller
             DB::rollBack();
 
             Log::error('Error updating project: ' . $e->getMessage(), [
-                'exception' => $e,
+                // 'exception' => $e,
                 'request_data' => $request->all(),
             ]);
 

@@ -20,8 +20,10 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             ProjectSeeder::class,
             PostSeeder::class,
+            DonorSeeder::class,
             // PageSeeder::class,
-            // FaqSeeder::class,
+            FaqSeeder::class,
+            InquirySeeder::class
         ]);
     }
 }

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
+use App\Models\Donor;
+use App\Models\Faq;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AboutController extends Controller
@@ -22,7 +25,14 @@ class AboutController extends Controller
             ->image(default: fn() => asset('images/about-us-banner.jpg'))
             ->flipp('about', 'your_flipp_id_here')
             ->twitterSite('@divafam');
+        $teamMembers = User::query()
+            ->whereDoesntHave('roles', function ($query) {
+                $query->whereIn('name', ['dev', 'guest', 'donor', 'beneficiary']);
+            })->where('is_team_member', true)
+            ->latest()->get();
+        $donors = Donor::all();
+        $faqs = Faq::where('is_active', true)->limit(6)->get();
 
-        return view('guest.about-us');
+        return view('guest.about-us', compact('teamMembers','donors','faqs'));
     }
 }

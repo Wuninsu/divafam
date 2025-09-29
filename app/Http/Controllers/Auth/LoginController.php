@@ -47,7 +47,7 @@ class LoginController extends Controller
 
         // Determine if input is email, phone or username
         $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' :
-            (preg_match('/^[0-9]{10,15}$/', $login) ? 'phone' : 'username');
+            (preg_match('/^[0-9]{10,13}$/', $login) ? 'phone' : 'username');
 
         return [
             $field => $login,

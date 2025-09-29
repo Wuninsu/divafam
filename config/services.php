@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
+
 return [
 
     /*
@@ -46,5 +48,14 @@ return [
         'redirect' => env('FACEBOOK_REDIRECT_URL'),
     ],
 
-
+    // You cannot fetch Paystack keys directly from the database in config files.
+ 
+    'paystack' => [
+        'public_key' => env('PAYSTACK_PUBLIC_KEY'),
+        'secret_key' => env('PAYSTACK_SECRET_KEY'),
+        'live_public_key' => env('PAYSTACK_LIVE_PUBLIC_KEY'),
+        'live_secret_key' => env('PAYSTACK_LIVE_SECRET_KEY'),
+        'live_payment_url' => env('PAYSTACK_LIVE_PAYMENT_URL'),
+        'merchant_email' => env('PAYSTACK_MERCHANT_EMAIL'),
+    ],
 ];

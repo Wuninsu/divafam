@@ -170,7 +170,9 @@
                 <div class="col-12 mt-4">
                     <div class="row g-3 justify-content-end">
                         <div class="col-auto">
-                            <a href="{{ route('posts.index') }}" class="btn btn-phoenix-primary px-5">Cancel</a>
+                            <button type="button" onclick="window.history.back();" class="btn btn-phoenix-primary px-5">
+                                Cancel
+                            </button>
                         </div>
                         <div class="col-auto">
                             <button type="submit" class="btn btn-primary px-5 px-sm-15">Update Post</button>

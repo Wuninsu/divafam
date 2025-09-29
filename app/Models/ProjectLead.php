@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class ProjectLead extends Model
 {
     protected $fillable =['project_id','user_id'];
-    public $timestamps = false;s
+    public $timestamps = false;
 }

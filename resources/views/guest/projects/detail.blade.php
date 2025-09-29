@@ -105,13 +105,7 @@
                             <p>
                                 {{$project->description}}
                             </p>
-                            <h6 class="mb-2">Key Achievements</h6>
-                            <ul class="custom-list mb-3">
-                                <li class="list-item">250+ women trained in vocational skills</li>
-                                <li class="list-item">60% of beneficiaries started small businesses</li>
-                                <li class="list-item">Established community savings groups</li>
-                                <li class="list-item">Ongoing mentorship program</li>
-                            </ul>
+
                             <h6 class="mb-2">Supported By</h6>
                             <p>
                                 Special thanks to our sponsors and donors who made this project a success,
@@ -124,31 +118,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="subs-title mb-3">Share Your Feedback</h5>
-                            <form class="project-feedback-form">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Name</label>
-                                            <input class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Email</label>
-                                            <input class="form-control" type="email">
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">Comments</label>
-                                            <textarea class="form-control"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <button type="submit" class="btn btn-success">Submit Feedback</button>
-                                    </div>
-                                </div>
-                            </form>
+                            @livewire('guest.feedback-form')
                         </div>
                     </div>
                 </div>
@@ -174,7 +144,7 @@
                                 <li><strong>Status:</strong> <span
                                         class="badge text-bg-{{$badgeClass}}">{{$project->status}}</span></li>
                                 <li><strong>Start Date:</strong>{{$project->start_date->format('jS M, Y')}}</li>
-                                <li><strong>Beneficiaries:</strong> 250+</li>
+                                <li><strong>Beneficiaries:</strong> {{$project->beneficiaries_count}}</li>
                                 <li><strong>Location:</strong>{{$project->location}}</li>
                             </ul>
                         </div>
@@ -184,7 +154,7 @@
                             <h5 class="subs-title mb-4">How You Can Help</h5>
                             <p>Support our mission by donating or volunteering with DivaFam. Every contribution creates
                                 impact.</p>
-                            <a href="#" class="btn btn-primary w-100 mt-2">Donate Now</a>
+                            <a href="{{route('guest.donations.donate')}}" class="btn btn-primary w-100 mt-2">Donate Now</a>
                             <a href="#" class="btn btn-outline-success w-100 mt-2">Become a Volunteer</a>
                         </div>
                     </div>

@@ -79,16 +79,16 @@ class Project extends Model
     }
 
 
-    // A project may have many trainings
-    public function trainings()
+    // A project may have many beneficiaries
+    public function beneficiaries()
     {
-        return $this->hasMany(Training::class);
+        return $this->hasMany(Beneficiary::class);
     }
 
-    // A project can have many communities (through trainings)
+    // A project can have many communities (through beneficiaries)
     public function communities()
     {
-        return $this->hasManyThrough(Community::class, Training::class);
+        return $this->hasManyThrough(Community::class, Beneficiary::class);
     }
 
     // If you normalize tags via pivot instead of JSON

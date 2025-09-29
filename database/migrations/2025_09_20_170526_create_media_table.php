@@ -17,8 +17,10 @@ return new class extends Migration {
             $table->string('path');
             $table->string('alt_text')->nullable();
             $table->foreignId('uploaded_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('project_id')->nullable()->constrained('projects')->nullOnDelete(); 
             $table->timestamps();
         });
+
     }
 
     /**

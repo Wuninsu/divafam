@@ -22,6 +22,7 @@ class RolesAndPermissionsSeeder extends Seeder
         // 🔹 Entities based on your schemas
         $entities = [
             'user',
+            'category',
             'usermeta',
             'page',
             'tag',
@@ -29,10 +30,13 @@ class RolesAndPermissionsSeeder extends Seeder
             'project',
             'training',
             'community',
-            'participant',
+            'beneficiary',
             'media',
             'event',
             'setting',
+            'donor',
+            'donation',
+            'sponsorship',
         ];
 
         $actions = ['view', 'create', 'update', 'delete'];
@@ -69,7 +73,8 @@ class RolesAndPermissionsSeeder extends Seeder
         $secretary = Role::firstOrCreate(['name' => 'secretary']);
         $editor = Role::firstOrCreate(['name' => 'editor']);
         $donor = Role::firstOrCreate(['name' => 'donor']);
-        $participant = Role::firstOrCreate(['name' => 'participant']);
+        $beneficiary = Role::firstOrCreate(['name' => 'beneficiary']);
+        $guest = Role::firstOrCreate(['name' => 'guest']);
 
         // 🔹 Assign permissions to roles
         $dev->syncPermissions(Permission::all());
@@ -99,13 +104,31 @@ class RolesAndPermissionsSeeder extends Seeder
             'create event',
             'update event',
             'delete event',
+            'view donor',
+            'view donation',
+            'view sponsorship',
+            'create sponsorship',
+            'update sponsorship',
+            'view tag',
+            'create tag',
+            'update tag',
+            'view page',
+            'update page',
+            'create page',
+            'view post',
+            'create post',
+            'update post',
+            'view media',
+            'create media',
+            'update media',
+            'manage users'
         ]);
 
         $secretary->syncPermissions([
-            'view participant',
-            'create participant',
-            'update participant',
-            'delete participant',
+            'view beneficiary',
+            'create beneficiary',
+            'update beneficiary',
+            'delete beneficiary',
             'view training',
             'create training',
             'update training',
@@ -131,6 +154,9 @@ class RolesAndPermissionsSeeder extends Seeder
             'view tag',
             'create tag',
             'update tag',
+            'create category',
+            'update category',
+            'view category'
         ]);
 
         $donor->syncPermissions([
@@ -140,14 +166,21 @@ class RolesAndPermissionsSeeder extends Seeder
             'view event',
         ]);
 
-        $participant->syncPermissions([
+        $beneficiary->syncPermissions([
             'view project',
             'view training',
             'view event',
-            'view participant',
-            'update participant', // only their own
+            'view beneficiary',
+            'update beneficiary', // only their own
         ]);
 
+        $guest->syncPermissions([
+            'view page',
+            'view post',
+            'view event',
+            'view project',
+            'view training',
+        ]);
         // 🔹 Example users
         $devUser = User::firstOrCreate(
             ['email' => 'dev@divafam.org', 'username' => 'dev'],
@@ -209,14 +242,24 @@ class RolesAndPermissionsSeeder extends Seeder
         );
         $donorUser->assignRole($donor);
 
-        $participantUser = User::firstOrCreate(
-            ['email' => 'participant@divafam.org', 'username' => 'participant'],
+        $beneficiaryUser = User::firstOrCreate(
+            ['email' => 'beneficiary@divafam.org', 'username' => 'beneficiary'],
             [
-                'name' => 'Participant User',
+                'name' => 'beneficiary User',
                 'password' => Hash::make('test1234'),
                 'phone' => '0500000006',
             ]
         );
-        $participantUser->assignRole($participant);
+        $beneficiaryUser->assignRole($beneficiary);
+
+        $guestUser = User::firstOrCreate(
+            ['email' => 'guest@divafam.org', 'username' => 'guest'],
+            [
+                'name' => 'guest User',
+                'password' => Hash::make('test1234'),
+                'phone' => '0500000007',
+            ]
+        );
+        $guestUser->assignRole($guest);
     }
 }

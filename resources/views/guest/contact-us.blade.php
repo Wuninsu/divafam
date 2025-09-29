@@ -111,54 +111,7 @@
                     <div class="card mb-0">
                         <div class="card-body p-0 p-sm-5 p-md-6">
                             <h4 class="mb-3">Send Us a Message</h4>
-                            <form action="{{ route('guest.send.contact') }}" method="POST">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="mb-2">
-                                            <label class="form-label mb-0">Name <span
-                                                    class="ms-1 text-danger">*</span></label>
-                                            <input type="text" name="name" value="{{ old('name') }}"
-                                                class="form-control" placeholder="Your Name">
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="mb-2">
-                                            <label class="form-label mb-0">Email Address <span
-                                                    class="ms-1 text-danger">*</span></label>
-                                            <input type="email" name="email" value="{{ old('email') }}"
-                                                class="form-control" placeholder="your@email.com">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="mb-2">
-                                            <label class="form-label mb-0">Subject</label>
-                                            <input type="text" name="subject" value="{{ old('subject') }}"
-                                                class="form-control" placeholder="Subject">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <label class="form-label mb-0">Your Message</label>
-                                    <textarea name="message" class="form-control" rows="4"
-                                        placeholder="Type your message here...">{{ old('message') }}</textarea>
-                                </div>
-                                <!-- Displaying validation errors -->
-                                @if ($errors->any())
-                                <div>
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                                @endif
-                                <div class="d-grid">
-                                    <button type="submit" class="btn btn-outline-primary btn-lg">Send Message</button>
-                                </div>
-                            </form>
+                          @livewire('guest.contact-form')
                         </div>
                     </div>
                 </div>

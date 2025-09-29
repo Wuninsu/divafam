@@ -135,63 +135,23 @@
         </div>
         <div class="top-courses-slider lazy">
             <!-- Sponsor 1 -->
+            @forelse ($donors as $donor)
             <div>
                 <div class="categories-item categories-item-three mb-0">
-                    <img class="mx-auto" src="assets/diva/sponsors/sponsor1.png" alt="Sponsor 1 Logo">
-                    <h6 class="title">Sponsor One</h6>
+                    <img class="mx-auto" src="{{asset($donor->logo ?? NO_IMAGE)}}" alt="{{$donor->name}}">
+                    {{-- <h6 class="title">{{$donor->name}}</h6> --}}
                 </div>
             </div>
-            <!-- Sponsor 2 -->
-            <div>
-                <div class="categories-item categories-item-three mb-0">
-                    <img class="mx-auto" src="assets/diva/sponsors/sponsor2.png" alt="Sponsor 2 Logo">
-                    <h6 class="title">Donor Two</h6>
-                </div>
-            </div>
-            <!-- Sponsor 3 -->
-            <div>
-                <div class="categories-item categories-item-three mb-0">
-                    <img class="mx-auto" src="assets/diva/sponsors/sponsor3.png" alt="Sponsor 3 Logo">
-                    <h6 class="title">Sponsor Three</h6>
-                </div>
-            </div>
-            <!-- Sponsor 4 -->
-            <!-- Sponsor 1 -->
-            <div>
-                <div class="categories-item categories-item-three mb-0">
-                    <img class="mx-auto" src="assets/diva/sponsors/sponsor1.png" alt="Sponsor 1 Logo">
-                    <h6 class="title">Sponsor One</h6>
-                </div>
-            </div>
-            <!-- Sponsor 2 -->
-            <div>
-                <div class="categories-item categories-item-three mb-0">
-                    <img class="mx-auto" src="assets/diva/sponsors/sponsor2.png" alt="Sponsor 2 Logo">
-                    <h6 class="title">Donor Two</h6>
-                </div>
-            </div>
-            <!-- Sponsor 3 -->
-            <div>
-                <div class="categories-item categories-item-three mb-0">
-                    <img class="mx-auto" src="assets/diva/sponsors/sponsor3.png" alt="Sponsor 3 Logo">
-                    <h6 class="title">Sponsor Three</h6>
-                </div>
-            </div>
-            <!-- Sponsor 4 -->
-            <div>
-                <div class="categories-item categories-item-three mb-0">
-                    <img class="mx-auto" src="assets/diva/sponsors/sponsor4.png" alt="Sponsor 4 Logo">
-                    <h6 class="title">Donor Four</h6>
-                </div>
-            </div>
-            <!-- Add more as needed -->
+            @empty
+
+            @endforelse
         </div>
-        <a href="sponsors.html" class="btn btn-primary btn-md">View All Sponsors</a>
+        <a href="#" class="btn btn-primary btn-md">View All Sponsors</a>
     </div>
 </section>
 
 
-<!-- featured course -->
+<!-- featured projects -->
 <section class="featured-courses-section">
     <div class="container">
         <div class="section-header text-center">
@@ -201,51 +161,52 @@
         </div>
 
         <div class="feature-course-slider-2">
+            @forelse ($featuredProjects as $featured)
             <div>
                 <div class="course-item">
                     <div class="course-img">
-                        <a href="{{route('guest.projects.show')}}">
-                            <img src="{{asset('assets/diva/img-2.jpg')}}" alt="DivaFam Project" class="img-fluid w-100"
-                                style="height: 200px; object-fit: cover;">
+                        <a href="{{ route('guest.projects.show', ['project' => $featured->slug]) }}">
+                            <img src="{{asset($featured->cover_image ?? NO_IMAGE)}}" alt="{{$featured->slug}}"
+                                class="img-fluid w-100" style="height: 200px; object-fit: cover;">
                         </a>
-                        <div class="position-absolute start-0 top-0 d-flex align-items-start w-100 z-index-2 p-2">
-                            <span class="badge bg-success ms-auto">Ongoing</span>
+                        @php
+                        $badgeClass = match ($featured->status) {
+                        'ongoing' => 'warning',
+                        'completed' => 'success',
+                        'draft' => 'secondary',
+                        'archived' => 'dark',
+                        'postponed' => 'danger',
+                        default => 'primary',
+                        };
+                        @endphp
+                        <div class="position-absolute start-0 top-0 d-flex align-items-start w-100 z-index-2 p-3">
+                            <div class="badge text-bg-{{$badgeClass}}">{{$featured->status}}</div>
+
                         </div>
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
-                        <span class="badge badge-md badge-soft-info rounded-pill">Women Empowerment</span>
-                        <a href="javascript:void(0);" class="fav-icon"><i class="isax isax-heart"></i></a>
+                        <span class="badge badge-md badge-soft-info rounded-pill">{{$featured->category->name}}</span>
+
                     </div>
                     <div class="pb-3 border-bottom mb-3">
-                        <h5><a href="{{route('guest.projects.show')}}">DivaFam Women Empowerment Initiative</a></h5>
+                        <h5><a
+                                href="{{ route('guest.projects.show', ['project' => $featured->slug]) }}">{{$featured->title}}</a>
+                        </h5>
                     </div>
 
-                    <a href="{{route('guest.projects.show')}}" class="btn btn-success">View Project</a>
+                    <a href="{{ route('guest.projects.show', ['project' => $featured->slug]) }}"
+                        class="btn btn-success">View Project</a>
                 </div>
             </div>
-
-            <div>
-                <div class="course-item">
-                    <div class="course-img">
-                        <a href="{{route('guest.projects.show')}}">
-                            <img src="{{asset('assets/diva/img-5.jpg')}}" alt="DivaFam Project" class="img-fluid w-100"
-                                style="height: 200px; object-fit: cover;">
-                        </a>
-                        <div class="position-absolute start-0 top-0 d-flex align-items-start w-100 z-index-2 p-2">
-                            <span class="badge bg-primary ms-auto">Completed</span>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center justify-content-between">
-                        <span class="badge badge-md badge-soft-danger rounded-pill">Youth Development</span>
-                        <a href="javascript:void(0);" class="fav-icon"><i class="isax isax-heart"></i></a>
-                    </div>
-                    <div class="pb-3 border-bottom mb-3">
-                        <h5><a href="{{route('guest.projects.show')}}">DivaFam Digital Skills Training for Youth</a></h5>
-                    </div>
-
-                    <a href="{{route('guest.projects.show')}}" class="btn btn-success">View Project</a>
+            @empty
+            <div class="col-12 text-center">
+                <div class="alert alert-warning" role="alert">
+                    <strong>Note:</strong> No featured projects available right now.
                 </div>
             </div>
+            @endforelse
+
+
 
         </div>
         <div class="d-flex align-items-center justify-content-center">
@@ -336,39 +297,7 @@
         </div>
     </div>
 </section>
-
 <!-- /community-to-learn -->
-
-<!-- client -->
-<div class="cliets-section-one">
-    <div class="brand-slide">
-        <div>
-            <img src="assets/img/client/08.svg" alt="img">
-        </div>
-        <div>
-            <img src="assets/img/client/09.svg" alt="img">
-        </div>
-        <div>
-            <img src="assets/img/client/10.svg" alt="img">
-        </div>
-        <div>
-            <img src="assets/img/client/11.svg" alt="img">
-        </div>
-        <div>
-            <img src="assets/img/client/12.svg" alt="img">
-        </div>
-        <div>
-            <img src="assets/img/client/13.svg" alt="img">
-        </div>
-        <div>
-            <img src="assets/img/client/08.svg" alt="img">
-        </div>
-        <div>
-            <img src="assets/img/client/09.svg" alt="img">
-        </div>
-    </div>
-</div>
-<!-- /client -->
 
 <!-- how it works -->
 <div class="how-it-works-sec-two">
@@ -462,130 +391,27 @@
                     <!-- Accordion -->
                     <div class="accordion accordion-customicon1 accordions-items-seperate" id="faqAccordion">
 
-                        <!-- Item 1 -->
-                        <div class="accordion-item" data-aos="fade-up">
-                            <h2 class="accordion-header" id="faqHeadingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#faqCollapseOne" aria-expanded="true"
-                                    aria-controls="faqCollapseOne">
-                                    What is Divafam’s mission?
+                        @foreach($faqs as $index => $faq)
+                        <div class="accordion-item" data-aos="fade-up" data-aos-delay="{{ $index * 50 }}">
+                            <h2 class="accordion-header" id="faqHeading{{ $index }}">
+                                <button class="accordion-button {{ $index !== 0 ? 'collapsed' : '' }}" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#faqCollapse{{ $index }}"
+                                    aria-expanded="{{ $index === 0 ? 'true' : 'false' }}"
+                                    aria-controls="faqCollapse{{ $index }}">
+                                    {{ $faq->question }}
                                     <i class="isax isax-add fs-20 fw-semibold ms-1"></i>
                                 </button>
                             </h2>
-                            <div id="faqCollapseOne" class="accordion-collapse collapse show"
-                                aria-labelledby="faqHeadingOne" data-bs-parent="#faqAccordion">
+                            <div id="faqCollapse{{ $index }}"
+                                class="accordion-collapse collapse {{ $index === 0 ? 'show' : '' }}"
+                                aria-labelledby="faqHeading{{ $index }}" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body pt-0">
-                                    <p>Divafam (formerly Diva Farms) empowers women and youth through sustainable
-                                        vegetable farming, education, clean water access, farmer health support, and
-                                        grassroots climate awareness. We cultivate more than crops — we cultivate
-                                        futures.</p>
+                                    {!! $faq->answer !!}
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Item 2 -->
-                        <div class="accordion-item" data-aos="fade-up" data-aos-delay="150">
-                            <h2 class="accordion-header" id="faqHeadingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#faqCollapseTwo" aria-expanded="false"
-                                    aria-controls="faqCollapseTwo">
-                                    Who can join Divafam’s training programs?
-                                    <i class="isax isax-add fs-20 fw-semibold ms-1"></i>
-                                </button>
-                            </h2>
-                            <div id="faqCollapseTwo" class="accordion-collapse collapse" aria-labelledby="faqHeadingTwo"
-                                data-bs-parent="#faqAccordion">
-                                <div class="accordion-body pt-0">
-                                    <p>Our programs are open to young people, women, and marginalized community members
-                                        who want to learn sustainable farming, business skills, and community leadership
-                                        for self-sustaining livelihoods.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Item 3 -->
-                        <div class="accordion-item" data-aos="fade-up" data-aos-delay="200">
-                            <h2 class="accordion-header" id="faqHeadingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#faqCollapseThree" aria-expanded="false"
-                                    aria-controls="faqCollapseThree">
-                                    How does Divafam use donations?
-                                    <i class="isax isax-add fs-20 fw-semibold ms-1"></i>
-                                </button>
-                            </h2>
-                            <div id="faqCollapseThree" class="accordion-collapse collapse"
-                                aria-labelledby="faqHeadingThree" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body pt-0">
-                                    <p>Every donation, no matter how small, is treated with rigorous care. Funds support
-                                        training programs, boreholes for clean water, farmer health initiatives,
-                                        education for marginalized groups, and climate resilience projects.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Item 4 -->
-                        <div class="accordion-item" data-aos="fade-up" data-aos-delay="250">
-                            <h2 class="accordion-header" id="faqHeadingFour">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#faqCollapseFour" aria-expanded="false"
-                                    aria-controls="faqCollapseFour">
-                                    How can I get involved with Divafam?
-                                    <i class="isax isax-add fs-20 fw-semibold ms-1"></i>
-                                </button>
-                            </h2>
-                            <div id="faqCollapseFour" class="accordion-collapse collapse"
-                                aria-labelledby="faqHeadingFour" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body pt-0">
-                                    <p>You can join as a trainee, volunteer, donor, or partner. Whether through
-                                        financial contributions, sharing expertise, or offering community support —
-                                        every action strengthens our impact.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Item 5 -->
-                        <div class="accordion-item" data-aos="fade-up" data-aos-delay="300">
-                            <h2 class="accordion-header" id="faqHeadingFive">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#faqCollapseFive" aria-expanded="false"
-                                    aria-controls="faqCollapseFive">
-                                    How does Divafam ensure transparency?
-                                    <i class="isax isax-add fs-20 fw-semibold ms-1"></i>
-                                </button>
-                            </h2>
-                            <div id="faqCollapseFive" class="accordion-collapse collapse"
-                                aria-labelledby="faqHeadingFive" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body pt-0">
-                                    <p>We publish both our success metrics and setbacks openly. This fosters honest
-                                        dialogue, faster course-corrections, and stronger trust with our partners and
-                                        the communities we serve.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Item 6 -->
-                        <div class="accordion-item" data-aos="fade-up" data-aos-delay="350">
-                            <h2 class="accordion-header" id="faqHeadingSix">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#faqCollapseSix" aria-expanded="false"
-                                    aria-controls="faqCollapseSix">
-                                    How can I contact Divafam for support or partnership?
-                                    <i class="isax isax-add fs-20 fw-semibold ms-1"></i>
-                                </button>
-                            </h2>
-                            <div id="faqCollapseSix" class="accordion-collapse collapse" aria-labelledby="faqHeadingSix"
-                                data-bs-parent="#faqAccordion">
-                                <div class="accordion-body pt-0">
-                                    <p>You can reach us through our website contact form, by email at
-                                        <a href="mailto:info@divafam.org">info@divafam.org</a>, or via our community
-                                        engagement team.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
+                        @endforeach
                     </div><!-- End Accordion -->
-
                 </div>
             </div>
         </div>
@@ -605,62 +431,26 @@
                             work.</p>
                     </div>
                     <div class="owl-carousel owl-theme nav-bottom" id="review-carousel">
-
+                        @forelse ($testimonies as $testimony)
                         <div class="item flex-fill">
                             <div class="review-item">
-                                <h5 class="title">"A New Beginning"</h5>
-                                <p>Through Divafam’s farming training, I can now grow enough food to feed my family and
-                                    even sell some at the market. It has given me hope and confidence for the future.
-                                </p>
+                                <h5 class="title">"{{$testimony->subject}}"</h5>
+                                <p>{{$testimony->message}}</p>
                                 <div class="d-flex align-items-center review-user">
                                     <div class="me-2">
-                                        <img src="assets/img/user/user-12.jpg" alt="img"
+                                        <img src="{{asset($testimony->image ?? NO_IMAGE)}}" alt="img"
                                             class="img-fluid rounded-circle" width="50">
                                     </div>
                                     <div>
-                                        <h6 class="fw-medium mb-0">Adwoa Mensah</h6>
-                                        <p class="mb-0 small">Young Farmer</p>
+                                        <h6 class="fw-medium mb-0">{{$testimony->name}}</h6>
+                                        {{-- <p class="mb-0 small"></p> --}}
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        @empty
 
-                        <div class="item flex-fill">
-                            <div class="review-item">
-                                <h5 class="title">"Clean Water Changed Everything"</h5>
-                                <p>Before Divafam’s borehole project, we walked long distances for water. Now, my
-                                    children are healthier and I have more time to focus on farming and school
-                                    activities.</p>
-                                <div class="d-flex align-items-center review-user">
-                                    <div class="me-2">
-                                        <img src="assets/img/user/user-06.jpg" alt="img"
-                                            class="img-fluid rounded-circle" width="50">
-                                    </div>
-                                    <div>
-                                        <h6 class="fw-medium mb-0">Fatima Yakubu</h6>
-                                        <p class="mb-0 small">Mother of 4</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="item flex-fill">
-                            <div class="review-item">
-                                <h5 class="title">"Learning for the Future"</h5>
-                                <p>Divafam taught me not just farming but how to save, plan, and look after my health. I
-                                    now dream of starting my own small agribusiness.</p>
-                                <div class="d-flex align-items-center review-user">
-                                    <div class="me-2">
-                                        <img src="assets/img/user/user-09.jpg" alt="img"
-                                            class="img-fluid rounded-circle" width="50">
-                                    </div>
-                                    <div>
-                                        <h6 class="fw-medium mb-0">Kwame Boateng</h6>
-                                        <p class="mb-0 small">Youth Trainee</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforelse
 
                     </div>
                 </div>
@@ -698,8 +488,7 @@
                                 <h5 class="mb-2">Become a Sponsor</h5>
                                 <p class="mb-4">Support our programs and help provide resources for women and youth
                                     in farming.</p>
-                                <a href="become-sponsor.html"
-                                    class="btn btn-primary rounded-pill d-inline-flex align-items-center">
+                                <a href="{{route('guest.donations.donate')}}" class="btn btn-primary rounded-pill d-inline-flex align-items-center">
                                     Continue <i class="fas fa-arrow-right ms-2"></i>
                                 </a>
                             </div>
@@ -718,12 +507,12 @@
                                 <h5 class="mb-2">Become a Donor</h5>
                                 <p class="mb-4">Contribute to training, tools, and food security projects in local
                                     communities.</p>
-                                <a href="#" class="btn btn-secondary rounded-pill d-inline-flex align-items-center">
+                                <a href="{{route('guest.donations.donate')}}" class="btn btn-light rounded-pill d-inline-flex align-items-center">
                                     Continue <i class="fas fa-arrow-right ms-2"></i>
                                 </a>
                             </div>
                             <div class="col-xl-4 text-center">
-                                <i class="fas fa-donate fa-4x text-secondary"></i>
+                                <i class="fas fa-donate fa-4x text-dark"></i>
                             </div>
                         </div>
                     </div>
@@ -743,79 +532,43 @@
             <p>Explore curated content to enlighten, entertain and engage global readers.</p>
         </div>
         <div class="row row-gap-4 justify-content-center">
+            @forelse ($featuredPosts as $post)
             <div class="col-lg-4 col-md-6">
                 <div class="blog-card aos aos-init aos-animate" data-aos="zoom-in">
                     <div class="blog-img">
-                        <a href="{{route('guest.news.show')}}"><img class="img-fluid w-100"
-                                style="height: 200px; object-fit: cover;" alt="Img" src="assets/diva/img-1.jpg"></a>
+                        <a href="{{ route('guest.news.show', ['slug' => $post->slug]) }}"><img class="img-fluid w-100"
+                                style="height: 200px; object-fit: cover;" alt="Img"
+                                src="{{asset($post->cover_image ?? NO_IMAGE)}}"></a>
                     </div>
                     <div class="blog-content">
-                        <h5><a href="{{route('guest.news.show')}}">Training Women in Sustainable Vegetable Farming</a></h5>
-                        <p>Learning to grow vegetables sustainably can empower women and improve their livelihoods...
+                        <h5><a href="{{ route('guest.news.show', ['slug' => $post->slug]) }}">{{$post->title}}</a>
+                        </h5>
+                        <p>{{$post->summary}}
                         </p>
                         <div class="blog-user d-flex align-items-center justify-content-between">
                             <div class="d-flex align-items-center">
                                 <a href="#" class="avatar me-2">
-                                    <img src="assets/img/user/user-ghana.jpg" alt="img" class="img-fluid">
+                                    <img src="{{asset($post->author->avatar_url ?? NO_IMAGE)}}" alt="img"
+                                        class="img-fluid">
                                 </a>
-                                <p class="mb-0 d-flex align-items-center">by <a href="#"
-                                        class="fw-medium ms-1">Abdul-Hafiz Wuninsu</a></p>
+                                <p class="mb-0 d-flex align-items-center"><a href="#"
+                                        class="fw-medium ms-1">{{$post->author->name}}</a></p>
                             </div>
-                            <p class="d-flex align-items-center"><i class="isax isax-calendar-1 text-gray-7"></i>02
-                                Sep 2025</p>
+                            <p class="d-flex align-items-center"><i
+                                    class="isax isax-calendar-1 text-gray-7"></i>{{$post->published_at->format('jS M,
+                                Y')}}</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="blog-card">
-                    <div class="blog-img">
-                        <a href="{{route('guest.news.show')}}"><img class="img-fluid w-100"
-                                style="height: 200px; object-fit: cover;" alt="Img" src="assets/diva/img-19.jpg"></a>
-                    </div>
-                    <div class="blog-content">
-                        <h5><a href="{{route('guest.news.show')}}">Boreholes and Clean Water: Transforming Rural Villages</a>
-                        </h5>
-                        <p>Access to clean water is transforming rural communities, improving health, and increasing
-                            productivity...</p>
-                        <div class="blog-user d-flex align-items-center justify-content-between">
-                            <div class="d-flex align-items-center">
-                                <a href="#" class="avatar me-2">
-                                    <img src="assets/img/user/user-ghana.jpg" alt="img" class="img-fluid">
-                                </a>
-                                <p class="mb-0 d-flex align-items-center">by <a href="#" class="fw-medium ms-1">Ama
-                                        Boateng</a></p>
-                            </div>
-                            <p class="d-flex align-items-center"><i class="isax isax-calendar-1 text-gray-7"></i>15
-                                Aug 2025</p>
-                        </div>
-                    </div>
+            @empty
+            <div class="col-12 text-center">
+                <div class="alert alert-warning" role="alert">
+                    <strong>Note:</strong> No featured posts available right now.
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="blog-card">
-                    <div class="blog-img">
-                        <a href="{{route('guest.news.show')}}"><img class="img-fluid w-100"
-                                style="height: 200px; object-fit: cover;" alt="Img" src="assets/diva/img-6.jpg"></a>
-                    </div>
-                    <div class="blog-content">
-                        <h5><a href="{{route('guest.news.show')}}">Grassroots Climate Awareness for a Greener Future</a></h5>
-                        <p>Climate awareness at the grassroots level is crucial in creating sustainable environmental
-                            change...</p>
-                        <div class="blog-user d-flex align-items-center justify-content-between">
-                            <div class="d-flex align-items-center">
-                                <a href="#" class="avatar me-2">
-                                    <img src="assets/img/user/user-ghana.jpg" alt="img" class="img-fluid">
-                                </a>
-                                <p class="mb-0 d-flex align-items-center">by <a href="#" class="fw-medium ms-1">Kwame
-                                        Mensah</a></p>
-                            </div>
-                            <p class="d-flex align-items-center"><i class="isax isax-calendar-1 text-gray-7"></i>01
-                                Jul 2025</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforelse
+
         </div>
         <div class="text-center mt-3">
             <a class="btn btn-primary" data-aos="fade-up" href="{{ route('guest.news.index') }}">View All Articles</a>

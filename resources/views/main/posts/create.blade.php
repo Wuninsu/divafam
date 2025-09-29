@@ -6,11 +6,11 @@
         <ol class="breadcrumb mb-0">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
             <li class="breadcrumb-item"><a href="{{ route('posts.index') }}">Posts</a></li>
-            <li class="breadcrumb-item active">Edit</li>
+            <li class="breadcrumb-item active">Create</li>
         </ol>
     </nav>
 
-    <h2 class="mb-4">Edit Post</h2>
+    <h2 class="mb-4">Create Post</h2>
 
     <div class="row">
         <div class="col-xl-9">
@@ -179,7 +179,9 @@
                 <div class="col-12 mt-4">
                     <div class="row g-3 justify-content-end">
                         <div class="col-auto">
-                            <button type="reset" class="btn btn-phoenix-primary px-5">Cancel</button>
+                            <button type="button" onclick="window.history.back();" class="btn btn-phoenix-primary px-5">
+                                Cancel
+                            </button>
                         </div>
                         <div class="col-auto">
                             <button type="submit" class="btn btn-primary px-5 px-sm-15">Create Post</button>

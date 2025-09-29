@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
+use App\Models\Inquiry;
 use Illuminate\Http\Request;
 
 class TestimonialController extends Controller
@@ -19,7 +20,7 @@ class TestimonialController extends Controller
             ->image(default: fn() => asset('images/testimonials-banner.jpg'))
             ->flipp('testimonials', 'your_flipp_id_here')
             ->twitterSite('@divafam');
-
-        return view('guest.testimonials');
+        $testimonies = Inquiry::where('type','=','testimony')->where('status', true)->latest()->get();
+        return view('guest.testimonials',compact('testimonies'));
     }
 }

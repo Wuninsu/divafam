@@ -77,19 +77,21 @@
                     {{-- Share Buttons --}}
                     <div class="my-4">
                         <h6>Share this post:</h6>
-                        <a href="https://facebook.com/sharer/sharer.php?u={{ urlencode(request()->fullUrl()) }}"
-                            target="_blank" class="btn btn-sm btn-primary me-2">
-                            <i class="fab fa-facebook"></i> Facebook
-                        </a>
-                        <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->fullUrl()) }}&text={{ urlencode($post->title) }}"
-                            target="_blank" class="btn btn-sm btn-info text-white me-2">
-                            <i class="fab fa-twitter"></i> Twitter
-                        </a>
-                        <a href="https://www.linkedin.com/shareArticle?url={{ urlencode(request()->fullUrl()) }}"
-                            target="_blank" class="btn btn-sm btn-secondary">
-                            <i class="fab fa-linkedin"></i> LinkedIn
-                        </a>
+                        <!-- AddToAny BEGIN -->
+                        <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+                            <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+                            <a class="a2a_button_facebook"></a>
+                            <a class="a2a_button_email"></a>
+                            <a class="a2a_button_telegram"></a>
+                            <a class="a2a_button_x"></a>
+                            <a class="a2a_button_twitter"></a>
+                            <a class="a2a_button_linkedin"></a>
+                            <a class="a2a_button_whatsapp"></a>
+                        </div>
+                        <script defer src="https://static.addtoany.com/menu/page.js"></script>
+                        <!-- AddToAny END -->
                     </div>
+
 
                     {{-- Author Info --}}
                     <div

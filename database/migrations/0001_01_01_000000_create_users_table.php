@@ -23,6 +23,7 @@ return new class extends Migration {
             $table->string('avatar_url')->nullable();
             $table->string('google_id')->nullable();
             $table->string('facebook_id')->nullable();
+            $table->boolean('is_team_member')->default(false);
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();

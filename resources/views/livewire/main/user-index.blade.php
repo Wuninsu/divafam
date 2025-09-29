@@ -7,9 +7,7 @@
             </ol>
         </nav>
         <h2 class="text-bold text-body-emphasis mb-5">Users</h2>
-        <div id="members"
-            data-list="{&quot;valueNames&quot;:[&quot;customer&quot;,&quot;email&quot;,&quot;mobile_number&quot;,&quot;city&quot;,&quot;last_active&quot;,&quot;joined&quot;],&quot;page&quot;:10,&quot;pagination&quot;:true}">
-           
+        <div id="members">
             <div class="row mb-3">
                 <div class="col-md-6 mb-2 mb-md-0">
                     <input type="text" wire:model.live.debounce.1000ms="search" class="form-control"

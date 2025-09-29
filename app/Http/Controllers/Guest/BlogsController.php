@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Guest;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Request as Req;
 
 class BlogsController extends Controller
 {
@@ -39,6 +41,19 @@ class BlogsController extends Controller
 
         // Load post SEO data (if exists)
         $seo = $post->seo;
+
+        //  properly calculate post views
+        $ipAddress = Req::ip();
+        $userAgent = Req::header('User-Agent');
+
+        // Create a unique key per post + device + IP
+        $uniqueKey = md5("post_{$post->id}_{$ipAddress}_{$userAgent}");
+        $cacheKey = "viewed_post_{$uniqueKey}";
+
+        if (!Cache::has($cacheKey)) {
+            $post->increment('views');
+            Cache::put($cacheKey, true, now()->addYear());
+        }
 
         seo()
             ->site('DivaFam — Empowering Women Through Community and Connection')

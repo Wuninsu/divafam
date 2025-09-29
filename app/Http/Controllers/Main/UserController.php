@@ -68,4 +68,9 @@ class UserController extends Controller
     {
         //
     }
+
+    public function teamMembers()
+    {
+        return view('main.users.team-members');
+    }
 }

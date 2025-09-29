@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
+use App\Models\Media;
 use Illuminate\Http\Request;
 
 class GalleryController extends Controller
@@ -22,7 +23,10 @@ class GalleryController extends Controller
             ->image(default: fn() => asset('images/gallery-banner.jpg'))
             ->flipp('gallery', 'your_flipp_id_here')
             ->twitterSite('@divafam');
+        $mediaItems = Media::with('project')
+            ->latest()
+            ->paginate(paginationLimit());
 
-        return view('guest.gallery');
+        return view('guest.gallery', compact('mediaItems'));
     }
 }

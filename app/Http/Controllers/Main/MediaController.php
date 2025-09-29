@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
+use App\Models\Media;
 use Illuminate\Http\Request;
 
 class MediaController extends Controller
@@ -12,7 +13,7 @@ class MediaController extends Controller
      */
     public function index()
     {
-        return view('main.media');
+        return view('main.media.index');
     }
 
     /**
@@ -36,7 +37,9 @@ class MediaController extends Controller
      */
     public function show(string $id)
     {
-        //
+       
+        $projectId = Media::where('project_id', $id)->pluck('project_id')->first();
+        return view('main.media.show', compact('projectId'));
     }
 
     /**

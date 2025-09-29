@@ -81,24 +81,24 @@
                 </a>
                 <div class="navbar-logo">
                     <a class="logo-white header-logo" href="/">
-                        <img src="{{asset(setup_data('logo'))}}" class="logo" alt="Logo">
+                        <img src="{{asset(setup_data('logo'))}}" style="width: 50px" class="logo" alt="Logo">
                     </a>
                     <a class="logo-dark header-logo" href="/">
-                        <img src="assets/img/logo-white.svg" class="logo" alt="Logo">
+                        <img src="{{asset(setup_data('logo'))}}" style="width: 50px" class="logo" alt="Logo">
                     </a>
                 </div>
             </div>
             <div class="main-menu-wrapper">
                 <div class="menu-header">
                     <a href="/" class="menu-logo">
-                        <img src="{{asset(setup_data('logo'))}}" class="img-fluid" alt="Logo">
+                        <img src="{{asset(setup_data('logo'))}}" style="width: 50px" class="img-fluid" alt="Logo">
                     </a>
                     <a id="menu_close" class="menu-close" href="javascript:void(0);">
                         <i class="fas fa-times"></i>
                     </a>
                 </div>
                 <ul class="main-nav">
-                    <li class="{{ request()->routeIs('home') ? 'active' : '' }}">
+                    <li class="{{ request()->routeIs('guest.home','guest.home.redirect') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('guest.home') }}">Home</a>
                     </li>
 
@@ -179,9 +179,15 @@
 
                 </div>
                 <div class="menu-login">
+                    @auth
+                    <a href="{{ route('dashboard') }}" class="btn btn-primary w-100 mb-2">
+                        <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                    </a>
+                    @else
                     <a href="{{ route('login') }}" class="btn btn-primary w-100 mb-2">
                         <i class="fas fa-sign-in-alt me-2"></i> Sign In
                     </a>
+                    @endauth
                     <a href="{{route('guest.donations.donate')}}" class="btn btn-outline-primary w-100 me-0">
                         <i class="fas fa-donate me-2"></i> Donate
                     </a>
@@ -219,9 +225,17 @@
                         <i class="isax isax-moon"></i>
                     </a>
                 </div>
+                <!-- Header Btn -->
+                @auth
+                <a href="{{ route('dashboard') }}" class="btn btn-primary d-inline-flex align-items-center me-2">
+                    <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                </a>
+                @else
                 <a href="{{ route('login') }}" class="btn btn-primary d-inline-flex align-items-center me-2">
                     <i class="fas fa-sign-in-alt me-2"></i> Sign In
                 </a>
+                @endauth
+                <!-- /Header Btn -->
                 <a href="{{route('guest.donations.donate')}}" class="btn btn-outline-primary me-0">
                     <i class="fas fa-donate me-2"></i> Donate
                 </a>

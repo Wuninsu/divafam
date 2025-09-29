@@ -48,7 +48,8 @@ class ProjectsController extends Controller
      */
     public function show(string $project)
     {
-        $project = Project::with('user')->where('slug', $project)->firstOrFail();
+        $project = Project::with('user')
+            ->withCount('beneficiaries')->where('slug', $project)->firstOrFail();
 
         // Load project SEO data (if exists)
         $seo = $project->seo;

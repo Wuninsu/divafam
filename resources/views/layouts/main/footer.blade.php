@@ -14,5 +14,8 @@
 <script src="{{ asset('static/js/phoenix.js') }}"></script>
 <script src="{{ asset('static/js/dashboards/projectmanagement-dashboard.js') }}"></script>
 
+<script src="{{ asset('static/vendors/isotope-layout/isotope.pkgd.min.js') }}"></script>
+<script src="{{ asset('static/vendors/isotope-packery/packery-mode.pkgd.min.js') }}"></script>
+<script src="{{ asset('static/vendors/imagesloaded/imagesloaded.pkgd.min.js') }}"></script>
 
 @livewireScripts

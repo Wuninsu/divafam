@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Guest;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Donor;
+use App\Models\Faq;
+use App\Models\Inquiry;
+use App\Models\Post;
+use App\Models\Project;
 
 class HomeController extends Controller
 {
@@ -35,6 +40,14 @@ class HomeController extends Controller
             ->flipp('blog', 'your_flipp_id_here')
             ->twitterSite('@divafam');
 
-        return view('guest.home');
+        $featuredProjects = Project::where('is_featured', true)
+            ->where('is_active', true)->latest()->limit(4)->get();
+        $featuredPosts = Post::where('is_featured', true)
+            ->where('is_active', true)
+            ->where('is_approved', true)->latest()->limit(3)->get();
+        $faqs = Faq::where('is_active', true)->limit(6)->get();
+        $donors = Donor::all();
+        $testimonies = Inquiry::where('type', '=', 'testimony')->where('status', true)->latest()->limit(5)->get();
+        return view('guest.home', compact('featuredProjects', 'featuredPosts', 'faqs', 'donors','testimonies'));
     }
 }

@@ -32,6 +32,7 @@ class User extends Authenticatable
         'avatar_url',
         'google_id',
         'facebook_id',
+        'is_team_member'
     ];
 
     /**
@@ -54,6 +55,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_team_member'=>'boolean'
         ];
     }
 
@@ -114,9 +116,12 @@ class User extends Authenticatable
     // Relations
     public function metas()
     {
-        return $this->hasMany(UserMeta::class);
+        return $this->hasMany(UserMeta::class, 'user_id');
     }
-
+    public function getMeta($key, $default = null)
+    {
+        return $this->metas()->where('meta_key', $key)->value('meta_value') ?? $default;
+    }
     public function posts()
     {
         return $this->hasMany(Post::class, 'author_id');

@@ -204,8 +204,9 @@ if (!function_exists('sendSMS')) {
     function sendSMS($data): bool
     {
         // Define parameters
-        $api_key = "cnVOcm52bW1FYWdOQWZ0Ykx3aUY";
-        $from = "JITDelivery";
+        $api_key = "THNhUHBkSmtqdFlIYnlCVE52ZHg";
+        $from = "DivaFam"; // Sender ID
+        // $to = "233501234567"; // Recipient's phone number    
         $to = $data['to']; // Recipient's phone number
         $msg = urlencode($data['message']); // Encode the message
 

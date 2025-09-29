@@ -28,12 +28,12 @@ class PostSeeder extends Seeder
 
         $posts = [
             [
-                'title' => 'Empowering Women Farmers in Northern Nigeria',
-                'slug' => 'empowering-women-farmers-in-northern-nigeria-' . Str::random(5),
-                'summary' => 'Discover how Divafam is helping women farmers in Northern Nigeria boost productivity with climate-smart farming.',
+                'title' => 'Empowering Women Farmers in Northern Ghana',
+                'slug' => 'empowering-women-farmers-in-northern-ghana-' . Str::random(5),
+                'summary' => 'Discover how Divafam is helping women farmers in Northern Ghana boost productivity with climate-smart farming.',
                 'content' => 'In many parts of Sub-Saharan Africa, women form the backbone of the agricultural sector but often lack access to the resources they need to thrive. At Divafam, we believe that empowering rural women farmers is key to driving both household stability and long-term community development.
                 Through our Sustainable Agriculture Initiative, Divafam has trained over 500 women in climate-smart farming techniques, organic composting, and water-efficient irrigation systems. These practices not only increase productivity but also promote resilience against the growing challenges of climate change.
-                One such story is that of Mama Amina, a widow and mother of four from Northern Nigeria. After attending our workshop, she transformed her half-acre land into a thriving vegetable farm. Today, she supplies produce to local markets and even mentors younger women in her community.
+                One such story is that of Mama Amina, a widow and mother of four from Northern Ghana. After attending our workshop, she transformed her half-acre land into a thriving vegetable farm. Today, she supplies produce to local markets and even mentors younger women in her community.
                 Our impact doesn’t stop at farming. Divafam connects women to microfinance opportunities, seed grants, and cooperative networks to ensure that their success is sustainable. The ripple effect of empowering one woman is visible across households, schools, and entire villages.
                 By investing in women, we invest in the future. Join us as we build a more equitable, food-secure Africa — one empowered woman at a time.',
                 'status' => 'published',

@@ -170,6 +170,11 @@
                         </div>
                         @empty
 
+                        <div class="col-12 text-center">
+                            <div class="alert alert-warning" role="alert">
+                                <strong>Note:</strong>No blog post available right now.
+                            </div>
+                        </div>
                         @endforelse
                     </div>
                     <!-- /pagination -->

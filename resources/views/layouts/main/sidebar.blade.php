@@ -19,71 +19,92 @@
 
                 {{-- Content Management --}}
                 <li class="nav-item">
+                    {{-- Categories --}}
+                    <div class="nav-item-wrapper">
+                        <a class="nav-link {{ request()->routeIs('category.*') ? 'active' : '' }}"
+                            href="{{ route('category.index') }}">
+                            <div class="d-flex align-items-center">
+                                <span class="nav-link-icon"><span data-feather="layers"></span></span>
+                                <!-- Updated icon -->
+                                <span class="nav-link-text">Categories</span>
+                            </div>
+                        </a>
+                    </div>
+
                     {{-- Tags --}}
                     <div class="nav-item-wrapper">
-                        <a class="nav-link" href="{{ route('tags.index') }}">
+                        <a class="nav-link {{ request()->routeIs('tags.*') ? 'active' : '' }}"
+                            href="{{ route('tags.index') }}">
                             <div class="d-flex align-items-center">
-                                <span class="nav-link-icon"><span data-feather="file-text"></span></span>
-                                <span class="nav-link-text">Posts</span>
+                                <span class="nav-link-icon"><span data-feather="tag"></span></span>
+                                <!-- Updated icon -->
+                                <span class="nav-link-text">Tags</span>
                             </div>
                         </a>
                     </div>
                     {{-- Posts --}}
                     <div class="nav-item-wrapper">
-                        <a class="nav-link" href="{{ route('posts.index') }}">
+                        <a class="nav-link {{ request()->routeIs('posts.*') ? 'active' : '' }}"
+                            href="{{ route('posts.index') }}">
                             <div class="d-flex align-items-center">
                                 <span class="nav-link-icon"><span data-feather="file-text"></span></span>
                                 <span class="nav-link-text">Posts</span>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="nav-item-wrapper">
-                        <a class="nav-link dropdown-indicator label-1" href="#nv-posts" data-bs-toggle="collapse"
-                            aria-expanded="false" aria-controls="nv-posts">
-                            <div class="d-flex align-items-center">
-                                <div class="dropdown-indicator-icon-wrapper"><span class="fas fa-caret-right"></span>
-                                </div>
-                                <span class="nav-link-icon"><span data-feather="file-text"></span></span>
-                                <span class="nav-link-text">Posts</span>
-                            </div>
-                        </a>
-                        <div class="parent-wrapper label-1">
-                            <ul class="nav collapse parent" id="nv-posts" data-bs-parent="#navbarVerticalNav">
-                                <li class="nav-item"><a class="nav-link" href="{{ route('posts.index') }}">All Posts</a>
-                                </li>
-                                <li class="nav-item"><a class="nav-link" href="{{ route('posts.create') }}">Add New</a>
-                                </li>
-                                <li class="nav-item"><a class="nav-link" href="{{ route('tags.index') }}">Tags</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    {{-- Pages --}}
-                    <div class="nav-item-wrapper">
-                        <a class="nav-link" href="{{ route('pages.index') }}">
-                            <div class="d-flex align-items-center">
-                                <span class="nav-link-icon"><span data-feather="book-open"></span></span>
-                                <span class="nav-link-text">Pages</span>
                             </div>
                         </a>
                     </div>
 
                     {{-- Media --}}
                     <div class="nav-item-wrapper">
-                        <a class="nav-link" href="{{ route('media.index') }}">
+                        <a class="nav-link {{ request()->routeIs('media.*') ? 'active' : '' }}"
+                            href="{{ route('media.index') }}">
                             <div class="d-flex align-items-center">
                                 <span class="nav-link-icon"><span data-feather="image"></span></span>
                                 <span class="nav-link-text">Media</span>
                             </div>
                         </a>
                     </div>
+
+                    {{-- Pages --}}
+                    @php
+                    $isPagesActive = request()->routeIs(['pages.*']);
+                    @endphp
+                    <div class="nav-item-wrapper">
+                        <a class="nav-link dropdown-indicator label-1 {{ $isPagesActive ? '' : 'collapsed'}}"
+                            href="#nv-pages" data-bs-toggle="collapse"
+                            aria-expanded="{{$isPagesActive ? 'true' : 'false'}}" aria-controls="nv-pages">
+                            <div class="d-flex align-items-center">
+                                <div class="dropdown-indicator-icon-wrapper"><span
+                                        class="fas fa-caret-{{$isPagesActive ? 'down' : 'right'}}"></span>
+                                </div>
+                                <span class="nav-link-icon"><span data-feather="book-open"></span></span>
+                                <span class="nav-link-text">Manage Pages</span>
+                            </div>
+                        </a>
+                        <div class="parent-wrapper label-1">
+                            <ul class="nav collapse parent {{$isPagesActive ? 'show' : ''}}" id="nv-pages"
+                                data-bs-parent="#navbarVerticalNav">
+                                <li class="nav-item">
+                                    <a class="nav-link {{ request()->routeIs('pages.index', 'pages.create', 'pages.edit') ? 'active' : '' }}"
+                                        href="{{ route('pages.index') }}">
+                                        Pages
+                                    </a>
+                                </li>
+                                <li class="nav-item"><a
+                                        class="nav-link {{ request()->routeIs('pages.faq') ? 'active' : '' }}"
+                                        href="{{ route('pages.faq') }}">FAQ's</a>
+                                </li>
+                                <li class="nav-item"><a class="nav-link"
+                                        href="{{ route('pages.inquiry') }}">Inquiries</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </li>
 
                 {{-- Projects & Trainings --}}
                 <li class="nav-item">
                     {{-- Projects --}}
-                    <div class="nav-item-wrapper">
+                    {{-- <div class="nav-item-wrapper">
                         <a class="nav-link {{ request()->routeIs('programs.*') ? 'active' : '' }}"
                             href="{{ route('programs.index') }}">
                             <div class="d-flex align-items-center">
@@ -91,10 +112,46 @@
                                 <span class="nav-link-text">Projects</span>
                             </div>
                         </a>
+                    </div> --}}
+
+                    @php
+                    $isProgramActive = request()->routeIs(['programs.*', 'beneficiaries.*', 'communities.*']);
+                    @endphp
+                    <div class="nav-item-wrapper">
+                        <a class="nav-link dropdown-indicator label-1 {{ $isProgramActive ? '' : 'collapsed'}}"
+                            href="#nv-programs" data-bs-toggle="collapse"
+                            aria-expanded="{{$isProgramActive ? 'true' : 'false'}}" aria-controls="nv-programs">
+                            <div class="d-flex align-items-center">
+                                <div class="dropdown-indicator-icon-wrapper"><span
+                                        class="fas fa-caret-{{$isProgramActive ? 'down' : 'right'}}"></span>
+                                </div>
+                                <span class="nav-link-icon"><span data-feather="briefcase"></span></span>
+                                <span class="nav-link-text">Projects</span>
+                            </div>
+                        </a>
+                        <div class="parent-wrapper label-1">
+                            <ul class="nav collapse parent {{$isProgramActive ? 'show' : ''}}" id="nv-programs"
+                                data-bs-parent="#navbarVerticalNav">
+                                <li class="nav-item">
+                                    <a class="nav-link {{ request()->routeIs('programs.index','programs.create','programs.edit') ? 'active' : '' }}"
+                                        href="{{ route('programs.index') }}">
+                                        All Projects
+                                    </a>
+                                </li>
+                                <li class="nav-item"><a
+                                        class="nav-link {{ request()->routeIs('communities.index') ? 'active' : '' }}"
+                                        href="{{ route('communities.index') }}">Communities</a>
+                                </li>
+                                <li class="nav-item"><a
+                                        class="nav-link {{ request()->routeIs('beneficiaries.index*') ? 'active' : '' }}"
+                                        href="{{ route('beneficiaries.index') }}">Beneficiaries</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
 
                     {{-- Trainings --}}
-                    <div class="nav-item-wrapper">
+                    {{-- <div class="nav-item-wrapper">
                         <a class="nav-link dropdown-indicator label-1" href="#nv-trainings" data-bs-toggle="collapse"
                             aria-expanded="false" aria-controls="nv-trainings">
                             <div class="d-flex align-items-center">
@@ -117,7 +174,7 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div> --}}
                 </li>
 
                 {{-- Events --}}
@@ -132,6 +189,51 @@
                     </div>
                 </li>
 
+
+                {{-- Funding --}}
+                @php
+                $isFundingActive = request()->routeIs(['donors.*', 'donations.*', 'sponsorships.*']);
+                @endphp
+                <div class="nav-item-wrapper">
+                    <a class="nav-link dropdown-indicator label-1 {{ $isFundingActive ? '' : 'collapsed'}}"
+                        href="#nv-funding" data-bs-toggle="collapse"
+                        aria-expanded="{{ $isFundingActive ? 'true' : 'false' }}" aria-controls="nv-funding">
+                        <div class="d-flex align-items-center">
+                            <div class="dropdown-indicator-icon-wrapper">
+                                <span class="fas fa-caret-{{ $isFundingActive ? 'down' : 'right' }}"></span>
+                            </div>
+                            <span class="nav-link-icon"><i class="fa fa-hand-holding-usd"></i></span>
+                            <span class="nav-link-text">Funding</span>
+                        </div>
+                    </a>
+                    <div class="parent-wrapper label-1">
+                        <ul class="nav collapse parent {{ $isFundingActive ? 'show' : '' }}" id="nv-funding"
+                            data-bs-parent="#navbarVerticalNav">
+
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('donors.*') ? 'active' : '' }}"
+                                    href="{{ route('donors.index') }}">
+                                    <i class="fa fa-hand-holding-heart me-2"></i> Donors
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('donations.*') ? 'active' : '' }}"
+                                    href="{{ route('donations.index') }}">
+                                    <i class="fa fa-donate me-2"></i> Donations
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('sponsorships.*') ? 'active' : '' }}"
+                                    href="{{ route('sponsorships.index') }}">
+                                    <i class="fa fa-handshake me-2"></i> Sponsorships
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
                 {{-- Users, Roles & Permissions --}}
                 @php
                 $isRolesActive = request()->routeIs(['users.*','permissions.*', 'roles.*']);
@@ -152,18 +254,27 @@
                         <div class="parent-wrapper label-1">
                             <ul class="nav collapse parent {{$isRolesActive ? 'show' : ''}}" id="nv-users"
                                 data-bs-parent="#navbarVerticalNav">
+                                @canany(['manage roles', 'manage permissions'], )
                                 <li class="nav-item"><a
                                         class="nav-link {{ request()->routeIs('roles.index') ? 'active' : '' }}"
                                         href="{{ route('roles.index') }}">Roles</a>
                                 </li>
                                 <li class="nav-item"><a
-                                        class="nav-link {{ request()->routeIs('users.index') ? 'active' : '' }}"
-                                        href="{{ route('users.index') }}">All Users</a>
-                                </li>
-                                <li class="nav-item"><a
                                         class="nav-link {{ request()->routeIs('permissions.index') ? 'active' : '' }}"
                                         href="{{ route('permissions.index') }}">Permissions</a>
                                 </li>
+                                @endcanany
+
+                                <li class="nav-item"><a
+                                        class="nav-link {{ request()->routeIs('users.index') ? 'active' : '' }}"
+                                        href="{{ route('users.index') }}">All Users</a>
+                                </li>
+
+                                <li class="nav-item"><a
+                                        class="nav-link {{ request()->routeIs('users.team') ? 'active' : '' }}"
+                                        href="{{ route('users.team') }}">Team Members</a>
+                                </li>
+
                             </ul>
                         </div>
                     </div>
@@ -175,10 +286,22 @@
                     <hr class="navbar-vertical-line" />
 
                     <div class="nav-item-wrapper">
-                        <a class="nav-link" href="{{ route('settings.index') }}">
+                        <a class="nav-link {{ request()->routeIs('settings.index') ? 'active' : '' }}"
+                            href="{{ route('settings.index') }}">
                             <div class="d-flex align-items-center">
                                 <span class="nav-link-icon"><span data-feather="settings"></span></span>
                                 <span class="nav-link-text">Settings</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="nav-item-wrapper">
+                        <a class="nav-link {{ request()->routeIs('restore.index') ? 'active' : '' }}"
+                            href="{{ route('restore.index') }}">
+                            <div class="d-flex align-items-center">
+                                <span class="nav-link-icon"><span data-feather="refresh-ccw"></span></span>
+                                <!-- 'refresh-ccw' is the feather icon for restore -->
+                                <span class="nav-link-text">Restore</span>
                             </div>
                         </a>
                     </div>
@@ -201,9 +324,9 @@
                     class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
             <a class="navbar-brand me-1 me-sm-3" href="#">
                 <div class="d-flex align-items-center">
-                    {{-- <div class="d-flex align-items-center"><img src="static/assets/img/icons/logo.png"
-                            alt="divafam" width="27" /> --}}
-                        <h5 class="logo-text ms-2 d-none d-sm-block">Divafam</h5>
+                    <div class="d-flex align-items-center"><img src="{{asset(setup_data('logo') ?? NO_IMAGE)}}"
+                            alt="Divafam" width="27" />
+                        {{-- <h5 class="logo-text ms-2 d-none d-sm-block">Divafam</h5> --}}
                     </div>
                 </div>
             </a>
@@ -231,14 +354,14 @@
                                 <div class="d-flex align-items-center">
                                     <div class="fw-normal text-body-highlight title"><span
                                             class="fa-solid fa-clock-rotate-left" data-fa-transform="shrink-2"></span>
-                                        Store Macbook</div>
+                                        Project 1</div>
                                 </div>
                             </a>
                             <a class="dropdown-item" href="static/apps/e-commerce/landing/product-details.html">
                                 <div class="d-flex align-items-center">
                                     <div class="fw-normal text-body-highlight title"> <span
                                             class="fa-solid fa-clock-rotate-left" data-fa-transform="shrink-2"></span>
-                                        MacBook Air - 13″</div>
+                                        Project 2″</div>
                                 </div>
                             </a>
                         </div>
@@ -327,30 +450,24 @@
             <li class="nav-item dropdown"><a class="nav-link lh-1 pe-0" id="navbarDropdownUser" href="#!" role="button"
                     data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
                     <div class="avatar avatar-l ">
-                        <img class="rounded-circle " src="static/assets/img/team/40x40/57.webp" alt="" />
+                        <img class="rounded-circle " src="{{asset(auth()->user()->avatar_url ?? NO_IMAGE)}}" alt="" />
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end navbar-dropdown-caret py-0 dropdown-profile shadow border"
                     aria-labelledby="navbarDropdownUser">
                     <div class="card position-relative border-0">
 
-                        <div class="overflow-auto scrollbar" style="height: 10rem;">
+                        <div class="overflow-auto scrollbar" style="height: 6rem;">
                             <ul class="nav d-flex flex-column mb-2 pb-1">
-                                <li class="nav-item"><a class="nav-link px-3 d-block" href="#!">
+                                <li class="nav-item"><a class="nav-link px-3 d-block" href="{{route('profile.index')}}">
                                         <span class="me-2 text-body align-bottom" data-feather="user"></span>
                                         <span>Profile</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link px-3 d-block" href="#!">
+                                    <a class="nav-link px-3 d-block" href="{{route('dashboard')}}">
                                         <span class="me-2 text-body align-bottom"
                                             data-feather="pie-chart"></span>Dashboard
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link px-3 d-block" href="#!">
-                                        <span class="me-2 text-body align-bottom" data-feather="lock"></span>Posts
-                                        &amp; Activity
                                     </a>
                                 </li>
                                 <li class="nav-item">
