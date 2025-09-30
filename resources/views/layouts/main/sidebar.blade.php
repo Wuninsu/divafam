@@ -89,6 +89,9 @@
                                         Pages
                                     </a>
                                 </li>
+                                <li class="nav-item"><a class="nav-link {{ request()->routeIs('pages.home') ? 'active' : '' }}"
+                                        href="{{ route('pages.home') }}">Home</a>
+                                </li>
                                 <li class="nav-item"><a
                                         class="nav-link {{ request()->routeIs('pages.faq') ? 'active' : '' }}"
                                         href="{{ route('pages.faq') }}">FAQ's</a>

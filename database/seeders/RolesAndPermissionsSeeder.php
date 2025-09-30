@@ -60,6 +60,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'manage recycle bin',
             'restore from recycle bin',
             'force delete from recycle bin',
+            'approve posts',
         ];
 
         foreach ($specialPermissions as $perm) {
@@ -83,7 +84,8 @@ class RolesAndPermissionsSeeder extends Seeder
             Permission::whereNotIn('name', [
                 'assign role',
                 'assign permission',
-                'manage system settings'
+                'manage system settings',
+                'approve posts',
             ])->get()
         );
 
@@ -121,7 +123,8 @@ class RolesAndPermissionsSeeder extends Seeder
             'view media',
             'create media',
             'update media',
-            'manage users'
+            'manage users',
+            'approve posts',
         ]);
 
         $secretary->syncPermissions([
@@ -138,6 +141,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'view page',
             'create page',
             'update page',
+            'approve posts',
         ]);
 
         $editor->syncPermissions([

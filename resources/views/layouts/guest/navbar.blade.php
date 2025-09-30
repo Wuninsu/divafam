@@ -125,8 +125,10 @@
                     <li class="{{ request()->routeIs('guest.contact') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('guest.contact') }}">Contact</a>
                     </li>
+                    <li class="{{ request()->routeIs('guest.testimonials') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('guest.testimonials') }}">Testimonials</a></li>
 
-                    <li class="has-submenu active">
+                    {{-- <li class="has-submenu active">
                         <a href="#">More <i class="fas fa-chevron-down"></i></a>
                         <ul class="submenu">
                             <li class="active"><a href="{{ route('guest.testimonials') }}">Testimonials</a></li>
@@ -134,10 +136,10 @@
                             <li><a href="{{route('guest.donations.donors')}}">Donors</a></li>
                             <li><a href="#">Our Team</a></li>
                         </ul>
-                    </li>
+                    </li> --}}
                 </ul>
 
-                <div class="menu-dropdown">
+                {{-- <div class="menu-dropdown">
                     <div class="dropdown flag-dropdown mb-2">
                         <a href="javascript:void(0);" class="dropdown-toggle d-flex align-items-center"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -177,7 +179,7 @@
 
 
 
-                </div>
+                </div> --}}
                 <div class="menu-login">
                     @auth
                     <a href="{{ route('dashboard') }}" class="btn btn-primary w-100 mb-2">
@@ -194,7 +196,7 @@
                 </div>
             </div>
             <div class="header-btn d-flex align-items-center">
-                <div class="dropdown flag-dropdown icon-btn">
+                {{-- <div class="dropdown flag-dropdown icon-btn">
                     <a href="javascript:void(0);" class="d-inline-flex align-items-center" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         <img src="assets/img/flags/us-flag.svg" alt="flag">
@@ -216,7 +218,7 @@
                             </a>
                         </li>
                     </ul>
-                </div>
+                </div> --}}
                 <div class="icon-btn">
                     <a href="javascript:void(0);" id="dark-mode-toggle" class="theme-toggle activate">
                         <i class="isax isax-sun-15"></i>

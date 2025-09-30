@@ -1,10 +1,29 @@
 <?php
+
+use App\Models\HomeContent;
+use App\Models\Page;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+
+if (!function_exists('get_home_content_by_type')) {
+    function get_home_content_by_type(string $type)
+    {
+        $data = HomeContent::where('type', $type)->first();
+        return $data ?? false;
+    }
+}
+
+if (!function_exists('get_page_by_slug')) {
+    function get_page_by_slug($slug)
+    {
+        return Page::where('slug', $slug)->where('is_active', true)->first();
+    }
+}
+
 if (!function_exists('generateUsername')) {
     function generateUsername($name)
     {

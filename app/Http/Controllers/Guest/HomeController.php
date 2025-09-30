@@ -9,6 +9,7 @@ use App\Models\Faq;
 use App\Models\Inquiry;
 use App\Models\Post;
 use App\Models\Project;
+use App\Models\SetupMeta;
 
 class HomeController extends Controller
 {
@@ -29,6 +30,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $worksData = get_home_content_by_type('how_it_works');
+        $impactData = get_home_content_by_type('community_impact');
+        $carouselData = get_home_content_by_type('carousel');
+
         seo()
             ->site('DivaFam — Empowering Women Through Community and Connection')
             ->title('Home - ' . config('app.name', 'DivaFam'))
@@ -48,6 +53,15 @@ class HomeController extends Controller
         $faqs = Faq::where('is_active', true)->limit(6)->get();
         $donors = Donor::all();
         $testimonies = Inquiry::where('type', '=', 'testimony')->where('status', true)->latest()->limit(5)->get();
-        return view('guest.home', compact('featuredProjects', 'featuredPosts', 'faqs', 'donors','testimonies'));
+        return view('guest.home', compact([
+            'featuredProjects',
+            'featuredPosts',
+            'faqs',
+            'donors',
+            'testimonies',
+            'worksData',
+            'impactData',
+            'carouselData'
+        ]));
     }
 }

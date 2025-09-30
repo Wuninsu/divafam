@@ -32,7 +32,8 @@ class AboutController extends Controller
             ->latest()->get();
         $donors = Donor::all();
         $faqs = Faq::where('is_active', true)->limit(6)->get();
-
-        return view('guest.about-us', compact('teamMembers','donors','faqs'));
+        $more = get_page_by_slug('more-about-us');
+        $more=$more->content ?? null;
+        return view('guest.about-us', compact('more','teamMembers','donors','faqs'));
     }
 }

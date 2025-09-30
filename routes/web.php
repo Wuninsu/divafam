@@ -131,6 +131,7 @@ Route::middleware('auth')->group(function () {
         // Public-facing content; permissions optional
         Route::get('/pages/faq', 'faq')->name('pages.faq');
         Route::get('/pages/inquires', 'inquiry')->name('pages.inquiry');
+        Route::get('/pages/home', 'home')->name('pages.home');
     });
 
     // Media

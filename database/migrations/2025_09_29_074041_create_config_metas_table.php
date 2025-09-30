@@ -10,11 +10,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('pay_config_metas', function (Blueprint $table) {
+        Schema::create('config_metas', function (Blueprint $table) {
             $table->id();
             $table->string('key')->unique();
             $table->text('value')->nullable();
-            $table->timestamps();
         });
     }
 
@@ -23,6 +22,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('pay_config_metas');
+        Schema::dropIfExists('config_metas');
     }
 };

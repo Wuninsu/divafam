@@ -113,6 +113,7 @@
                     </div>
                 </div>
 
+                @can('approve posts')
                 <!-- Is Approved -->
                 <div class="col-md-2">
                     <div class="form-check mt-4">
@@ -123,6 +124,7 @@
                         @error('is_approved')<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
                     </div>
                 </div>
+                @endcan
 
                 <!-- Is Active -->
                 <div class="col-md-2">

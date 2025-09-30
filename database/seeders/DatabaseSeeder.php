@@ -21,9 +21,10 @@ class DatabaseSeeder extends Seeder
             ProjectSeeder::class,
             PostSeeder::class,
             DonorSeeder::class,
-            // PageSeeder::class,
+                // PageSeeder::class,
             FaqSeeder::class,
-            InquirySeeder::class
+            InquirySeeder::class,
+            HomeSeeder::class,
         ]);
     }
 }

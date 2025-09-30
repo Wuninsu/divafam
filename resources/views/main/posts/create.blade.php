@@ -118,6 +118,7 @@
                 </div>
 
                 <!-- Is Approved -->
+                @can('approve posts')
                 <div class="col-md-2">
                     <div class="form-check mt-4">
                         <input type="checkbox" name="is_approved" id="is_approved" value="1"
@@ -129,6 +130,7 @@
                         @enderror
                     </div>
                 </div>
+                @endcan
 
                 <!-- Is Active -->
                 <div class="col-md-2">
@@ -155,7 +157,7 @@
                         @enderror
                     </div>
                 </div>
-                
+
                 <!-- Tags -->
                 <div class="col-12">
                     <label for="tags" class="form-label fw-bold">Tags</label>
