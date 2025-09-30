@@ -17,7 +17,7 @@ class TestimonialController extends Controller
             ->keywords('testimonials, women empowerment stories, community impact, youth success, DivaFam experiences')
             ->canonical(url()->current())
             ->twitterCard('summary_large_image')
-            ->image(default: fn() => asset('images/testimonials-banner.jpg'))
+            ->image(default: fn() => asset(setup_data('favicon')))
             ->flipp('testimonials', 'your_flipp_id_here')
             ->twitterSite('@divafam');
         $testimonies = Inquiry::where('type','=','testimony')->where('status', true)->latest()->get();

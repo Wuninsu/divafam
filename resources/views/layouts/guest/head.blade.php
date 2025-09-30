@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="robots" content="index, follow">
     <x-seo::meta />
 
     <!-- Favicon -->
@@ -39,8 +40,8 @@
 
     <!-- owl carousel css file -->
     <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css') }}">
-<!-- In your <head> -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- In your <head> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- style.css file -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 

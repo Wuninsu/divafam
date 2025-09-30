@@ -22,7 +22,7 @@ class BlogsController extends Controller
             ->keywords('DivaFam blog, women empowerment blog, sustainable farming blog, community stories, agriculture, women in agriculture')
             ->canonical(url()->current())
             ->twitterCard('summary_large_image')
-            ->image(default: fn() => asset('images/blog-banner.jpg'))
+            ->image(default: fn() => asset(setup_data('favicon')))
             ->flipp('blog', 'your_flipp_id_here')
             ->twitterSite('@divafam');
 
@@ -70,27 +70,4 @@ class BlogsController extends Controller
         return view('guest.blogs.detail', compact('post'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

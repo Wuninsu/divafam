@@ -20,7 +20,7 @@ class ProjectsController extends Controller
             ->keywords('DivaFam projects, women empowerment projects, sustainable farming, clean water initiatives, youth programs, community development')
             ->canonical(url()->current())
             ->twitterCard('summary_large_image')
-            ->image(default: fn() => asset('images/projects-banner.jpg'))
+            ->image(default: fn() => asset(setup_data('favicon')))
             ->flipp('projects', 'your_flipp_id_here')
             ->twitterSite('@divafam');
 

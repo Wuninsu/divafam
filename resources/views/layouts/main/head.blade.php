@@ -9,16 +9,15 @@
   <!-- ===============================================-->
   <!--    Favicons-->
   <!-- ===============================================-->
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('static/img/favicons/apple-touch-icon.png') }}">
-  <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('static/img/favicons/favicon-32x32.png') }}">
-  <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('static/img/favicons/favicon-16x16.png') }}">
-  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('static/img/favicons/favicon.ico') }}">
-  <link rel="manifest" href="{{ asset('static/img/favicons/manifest.json') }}">
-  <meta name="msapplication-TileImage" content="{{ asset('static/img/favicons/mstile-150x150.png') }}">
+  <!-- Favicon -->
+  <link rel="icon" href="{{asset(setup_data('favicon'))}}">
+  <link rel="apple-touch-icon" href="{{asset(setup_data('favicon'))}}">
+  <link rel="shortcut icon" type="image/x-icon" href="{{asset(setup_data('favicon'))}}">
   <meta name="theme-color" content="#ffffff">
   <script src="{{ asset('static/vendors/simplebar/simplebar.min.js') }}"></script>
   <script src="{{ asset('static/js/config.js') }}"></script>
 
+  <meta name="robots" content="noindex, nofollow">
   <!-- ===============================================-->
   <!--    Stylesheets-->
   <!-- ===============================================-->

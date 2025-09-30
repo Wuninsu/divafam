@@ -20,7 +20,7 @@ class ContactController extends Controller
             ->keywords('contact DivaFam, get in touch, volunteer, donation inquiries, DivaFam contact information')
             ->canonical(url()->current())
             ->twitterCard('summary_large_image')
-            ->image(default: fn() => asset('images/contact-us-banner.jpg'))
+            ->image(default: fn() => asset(setup_data('favicon')))
             ->flipp('contact', 'your_flipp_id_here')
             ->twitterSite('@divafam');
 

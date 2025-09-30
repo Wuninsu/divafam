@@ -12,11 +12,13 @@ class UserController extends Controller
      */
     public function index()
     {
+        seo()->title('Users - ' . config('app.name', 'DivaFam'));
         return view('main.users.index');
     }
 
     public function managePermission($user)
     {
+        seo()->title('Manage Permissions - ' . config('app.name', 'DivaFam'));
         return view('main.users.manage-permissions', ['user' => $user]);
     }
     /**
@@ -24,15 +26,8 @@ class UserController extends Controller
      */
     public function create()
     {
+        seo()->title('Create User - ' . config('app.name', 'DivaFam'));
         return view('main.users.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -50,27 +45,17 @@ class UserController extends Controller
      */
     public function edit($user)
     {
+        seo()->title('Edit User - ' . config('app.name', 'DivaFam'));
         return view('main.users.edit', ['user' => $user]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 
     public function teamMembers()
     {
+        seo()->title('Team Members - ' . config('app.name', 'DivaFam'));
         return view('main.users.team-members');
     }
 }

@@ -22,7 +22,7 @@ class AboutController extends Controller
             ->keywords('about DivaFam, women empowerment, sustainable farming, nonprofit, youth training, community development, agricultural skills, future-building')
             ->canonical(url()->current())
             ->twitterCard('summary_large_image')
-            ->image(default: fn() => asset('images/about-us-banner.jpg'))
+            ->image(default: fn() => asset(setup_data('favicon')))
             ->flipp('about', 'your_flipp_id_here')
             ->twitterSite('@divafam');
         $teamMembers = User::query()
@@ -33,7 +33,7 @@ class AboutController extends Controller
         $donors = Donor::all();
         $faqs = Faq::where('is_active', true)->limit(6)->get();
         $more = get_page_by_slug('more-about-us');
-        $more=$more->content ?? null;
-        return view('guest.about-us', compact('more','teamMembers','donors','faqs'));
+        $more = $more->content ?? null;
+        return view('guest.about-us', compact('more', 'teamMembers', 'donors', 'faqs'));
     }
 }

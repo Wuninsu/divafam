@@ -89,14 +89,16 @@
                                         Pages
                                     </a>
                                 </li>
-                                <li class="nav-item"><a class="nav-link {{ request()->routeIs('pages.home') ? 'active' : '' }}"
+                                <li class="nav-item"><a
+                                        class="nav-link {{ request()->routeIs('pages.home') ? 'active' : '' }}"
                                         href="{{ route('pages.home') }}">Home</a>
                                 </li>
                                 <li class="nav-item"><a
                                         class="nav-link {{ request()->routeIs('pages.faq') ? 'active' : '' }}"
                                         href="{{ route('pages.faq') }}">FAQ's</a>
                                 </li>
-                                <li class="nav-item"><a class="nav-link"
+                                <li class="nav-item"><a
+                                        class="nav-link {{ request()->routeIs('pages.inquiry') ? 'active' : '' }}"
                                         href="{{ route('pages.inquiry') }}">Inquiries</a>
                                 </li>
                             </ul>
@@ -181,7 +183,7 @@
                 </li>
 
                 {{-- Events --}}
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <div class="nav-item-wrapper">
                         <a class="nav-link" href="{{ route('events.index') }}">
                             <div class="d-flex align-items-center">
@@ -190,7 +192,7 @@
                             </div>
                         </a>
                     </div>
-                </li>
+                </li> --}}
 
 
                 {{-- Funding --}}

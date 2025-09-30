@@ -12,6 +12,7 @@ class TagController extends Controller
      */
     public function index()
     {
+        seo()->title('Tags - ' . config('app.name', 'DivaFam'));
         return view('main.tags');
     }
 

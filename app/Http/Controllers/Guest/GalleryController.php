@@ -20,7 +20,7 @@ class GalleryController extends Controller
             ->keywords('DivaFam gallery, women empowerment photos, sustainable farming images, community events, agricultural projects, youth training')
             ->canonical(url()->current())
             ->twitterCard('summary_large_image')
-            ->image(default: fn() => asset('images/gallery-banner.jpg'))
+            ->image(default: fn() => asset(setup_data('favicon')))
             ->flipp('gallery', 'your_flipp_id_here')
             ->twitterSite('@divafam');
         $mediaItems = Media::with('project')

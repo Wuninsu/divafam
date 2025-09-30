@@ -14,6 +14,15 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        seo()
+            ->site('DivaFam — Empowering Women Through Community and Connection')
+            ->title('Dashboard - ' . config('app.name', 'DivaFam'))
+
+            ->twitterCard('summary_large_image')
+            ->image(default: fn() => asset(setup_data('favicon')))
+            ->flipp('dashboard', 'your_flipp_id_here')
+            ->twitterSite('@divafam');
+
         $totalDonations = Donation::sum('amount');
         $activeDonors = Donor::count();
         $projectsCount = Project::count();

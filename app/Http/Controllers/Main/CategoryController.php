@@ -9,6 +9,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
+        seo()->title('Post Categories - ' . config('app.name', 'DivaFam'));
         return view('main.category');
     }
 }

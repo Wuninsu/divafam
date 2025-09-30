@@ -13,31 +13,19 @@ class MediaController extends Controller
      */
     public function index()
     {
+        seo()->title('Media Library - ' . config('app.name', 'DivaFam'));
         return view('main.media.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-       
+        seo()->title('View Media - ' . config('app.name', 'DivaFam'));
+
         $projectId = Media::where('project_id', $id)->pluck('project_id')->first();
         return view('main.media.show', compact('projectId'));
     }

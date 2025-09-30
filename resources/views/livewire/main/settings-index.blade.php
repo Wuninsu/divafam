@@ -223,7 +223,7 @@
                             {{-- New upload preview --}}
                             @if ($editing['value'] instanceof
                             \Livewire\Features\SupportFileUploads\TemporaryUploadedFile)
-                            <img src="{{ $editing['value']->temporaryUrl() }}" width="100" class="d-block mb-2 rounded">
+                            {{-- <img src="{{ $editing['value']->temporaryUrl() }}" width="100" class="d-block mb-2 rounded"> --}}
 
                             {{-- Old file preview if no new upload --}}
                             @elseif ($editing['value'])

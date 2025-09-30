@@ -114,9 +114,9 @@
                         <a class="nav-link" href="{{ route('guest.news.index') }}">News</a>
                     </li>
 
-                    <li class="{{ request()->is('events*') ? 'active' : '' }}">
+                    {{-- <li class="{{ request()->is('events*') ? 'active' : '' }}">
                         <a class="nav-link" href="#">Events</a>
-                    </li>
+                    </li> --}}
 
                     <li class="{{ request()->routeIs('guest.gallery') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('guest.gallery') }}">Gallery</a>

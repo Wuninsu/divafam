@@ -20,6 +20,7 @@ class PostController extends Controller
      */
     public function index()
     {
+        seo()->title('Posts - ' . config('app.name', 'DivaFam'));
         return view('main.posts.index');
     }
 
@@ -28,6 +29,8 @@ class PostController extends Controller
      */
     public function create()
     {
+        seo()->title('Create Post - ' . config('app.name', 'DivaFam'));
+
         $categories = Category::all();
         $tags = Tag::all();
         return view('main.posts.create', compact('categories', 'tags'));
@@ -152,7 +155,8 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        //
+        seo()->title('View Post - ' . config('app.name', 'DivaFam'));
+
     }
 
     /**
@@ -311,117 +315,7 @@ class PostController extends Controller
         }
     }
 
-    // public function update(Request $request, Post $post)
-    // {
-    //     $validated = $request->validate([
-    //         'title' => 'required|string|max:255',
-    //         'slug' => 'nullable|string|max:255|unique:posts,slug,' . $post->id,
-    //         'summary' => 'required|string|max:500',
-    //         'status' => 'nullable',
-    //         'content' => 'required|string|min:20',
-    //         'category_id' => 'required|exists:categories,id',
-    //         'is_approved' => 'sometimes|boolean',
-    //         'is_featured' => 'sometimes|boolean',
-    //         'is_active' => 'sometimes|boolean',
-    //         'cover_image' => 'nullable|image|max:2048',
-    //         'tags' => 'nullable|array',
-    //         'tags.*' => 'exists:tags,id',
-    //     ]);
-
-    //     try {
-    //         DB::transaction(function () use ($validated, $request, $post) {
-
-    //             // Get the content content from the request
-    //             $content = $validated['content'];
-
-    //             // Define the path where the images will be stored
-    //             $imagePath = 'uploads/posts';
-
-    //             // Check if the directory exists, and create it if not
-    //             if (!Storage::exists($imagePath)) {
-    //                 Storage::makeDirectory($imagePath);  // Create the directory if it doesn't exist
-    //             }
-
-    //             // Create a DOMDocument instance to manipulate the HTML content
-    //             $dom = new DOMDocument();
-    //             @$dom->loadHTML($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);  // Suppress warnings
-
-    //             // Get all the image elements
-    //             $images = $dom->getElementsByTagName('img');
-
-    //             // Loop through the images and process base64 encoded images
-    //             foreach ($images as $key => $img) {
-    //                 // Get the 'src' attribute (which could be base64 or a URL)
-    //                 $src = $img->getAttribute('src');
-
-    //                 // Check if the src attribute contains base64 encoded image data
-    //                 if (strpos($src, 'data:image') === 0) {
-    //                     // Process base64 image
-    //                     $data = base64_decode(explode(',', $src)[1]);
-    //                     $imageName = Str::uuid() . '.png';
-
-    //                     // Store the image in the public disk
-    //                     Storage::disk('public')->put($imagePath . $imageName, $data);
-
-    //                     // Update the src attribute to point to the correct public URL
-    //                     $img->removeAttribute('src');
-    //                     $img->setAttribute('src', Storage::url($imagePath . $imageName));
-    //                 } elseif (filter_var($src, FILTER_VALIDATE_URL)) {
-    //                     // Handle external image URL (optional)
-    //                     continue; // Skip external URLs or handle separately
-    //                 }
-    //             }
-
-    //             // Save the modified content with updated image URLs
-    //             $validated['content'] = $dom->saveHTML();
-
-
-    //             // Auto-generate slug if not provided
-    //             $validated['slug'] = Str::slug($validated['slug'] ?? $validated['title']);
-
-    //             // Handle cover image upload
-    //             if ($request->hasFile('cover_image')) {
-    //                 // Optional: delete old image
-    //                 if ($post->cover_image) {
-    //                     deleteImage($post, 'cover_image');
-    //                 }
-
-    //                 $validated['cover_image'] = uploadFile($request->file('cover_image'), 'uploads/posts');
-    //             }
-
-    //             // Update publish date based on status
-    //             $validated['published_at'] = $validated['status'] === 'published' ? now() : null;
-
-    //             // Update post
-    //             $post->update($validated);
-
-    //             // Sync tags
-    //             $post->tags()->sync($validated['tags'] ?? []);
-
-    //             // Update or create SEO
-    //             $tagNames = Tag::whereIn('id', $request->input('tags', []))->pluck('name')->toArray();
-
-    //             $post->seo()->updateOrCreate([], [
-    //                 'meta_title' => $request->input('title'),
-    //                 'meta_description' => $request->input('summary'),
-    //                 'meta_keywords' => implode(', ', $tagNames),
-    //             ]);
-    //         });
-
-    //         return redirect()->route('posts.index')->with('success', 'Post updated successfully.');
-    //     } catch (\Exception $e) {
-    //         Log::error('Error updating post: ' . $e->getMessage(), [
-    //             'exception' => $e,
-    //             'request_data' => $request->all(),
-    //         ]);
-    //         return back()->with('error', 'Something went wrong. Please try again.')->withInput();
-    //     }
-    // }
-
-
-    /**
-     * Remove the specified resource from storage.
-     */
+ 
     public function destroy(string $id)
     {
         //

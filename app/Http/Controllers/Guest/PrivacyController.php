@@ -16,7 +16,7 @@ class PrivacyController extends Controller
             ->keywords('privacy policy, data protection, personal information, security, privacy rights, DivaFam data handling')
             ->canonical(url()->current())
             ->twitterCard('summary_large_image')
-            ->image(default: fn() => asset('images/privacy-policy-banner.jpg'))
+            ->image(default: fn() => asset(setup_data('favicon')))
             ->flipp('privacy', 'your_flipp_id_here')
             ->twitterSite('@divafam');
 

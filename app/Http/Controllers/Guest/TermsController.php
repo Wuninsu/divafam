@@ -16,7 +16,7 @@ class TermsController extends Controller
             ->keywords('terms of service, website terms, donation rules, community participation, user guidelines, DivaFam website terms')
             ->canonical(url()->current())
             ->twitterCard('summary_large_image')
-            ->image(default: fn() => asset('images/terms-of-service-banner.jpg'))
+            ->image(default: fn() => asset(setup_data('favicon')))
             ->flipp('terms', 'your_flipp_id_here')
             ->twitterSite('@divafam');
 

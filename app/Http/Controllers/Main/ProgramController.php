@@ -17,6 +17,7 @@ class ProgramController extends Controller
      */
     public function index()
     {
+        seo()->title('Projects - ' . config('app.name', 'DivaFam'));
         return view('main.projects.index');
     }
 
@@ -25,6 +26,7 @@ class ProgramController extends Controller
      */
     public function create()
     {
+        seo()->title('Add Project - ' . config('app.name', 'DivaFam'));
         return view('main.projects.create');
     }
 
@@ -108,7 +110,8 @@ class ProgramController extends Controller
      */
     public function show(string $id)
     {
-        //
+        seo()->title('Project Details - ' . config('app.name', 'DivaFam'));
+
     }
 
     /**

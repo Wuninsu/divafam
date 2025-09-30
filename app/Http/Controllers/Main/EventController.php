@@ -12,7 +12,8 @@ class EventController extends Controller
      */
     public function index()
     {
-       return view('main.events');
+        seo()->title('Events - ' . config('app.name', 'DivaFam'));
+        return view('main.events');
     }
 
     /**
