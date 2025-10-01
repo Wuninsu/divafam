@@ -13,8 +13,10 @@
                     <h2 class="mb-0">Projects<span class="fw-normal text-body-tertiary ms-3">({{
                             array_sum($statusCounts) }})</span></h2>
                 </div>
+                @can('create project')
                 <div class="col-auto"><a class="btn btn-primary px-5" href="{{ route('programs.create') }}">
                         <i class="fa-solid fa-plus me-2"></i>Add new project</a></div>
+                @endcan
             </div>
             <div class="row g-3 justify-content-between align-items-end mb-4">
                 <div class="col-12 col-sm-auto">
@@ -64,12 +66,12 @@
                             <th class="sort white-space-nowrap align-middle ps-0" scope="col" style="width:25%;">
                                 PROJECT
                                 NAME</th>
-                            <th class="sort align-middle ps-3" scope="col" style="width:15%;">LEAD(S)</th>
+                            {{-- <th class="sort align-middle ps-3" scope="col" style="width:15%;">LEAD(S)</th> --}}
                             <th class="sort align-middle ps-3" scope="col" style="width:15%;">START</th>
                             <th class="sort align-middle ps-3" scope="col" style="width:15%;">
                                 DEADLINE</th>
-                            <th class="sort align-middle ps-3" scope="col" style="width:12%;">TASK
-                            </th>
+                            {{-- <th class="sort align-middle ps-3" scope="col" style="width:12%;">TASK
+                            </th> --}}
                             <th class="sort align-middle text-center" scope="col" style="width:10%;">
                                 STATUS</th>
                             <th class="sort align-middle text-center" scope="col" style="width:10%;">ACTION</th>
@@ -79,10 +81,10 @@
                         @forelse ($projects as $project)
                         <tr>
                             <td class="align-middle ps-0">{{ $project->title }}</td>
-                            <td class="align-middle ps-3">John Doe, Jane Smith</td>
+                            {{-- <td class="align-middle ps-3">John Doe, Jane Smith</td> --}}
                             <td class="align-middle ps-3">{{ $project->start_date->format('jS M Y') }}</td>
                             <td class="align-middle ps-3">{{ $project->end_date->format('jS M Y') }}</td>
-                            <td class="align-middle ps-3">UI Design</td>
+                            {{-- <td class="align-middle ps-3">UI Design</td> --}}
                             <td class="align-middle text-center">
                                 @php
                                 $badgeClass = match ($project->status) {
@@ -100,12 +102,18 @@
                             </td>
                             <td class="align-middle text-center">
                                 <div class="btn-group">
+                                    @can('view project')
                                     <a class="btn btn-outline-primary btn-sm"
                                         href="{{ route('programs.show', ['project' => $project->uuid]) }}">Show</a>
+                                    @endcan
+                                    @can('update project')
                                     <a class="btn btn-primary btn-sm"
                                         href="{{ route('programs.edit', ['project' => $project->uuid]) }}">Edit</a>
+                                    @endcan
+                                    @can('delete project')
                                     <button type="button" wire:click='deleteProject({{ $project->id }})'
                                         class="btn btn-danger btn-sm">Delete</button>
+                                    @endcan
                                 </div>
                             </td>
                         </tr>

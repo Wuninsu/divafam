@@ -19,11 +19,11 @@
                     <table class="table table-sm fs-9 mb-0">
                         <thead>
                             <tr>
-                                <tr>
-                                    <th class="align-middle" style="width:10%; min-width:200px;">Step Title</th>
-                                    <th class="align-middle" style="width:50%; min-width:200px;">Step Description</th>
-                                    <th class="align-middle" style="width:10%;">Action</th>
-                                </tr>
+                            <tr>
+                                <th class="align-middle" style="width:10%; min-width:200px;">Step Title</th>
+                                <th class="align-middle" style="width:50%; min-width:200px;">Step Description</th>
+                                <th class="align-middle" style="width:10%;">Action</th>
+                            </tr>
                             </tr>
                         </thead>
                         <tbody>
@@ -222,11 +222,15 @@
                                         <span class="text-danger small">{{ $message }}</span>
                                         @enderror
 
+                                        <img src="{{ $imagePreviews[$index] ?? asset( $carouselItem['image']) }}"
+                                            alt="Saved Image" style="max-width: 100%; height: auto; margin-top: 3px;">
+
+
                                         <!-- Image preview if available -->
-                                        @if (isset($imagePreviews[$index]))
+                                        {{-- @if (isset($imagePreviews[$index]))
                                         <img src="{{ $imagePreviews[$index] }}" alt="Image Preview"
                                             style="max-width: 100%; height: auto; margin-top: 3px;">
-                                        @endif
+                                        @endif --}}
                                     </td>
 
                                     <!-- Action -->

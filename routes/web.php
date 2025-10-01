@@ -19,10 +19,6 @@ Route::post('trix/update/{id}', [TrixController::class, 'update'])->name('trix.u
 Route::get('trix/delete/{id}', [TrixController::class, 'destroy'])->name('trix.delete');
 
 
-
-
-// Route::middleware('guest')->group(function () {
-
 // Static pages
 Route::get('/', [App\Http\Controllers\Guest\HomeController::class, 'index'])->name('guest.home');
 Route::get('/home', [App\Http\Controllers\Guest\HomeController::class, 'index'])->name('guest.home.redirect');
@@ -34,10 +30,12 @@ Route::post('/send-contact', [ContactController::class, 'sendContact'])->name('g
 Route::get('/terms', [App\Http\Controllers\Guest\TermsController::class, 'index'])->name('guest.terms');
 Route::get('/privacy', [App\Http\Controllers\Guest\PrivacyController::class, 'index'])->name('guest.privacy');
 
+Route::get('/faqs', [App\Http\Controllers\Guest\TermsController::class, 'faq'])->name('guest.faqs');
+
 // Blog routes
 Route::controller(App\Http\Controllers\Guest\DonationController::class)->group(function () {
-    Route::get('/donations/donate', 'donate')->name('guest.donations.donate');
-    Route::get('/donations/donors', 'donors')->name('guest.donations.donors');
+    Route::get('/donate', 'donate')->name('guest.donate');
+    Route::get('/donors', 'donors')->name('guest.donors');
 });
 
 
@@ -54,8 +52,6 @@ Route::controller(App\Http\Controllers\Guest\ProjectsController::class)->group(f
     Route::post('/projects', 'store')->name('guest.projects.store');
     Route::get('/projects/{project?}', 'show')->name('guest.projects.show');
 });
-
-// });
 
 
 use Illuminate\Support\Facades\Mail;
@@ -100,8 +96,8 @@ use App\Http\Controllers\Main\{
 };
 use App\Http\Controllers\SocialAuthController;
 
-Route::middleware('auth')->group(function () {
-    // Dashboard
+Route::prefix('secured')->middleware(['auth', 'role:admin|dev|editor|director|secretary|'])->group(function () {
+
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Posts, Tags & Categories
@@ -190,7 +186,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(App\Http\Controllers\Main\SettingController::class)->group(function () {
         Route::get('/settings', 'index')->middleware('can:manage site options')->name('settings.index');
         Route::get('/restore', 'restore')->middleware('can:manage recycle bin')->name('restore.index');
-        Route::get('/user/profile', 'profile')->name('profile.index'); // accessible by all users
+        // Route::get('/user/profile/{user?}', 'profile')->name('profile.index'); // accessible by all users
     });
 
     // Profile

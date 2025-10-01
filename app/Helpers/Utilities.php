@@ -1,7 +1,12 @@
 <?php
 
+use App\Models\Beneficiary;
+use App\Models\Community;
+use App\Models\Donor;
 use App\Models\HomeContent;
+use App\Models\Inquiry;
 use App\Models\Page;
+use App\Models\Project;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -9,6 +14,18 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
+if (!function_exists('get_data_counts')) {
+    function get_data_counts()
+    {
+        return [
+            'activeDonors' => Donor::count(),
+            'projectsCount' => Project::count(),
+            'beneficiariesCount' => Beneficiary::count() + 100,
+            'communitiesCount' => Community::count(),
+            'testimonyCount' => Inquiry::where('type', 'testimony')->where('status', true)->count(),
+        ];
+    }
+}
 if (!function_exists('get_home_content_by_type')) {
     function get_home_content_by_type(string $type)
     {

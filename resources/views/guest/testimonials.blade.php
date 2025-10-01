@@ -44,9 +44,24 @@
                 </div>
             </div>
             @empty
-
+            <div class="item flex-fill">
+                <div class="review-item text-center">
+                    <i class="isax isax-quote-up5 fs-24 text-primary text-opacity-50"></i>
+                    <h5 class="title">No testimonies yet</h5>
+                    <p>Be the first to share your story and inspire others!</p>
+                </div>
+            </div>
             @endforelse
 
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-tile">Share you story</h4>
+            </div>
+            <div class="card-body">
+                @livewire('guest.feedback-form')
+            </div>
         </div>
     </div>
 </div>

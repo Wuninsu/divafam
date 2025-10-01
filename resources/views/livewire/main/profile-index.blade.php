@@ -7,7 +7,7 @@
                         <div class="card-header hover-actions-trigger position-relative mb-6"
                             style="min-height: 130px; ">
                             <div class="bg-holder rounded-top"
-                                style="background-image: linear-gradient(0deg, #000000 -3%, rgba(0, 0, 0, 0) 83%), url({{asset(setup_data('other_image') ?? NO_IMAGE)}})">
+                                style="background-image: linear-gradient(0deg, #000000 -3%, rgba(0, 0, 0, 0) 83%), url({{asset(setup_data('main_background_image') ?? NO_IMAGE)}})">
                                 <input class="d-none" id="upload-settings-cover-image" type="file"><label
                                     class="cover-image-file-input" for="upload-settings-cover-image"></label>
                                 <div class="hover-actions end-0 bottom-0 pe-1 pb-2 text-white dark__text-gray-1100">
@@ -51,7 +51,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="border-bottom border-translucent border-dashed pb-3 mb-4">
+                    {{-- <div class="border-bottom border-translucent border-dashed pb-3 mb-4">
                         <h5 class="text-body mb-3">Who will be able to see your profile?</h5>
                         <div class="form-check"><input class="form-check-input" id="onlyMe" type="radio"
                                 checked="checked" name="profiileVisibility"><label class="form-check-label fs-8"
@@ -95,7 +95,7 @@
                                 type="checkbox" checked="checked" name="permitFollow"><label
                                 class="form-check-label fs-8" for="permitFollow">Permit users to follow you.</label>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="col-12 col-xl-8">
                     <div class="border-bottom mb-4">
@@ -148,7 +148,7 @@
                                             <div class="form-floating"><textarea wire:model='biography'
                                                     class="form-control form-icon-input" id="info"
                                                     style="height: 115px;" placeholder="Info"></textarea><label
-                                                    class="text-body-tertiary form-icon-label" for="info">Info</label>
+                                                    class="text-body-tertiary form-icon-label" for="info">Biography</label>
                                             </div>
                                             <span class="fa-solid fa-circle-info text-body fs-9 form-icon"></span>
                                         </div>

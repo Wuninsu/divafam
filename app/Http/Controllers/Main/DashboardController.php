@@ -28,6 +28,7 @@ class DashboardController extends Controller
         $projectsCount = Project::count();
         $beneficiariesCount = Beneficiary::count();
 
+
         // Donation trends (last 12 months)
         $donationTrends = Donation::select(
             DB::raw("DATE_FORMAT(donation_date, '%Y-%m') as month"),

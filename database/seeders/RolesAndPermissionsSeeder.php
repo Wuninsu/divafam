@@ -61,6 +61,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'restore from recycle bin',
             'force delete from recycle bin',
             'approve posts',
+            'view profile'
         ];
 
         foreach ($specialPermissions as $perm) {
@@ -86,6 +87,7 @@ class RolesAndPermissionsSeeder extends Seeder
                 'assign permission',
                 'manage system settings',
                 'approve posts',
+                'view profile',
             ])->get()
         );
 
@@ -125,6 +127,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'update media',
             'manage users',
             'approve posts',
+            'view profile',
         ]);
 
         $secretary->syncPermissions([
@@ -187,7 +190,7 @@ class RolesAndPermissionsSeeder extends Seeder
         ]);
         // 🔹 Example users
         $devUser = User::firstOrCreate(
-            ['email' => 'dev@divafam.org', 'username' => 'dev'],
+            ['email' => 'dev@divafarms.org', 'username' => 'dev'],
             [
                 'name' => 'System Developer',
                 'password' => Hash::make('test1234'),
@@ -197,7 +200,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $devUser->assignRole($dev);
 
         $adminUser = User::firstOrCreate(
-            ['email' => 'admin@divafam.org', 'username' => 'admin'],
+            ['email' => 'admin@divafarms.org', 'username' => 'admin'],
             [
                 'name' => 'Administrator',
                 'password' => Hash::make('test1234'),
@@ -207,7 +210,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $adminUser->assignRole($admin);
 
         $directorUser = User::firstOrCreate(
-            ['email' => 'director@divafam.org', 'username' => 'director'],
+            ['email' => 'director@divafarms.org', 'username' => 'director'],
             [
                 'name' => 'Director User',
                 'password' => Hash::make('test1234'),
@@ -217,7 +220,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $directorUser->assignRole($director);
 
         $secretaryUser = User::firstOrCreate(
-            ['email' => 'secretary@divafam.org', 'username' => 'secretary'],
+            ['email' => 'secretary@divafarms.org', 'username' => 'secretary'],
             [
                 'name' => 'Secretary User',
                 'password' => Hash::make('test1234'),
@@ -227,7 +230,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $secretaryUser->assignRole($secretary);
 
         $editorUser = User::firstOrCreate(
-            ['email' => 'editor@divafam.org', 'username' => 'editor'],
+            ['email' => 'editor@divafarms.org', 'username' => 'editor'],
             [
                 'name' => 'Editor User',
                 'password' => Hash::make('test1234'),
@@ -236,34 +239,34 @@ class RolesAndPermissionsSeeder extends Seeder
         );
         $editorUser->assignRole($editor);
 
-        $donorUser = User::firstOrCreate(
-            ['email' => 'donor@divafam.org', 'username' => 'donor'],
-            [
-                'name' => 'Donor User',
-                'password' => Hash::make('test1234'),
-                'phone' => '0500000005',
-            ]
-        );
-        $donorUser->assignRole($donor);
+        // $donorUser = User::firstOrCreate(
+        //     ['email' => 'donor@divafarms.org', 'username' => 'donor'],
+        //     [
+        //         'name' => 'Donor User',
+        //         'password' => Hash::make('test1234'),
+        //         'phone' => '0500000005',
+        //     ]
+        // );
+        // $donorUser->assignRole($donor);
 
-        $beneficiaryUser = User::firstOrCreate(
-            ['email' => 'beneficiary@divafam.org', 'username' => 'beneficiary'],
-            [
-                'name' => 'beneficiary User',
-                'password' => Hash::make('test1234'),
-                'phone' => '0500000006',
-            ]
-        );
-        $beneficiaryUser->assignRole($beneficiary);
+        // $beneficiaryUser = User::firstOrCreate(
+        //     ['email' => 'beneficiary@divafarms.org', 'username' => 'beneficiary'],
+        //     [
+        //         'name' => 'beneficiary User',
+        //         'password' => Hash::make('test1234'),
+        //         'phone' => '0500000006',
+        //     ]
+        // );
+        // $beneficiaryUser->assignRole($beneficiary);
 
-        $guestUser = User::firstOrCreate(
-            ['email' => 'guest@divafam.org', 'username' => 'guest'],
-            [
-                'name' => 'guest User',
-                'password' => Hash::make('test1234'),
-                'phone' => '0500000007',
-            ]
-        );
-        $guestUser->assignRole($guest);
+        // $guestUser = User::firstOrCreate(
+        //     ['email' => 'guest@divafarms.org', 'username' => 'guest'],
+        //     [
+        //         'name' => 'guest User',
+        //         'password' => Hash::make('test1234'),
+        //         'phone' => '0500000007',
+        //     ]
+        // );
+        // $guestUser->assignRole($guest);
     }
 }

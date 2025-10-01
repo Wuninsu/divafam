@@ -133,7 +133,7 @@
                         <ul class="submenu">
                             <li class="active"><a href="{{ route('guest.testimonials') }}">Testimonials</a></li>
                             <li><a href="#">Sponsors</a></li>
-                            <li><a href="{{route('guest.donations.donors')}}">Donors</a></li>
+                            <li><a href="{{route('guest.donors')}}">Donors</a></li>
                             <li><a href="#">Our Team</a></li>
                         </ul>
                     </li> --}}
@@ -190,7 +190,7 @@
                         <i class="fas fa-sign-in-alt me-2"></i> Sign In
                     </a>
                     @endauth
-                    <a href="{{route('guest.donations.donate')}}" class="btn btn-outline-primary w-100 me-0">
+                    <a href="{{route('guest.donate')}}" class="btn btn-outline-primary w-100 me-0">
                         <i class="fas fa-donate me-2"></i> Donate
                     </a>
                 </div>
@@ -238,7 +238,7 @@
                 </a>
                 @endauth
                 <!-- /Header Btn -->
-                <a href="{{route('guest.donations.donate')}}" class="btn btn-outline-primary me-0">
+                <a href="{{route('guest.donate')}}" class="btn btn-outline-primary me-0">
                     <i class="fas fa-donate me-2"></i> Donate
                 </a>
 

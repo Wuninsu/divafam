@@ -99,7 +99,7 @@
                                 </li>
                                 <li class="nav-item"><a
                                         class="nav-link {{ request()->routeIs('pages.inquiry') ? 'active' : '' }}"
-                                        href="{{ route('pages.inquiry') }}">Inquiries</a>
+                                        href="{{ route('pages.inquiry') }}">Testimony & Inquiries</a>
                                 </li>
                             </ul>
                         </div>
@@ -260,6 +260,7 @@
                             <ul class="nav collapse parent {{$isRolesActive ? 'show' : ''}}" id="nv-users"
                                 data-bs-parent="#navbarVerticalNav">
                                 @canany(['manage roles', 'manage permissions'], )
+                                @hasallroles('dev')
                                 <li class="nav-item"><a
                                         class="nav-link {{ request()->routeIs('roles.index') ? 'active' : '' }}"
                                         href="{{ route('roles.index') }}">Roles</a>
@@ -268,6 +269,7 @@
                                         class="nav-link {{ request()->routeIs('permissions.index') ? 'active' : '' }}"
                                         href="{{ route('permissions.index') }}">Permissions</a>
                                 </li>
+                                @endhasallroles
                                 @endcanany
 
                                 <li class="nav-item"><a
@@ -329,9 +331,9 @@
                     class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
             <a class="navbar-brand me-1 me-sm-3" href="#">
                 <div class="d-flex align-items-center">
-                    <div class="d-flex align-items-center"><img src="{{asset(setup_data('logo') ?? NO_IMAGE)}}"
-                            alt="Divafam" width="27" />
-                        {{-- <h5 class="logo-text ms-2 d-none d-sm-block">Divafam</h5> --}}
+                    <div class="d-flex align-items-center">
+                        {{-- <img src="{{asset(setup_data('logo') ?? NO_IMAGE)}}" alt="Divafam" width="27" /> --}}
+                        <h5 class="logo-text ms-2">Divafam</h5>
                     </div>
                 </div>
             </a>
@@ -354,15 +356,14 @@
                         <h6
                             class="dropdown-header text-body-highlight fs-9 border-bottom border-translucent py-2 lh-sm">
                             Recently Searched </h6>
-                        <div class="py-2"><a class="dropdown-item"
-                                href="static/apps/e-commerce/landing/product-details.html">
+                        <div class="py-2"><a class="dropdown-item" href="#">
                                 <div class="d-flex align-items-center">
                                     <div class="fw-normal text-body-highlight title"><span
                                             class="fa-solid fa-clock-rotate-left" data-fa-transform="shrink-2"></span>
                                         Project 1</div>
                                 </div>
                             </a>
-                            <a class="dropdown-item" href="static/apps/e-commerce/landing/product-details.html">
+                            <a class="dropdown-item" href="#">
                                 <div class="d-flex align-items-center">
                                     <div class="fw-normal text-body-highlight title"> <span
                                             class="fa-solid fa-clock-rotate-left" data-fa-transform="shrink-2"></span>
@@ -413,7 +414,8 @@
                         <div class="card-body p-0">
                             <div class="scrollbar-overlay" style="height: 27rem;">
                                 <div class="px-2 px-sm-3 py-3 notification-card position-relative read border-bottom">
-                                    <div class="d-flex align-items-center justify-content-between position-relative">
+                                    {{-- <div
+                                        class="d-flex align-items-center justify-content-between position-relative">
                                         <div class="d-flex">
                                             <div class="avatar avatar-m status-online me-3"><img class="rounded-circle"
                                                     src="static/assets/img/team/40x40/30.webp" alt="" /></div>
@@ -438,14 +440,14 @@
                                             <div class="dropdown-menu py-2"><a class="dropdown-item" href="#!">Mark as
                                                     unread</a></div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                             </div>
                         </div>
                         <div class="card-footer p-0 border-top border-translucent border-0">
                             <div class="my-2 text-center fw-bold fs-10 text-body-tertiary text-opactity-85"><a
-                                    class="fw-bolder" href="static/pages/notifications.html">Notification
+                                    class="fw-bolder" href="#">Notification
                                     history</a></div>
                         </div>
                     </div>
@@ -504,103 +506,3 @@
         </ul>
     </div>
 </nav>
-
-<script>
-    var navbarTopShape = window.config.config.phoenixNavbarTopShape;
-        var navbarPosition = window.config.config.phoenixNavbarPosition;
-        var body = document.querySelector('body');
-        var navbarDefault = document.querySelector('#navbarDefault');
-        var navbarTop = document.querySelector('#navbarTop');
-        var topNavSlim = document.querySelector('#topNavSlim');
-        var navbarTopSlim = document.querySelector('#navbarTopSlim');
-        var navbarCombo = document.querySelector('#navbarCombo');
-        var navbarComboSlim = document.querySelector('#navbarComboSlim');
-        var dualNav = document.querySelector('#dualNav');
-
-        var documentElement = document.documentElement;
-        var navbarVertical = document.querySelector('.navbar-vertical');
-
-        if (navbarPosition === 'dual-nav') {
-          topNavSlim?.remove();
-          navbarTop?.remove();
-          navbarTopSlim?.remove();
-          navbarCombo?.remove();
-          navbarComboSlim?.remove();
-          navbarDefault?.remove();
-          navbarVertical?.remove();
-          dualNav.removeAttribute('style');
-          document.documentElement.setAttribute('data-navigation-type', 'dual');
-
-        } else if (navbarTopShape === 'slim' && navbarPosition === 'vertical') {
-          navbarDefault?.remove();
-          navbarTop?.remove();
-          navbarTopSlim?.remove();
-          navbarCombo?.remove();
-          navbarComboSlim?.remove();
-          topNavSlim.style.display = 'block';
-          navbarVertical.style.display = 'inline-block';
-          document.documentElement.setAttribute('data-navbar-horizontal-shape', 'slim');
-
-        } else if (navbarTopShape === 'slim' && navbarPosition === 'horizontal') {
-          navbarDefault?.remove();
-          navbarVertical?.remove();
-          navbarTop?.remove();
-          topNavSlim?.remove();
-          navbarCombo?.remove();
-          navbarComboSlim?.remove();
-          dualNav?.remove();
-          navbarTopSlim.removeAttribute('style');
-          document.documentElement.setAttribute('data-navbar-horizontal-shape', 'slim');
-        } else if (navbarTopShape === 'slim' && navbarPosition === 'combo') {
-          navbarDefault?.remove();
-          navbarTop?.remove();
-          topNavSlim?.remove();
-          navbarCombo?.remove();
-          navbarTopSlim?.remove();
-          dualNav?.remove();
-          navbarComboSlim.removeAttribute('style');
-          navbarVertical.removeAttribute('style');
-          document.documentElement.setAttribute('data-navbar-horizontal-shape', 'slim');
-        } else if (navbarTopShape === 'default' && navbarPosition === 'horizontal') {
-          navbarDefault?.remove();
-          topNavSlim?.remove();
-          navbarVertical?.remove();
-          navbarTopSlim?.remove();
-          navbarCombo?.remove();
-          navbarComboSlim?.remove();
-          dualNav?.remove();
-          navbarTop.removeAttribute('style');
-          document.documentElement.setAttribute('data-navigation-type', 'horizontal');
-        } else if (navbarTopShape === 'default' && navbarPosition === 'combo') {
-          topNavSlim?.remove();
-          navbarTop?.remove();
-          navbarTopSlim?.remove();
-          navbarDefault?.remove();
-          navbarComboSlim?.remove();
-          dualNav?.remove();
-          navbarCombo.removeAttribute('style');
-          navbarVertical.removeAttribute('style');
-          document.documentElement.setAttribute('data-navigation-type', 'combo');
-        } else {
-          topNavSlim?.remove();
-          navbarTop?.remove();
-          navbarTopSlim?.remove();
-          navbarCombo?.remove();
-          navbarComboSlim?.remove();
-          dualNav?.remove();
-          navbarDefault.removeAttribute('style');
-          navbarVertical.removeAttribute('style');
-        }
-
-        var navbarTopStyle = window.config.config.phoenixNavbarTopStyle;
-        var navbarTop = document.querySelector('.navbar-top');
-        if (navbarTopStyle === 'darker') {
-          navbarTop.setAttribute('data-navbar-appearance', 'darker');
-        }
-
-        var navbarVerticalStyle = window.config.config.phoenixNavbarVerticalStyle;
-        var navbarVertical = document.querySelector('.navbar-vertical');
-        if (navbarVerticalStyle === 'darker') {
-          navbarVertical.setAttribute('data-navbar-appearance', 'darker');
-        }
-</script>

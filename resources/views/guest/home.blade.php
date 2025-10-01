@@ -3,7 +3,7 @@
 @section('content')
 <div class="banner-section-two">
 
- 
+
     @if ($carouselData)
     <div id="bs-carousel" class="carousel slide fade-carousel" data-bs-ride="carousel" data-bs-interval="4000">
         <!-- Overlay -->
@@ -29,7 +29,8 @@
                         <h3>{{ $slide['description'] }}</h3>
                     </hgroup>
                     @if($slide['button_link'])
-                    <a href="{{ $slide['button_link'] }}" class="btn btn-hero btn-lg" role="button">{{ $slide['button_text'] }}</a>
+                    <a href="{{ $slide['button_link'] }}" class="btn btn-hero btn-lg" role="button">{{
+                        $slide['button_text'] }}</a>
                     @else
                     <button class="btn btn-hero btn-lg" role="button">{{ $slide['button_text'] }}</button>
                     @endif
@@ -67,7 +68,8 @@
                             <i class="fas fa-users fs-3 text-primary"></i>
                         </div>
                         <h5 class="mt-3 mb-1">Beneficiaries</h5>
-                        <p>Over <strong>5,000 individuals</strong> have directly benefited from our programs.</p>
+                        <p>Over <strong>{{get_data_counts()['beneficiariesCount']}} individuals</strong> have directly
+                            benefited from our programs.</p>
                     </div>
                 </div>
             </div>
@@ -83,7 +85,8 @@
                             <i class="fas fa-project-diagram fs-3 text-secondary"></i>
                         </div>
                         <h5 class="mt-3 mb-1">Total Projects</h5>
-                        <p>We have successfully executed <strong>120+ community projects</strong> across various
+                        <p>We have successfully executed <strong>{{get_data_counts()['projectsCount']}} community
+                                projects</strong> across various
                             sectors.</p>
                     </div>
                 </div>
@@ -234,7 +237,7 @@
 
                 <div class="d-flex align-items-center gap-2">
                     {{-- <a href="#" class="btn btn-secondary btn-md">Join as Beneficiary</a> --}}
-                    <a href="{{route('guest.donations.donate')}}" class="btn btn-dark btn-md">Partner as Sponsor</a>
+                    <a href="{{route('guest.donate')}}" class="btn btn-dark btn-md">Partner as Sponsor</a>
                 </div>
             </div>
             <div class="col-lg-6">
@@ -286,34 +289,6 @@
 
                     @endif
 
-                    {{--
-                    <div class="d-flex align-items-center works-items">
-                        <span class="count">02</span>
-                        <div>
-                            <h5 class="mb-1">Support a Project</h5>
-                            <p>Browse through our ongoing initiatives and choose the one you’d like to support
-                                financially or with resources.</p>
-                        </div>
-                    </div>
-
-                    <div class="d-flex align-items-center works-items">
-                        <span class="count">03</span>
-                        <div>
-                            <h5 class="mb-1">Beneficiaries Receive Support</h5>
-                            <p>Your contribution directly impacts women, children, and families in need, providing them
-                                with skills and opportunities.</p>
-                        </div>
-                    </div>
-
-                    <div class="d-flex align-items-center works-items mb-0 pb-0 border-0">
-                        <span class="count">04</span>
-                        <div>
-                            <h5 class="mb-1">See the Impact</h5>
-                            <p>Track the success stories, project updates, and the lives changed because of your
-                                support.</p>
-                        </div>
-                    </div> --}}
-
                 </div>
             </div>
         </div>
@@ -335,7 +310,8 @@
             <!-- FAQ Image -->
             <div class="col-lg-6">
                 <div class="faq-img" data-aos="fade-up">
-                    <img class="img-fluid rounded-5" src="assets/diva/img-17.jpg" alt="Divafam FAQ">
+                    <img class="img-fluid rounded-5" src="{{asset(setup_data('home_faq_image') ?? NO_IMAGE)}}"
+                        alt="Divafam FAQ">
                     <span><i class="isax isax-message-question5"></i></span>
                 </div>
             </div>
@@ -397,7 +373,8 @@
                         @forelse ($testimonies as $testimony)
                         <div class="item flex-fill">
                             <div class="review-item">
-                                <h5 class="title">"{{$testimony->subject}}"</h5>
+                                <i class="isax isax-quote-up5 fs-24 text-primary text-opacity-50"></i>
+                                <h5 class="title">{{$testimony->subject}}</h5>
                                 <p>{{$testimony->message}}</p>
                                 <div class="d-flex align-items-center review-user">
                                     <div class="me-2">
@@ -412,7 +389,13 @@
                             </div>
                         </div>
                         @empty
-
+                        <div class="item flex-fill">
+                            <div class="review-item text-center">
+                                <i class="isax isax-quote-up5 fs-24 text-primary text-opacity-50"></i>
+                                <h5 class="title">No testimonies yet</h5>
+                                <p>Be the first to share your story and inspire others!</p>
+                            </div>
+                        </div>
                         @endforelse
 
                     </div>
@@ -420,44 +403,26 @@
 
                 <div class="col-lg-5">
                     <div class="img-section">
-                        <img src="assets/diva/img-4.jpg" alt="img" class="img-fluid about-img aos" data-aos="zoom-in">
+                        <img src="{{asset(setup_data('home_testimony_image')) ?? 'assets/diva/img-4.jpg'}}" alt="img"
+                            class="img-fluid about-img aos" data-aos="zoom-in">
                         <div class="enrolled-list-cover d-none d-xl-flex aos" data-aos="fade-down">
                             <div class="enrolled-list">
                                 <div class="avatar-list-stacked">
-                                    <span class="avatar avatar-rounded">
+                                    {{-- <span class="avatar avatar-rounded">
+                                        <img class="border border-white" src="assets/diva/img-3.jpg" alt="img">
+                                    </span> --}}
+                                    {{-- <span class="avatar avatar-rounded">
                                         <img class="border border-white" src="assets/diva/img-3.jpg" alt="img">
                                     </span>
                                     <span class="avatar avatar-rounded">
                                         <img class="border border-white" src="assets/diva/img-3.jpg" alt="img">
-                                    </span>
-                                    <span class="avatar avatar-rounded">
-                                        <img class="border border-white" src="assets/diva/img-3.jpg" alt="img">
-                                    </span>
-                                    <span class="avatar avatar-rounded">
-                                        <img class="border border-white" src="assets/diva/img-3.jpg" alt="img">
-                                    </span>
-                                    <span class="avatar avatar-rounded">
-                                        <img class="border border-white" src="assets/diva/img-3.jpg" alt="img">
-                                    </span>
-                                    <span class="avatar avatar-rounded">
-                                        <img class="border border-white" src="assets/diva/img-3.jpg" alt="img">
-                                    </span>
-                                    <span class="avatar avatar-rounded">
-                                        <img class="border border-white" src="assets/diva/img-3.jpg" alt="img">
-                                    </span>
-                                    <span class="avatar avatar-rounded">
-                                        <img class="border border-white" src="assets/diva/img-3.jpg" alt="img">
-                                    </span>
-                                    <span class="avatar avatar-rounded">
-                                        <img class="border border-white" src="assets/diva/img-3.jpg" alt="img">
-                                    </span>
-                                    <span class="avatar avatar-rounded">
-                                        <img class="border border-white" src="assets/diva/img-3.jpg" alt="img">
-                                    </span>
+                                    </span> --}}
+
 
                                 </div>
                                 <p class="mb-0 text-light fw-bold text-center">
-                                    <span class="text-secondary">200+</span> Stories Shared
+                                    <span class="text-secondary">{{get_data_counts()['testimonyCount']}}+</span> Stories
+                                    Shared
                                 </p>
                             </div>
                         </div>
@@ -477,7 +442,7 @@
                                 <h5 class="mb-2">Become a Sponsor</h5>
                                 <p class="mb-4">Support our programs and help provide resources for women and youth
                                     in farming.</p>
-                                <a href="{{route('guest.donations.donate')}}"
+                                <a href="{{route('guest.donate')}}"
                                     class="btn btn-primary rounded-pill d-inline-flex align-items-center">
                                     Continue <i class="fas fa-arrow-right ms-2"></i>
                                 </a>
@@ -497,7 +462,7 @@
                                 <h5 class="mb-2">Become a Donor</h5>
                                 <p class="mb-4">Contribute to training, tools, and food security projects in local
                                     communities.</p>
-                                <a href="{{route('guest.donations.donate')}}"
+                                <a href="{{route('guest.donate')}}"
                                     class="btn btn-light rounded-pill d-inline-flex align-items-center">
                                     Continue <i class="fas fa-arrow-right ms-2"></i>
                                 </a>

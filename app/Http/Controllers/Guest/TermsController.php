@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
+use App\Models\Faq;
 use Illuminate\Http\Request;
 
 class TermsController extends Controller
@@ -33,9 +34,10 @@ class TermsController extends Controller
             ->keywords('DivaFam FAQ, frequently asked questions, donation information, volunteer opportunities, community support, programs')
             ->canonical(url()->current())
             ->twitterCard('summary_large_image')
-            ->image(default: fn() => asset('images/faq-banner.jpg'))
+            ->image(default: fn() => asset(setup_data('favicon')))
             ->flipp('faq', 'your_flipp_id_here')
             ->twitterSite('@divafam');
-
+        $faqs = Faq::where('is_active', true)->get();
+        return view('guest.faq', compact('faqs'));
     }
 }

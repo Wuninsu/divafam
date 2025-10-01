@@ -121,7 +121,8 @@
                                     <i class="fas fa-users fa-2x text-info"></i>
                                 </div>
                                 <div class="count-content">
-                                    <h4 class="text-info"><span class="count-digit" data-count="15000">0</span>+</h4>
+                                    <h4 class="text-info"><span class="count-digit"
+                                            data-count="{{get_data_counts()['beneficiariesCount']}}">{{get_data_counts()['beneficiariesCount']}}</span>+</h4>
                                     <p>Beneficiaries Reached</p>
                                 </div>
                             </div>
@@ -138,7 +139,9 @@
                                     <i class="fas fa-seedling fa-2x text-warning"></i>
                                 </div>
                                 <div class="count-content">
-                                    <h4 class="text-warning"><span class="count-digit" data-count="120">0</span>+</h4>
+                                    <h4 class="text-warning"><span class="count-digit"
+                                            data-count="{{get_data_counts()['projectsCount']}}">
+                                            {{get_data_counts()['projectsCount']}}</span>+</h4>
                                     <p>Total Projects</p>
                                 </div>
                             </div>
@@ -155,7 +158,9 @@
                                     <i class="fas fa-handshake fa-2x text-success"></i>
                                 </div>
                                 <div class="count-content">
-                                    <h4 class="text-success"><span class="count-digit" data-count="50">0</span>+</h4>
+                                    <h4 class="text-success"><span class="count-digit"
+                                            data-count="{{get_data_counts()['activeDonors']}}">
+                                            {{get_data_counts()['activeDonors']}}</span>+</h4>
                                     <p>Partner Organizations</p>
                                 </div>
                             </div>
@@ -169,11 +174,13 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div class="counter-icon me-3">
-                                    <i class="fas fa-hands-helping fa-2x text-primary"></i>
+                                    <i class="fas fa-city fa-2x text-primary"></i>
                                 </div>
                                 <div class="count-content">
-                                    <h4 class="text-primary"><span class="count-digit" data-count="500">0</span>+</h4>
-                                    <p>Active Volunteers</p>
+                                    <h4 class="text-primary"><span class="count-digit"
+                                            data-count="{{get_data_counts()['communitiesCount']}}">
+                                            {{get_data_counts()['communitiesCount']}}</span>+</h4>
+                                    <p>Communities Reached</p>
                                 </div>
                             </div>
                         </div>

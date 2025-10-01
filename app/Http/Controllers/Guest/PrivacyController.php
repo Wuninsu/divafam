@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
+use App\Models\Faq;
 use Illuminate\Http\Request;
 
 class PrivacyController extends Controller
@@ -19,7 +20,7 @@ class PrivacyController extends Controller
             ->image(default: fn() => asset(setup_data('favicon')))
             ->flipp('privacy', 'your_flipp_id_here')
             ->twitterSite('@divafam');
-
+     
         return view('guest.privacy');
     }
 }

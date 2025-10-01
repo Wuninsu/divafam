@@ -22,12 +22,14 @@ class SettingSeeder extends Seeder
             ['key' => 'other_image', 'value' => null, 'type' => 'file', 'status' => true],
             ['key' => 'main_background_image', 'value' => null, 'type' => 'file', 'status' => true],
             ['key' => 'footer_background_image', 'value' => null, 'type' => 'file', 'status' => true],
+            ['key' => 'home_testimony_image', 'value' => null, 'type' => 'file', 'status' => true],
+            ['key' => 'home_faq_image', 'value' => null, 'type' => 'file', 'status' => true],
 
             // Business Info
             ['key' => 'business_name', 'value' => 'DivaFam', 'type' => 'text', 'status' => true],
             ['key' => 'url', 'value' => 'https://www.divafarms.org', 'type' => 'text', 'status' => true],
             ['key' => 'email', 'value' => 'info@divafarms.org', 'type' => 'text', 'status' => true],
-            ['key' => 'address', 'value' => 'DivaFam Headquarters, Address Location, City, Country', 'type' => 'textarea', 'status' => true],
+            ['key' => 'address', 'value' => 'Tamale, Northern Region, Ghana', 'type' => 'textarea', 'status' => true],
             ['key' => 'support_email', 'value' => 'support@divafarms.org', 'type' => 'text', 'status' => true],
             ['key' => 'support_phone', 'value' => '+1234567890', 'type' => 'text', 'status' => true],
             ['key' => 'motto', 'value' => 'Empowering Women, Strengthening Communities.', 'type' => 'text', 'status' => true],

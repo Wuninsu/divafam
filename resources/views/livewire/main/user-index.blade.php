@@ -57,7 +57,8 @@
                                     {{ $users->firstItem() + $loop->index }}
                                 </td>
                                 <td class="customer align-middle white-space-nowrap">
-                                    <a class="d-flex align-items-center text-body text-hover-1000" href="#!">
+                                    <a class="d-flex align-items-center text-body text-hover-1000"
+                                        href="{{route('profile.show',['user'=>$user->uuid])}}">
                                         <div class="avatar avatar-m">
                                             <img class="rounded-circle" src="{{ asset($user->avatar_url ?? NO_IMAGE) }}"
                                                 alt="">
