@@ -108,7 +108,7 @@
                         <!-- IMAGE -->
                         <div class="col-lg-5">
                             <div class="program-image-wrapper">
-                                <img src="{{ asset($this->program->image ?? setup_data('logo')) }}"
+                                <img src="{{ asset($this->program->image) }}"
                                     class="img-fluid rounded-3 w-100" style="height: 240px; object-fit: cover;">
                             </div>
                         </div>
