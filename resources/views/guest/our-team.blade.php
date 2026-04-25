@@ -36,7 +36,7 @@
 
 
             @forelse ($teamMembers as $team)
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-6 col-lg-4 h-100">
                 <div class="team-card leader-card p-3">
                     <img src="{{asset($team->avatar_url ?? NO_IMAGE)}}" class="team-img mb-3" alt="belawu">
 
