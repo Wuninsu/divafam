@@ -46,7 +46,7 @@
                 <!-- Partner -->
                 <div class="col-6 col-md-4 col-lg-3">
                     <div class="partner-card active text-center">
-                        <img src="{{asset($partnar->logo ?? NO_IMAGE)}}" class="partner-logo" alt="Partner One">
+                        <img src="{{asset($partner->logo ?? NO_IMAGE)}}" class="partner-logo" alt="Partner One">
                     </div>
                 </div>
                 @empty
@@ -80,7 +80,7 @@
                 @forelse ($pastPartners as $partner)
                 <div class="col-6 col-md-4 col-lg-3">
                     <div class="partner-card previous text-center">
-                        <img src="{{asset($partnar->logo ?? NO_IMAGE)}}" class="partner-logo" alt="Former Partner">
+                        <img src="{{asset($partner->logo ?? NO_IMAGE)}}" class="partner-logo" alt="Former Partner">
                     </div>
                 </div>
                 @empty
