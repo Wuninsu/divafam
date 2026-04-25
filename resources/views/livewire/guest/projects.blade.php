@@ -188,7 +188,7 @@
                                     </div>
 
                                     <h6 class="project-title">
-                                        {{ $project->title }}
+                                        {{! $project->title !}}
                                     </h6>
 
                                     <a href="{{ route('guest.projects.show', $project->slug) }}"

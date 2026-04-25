@@ -147,11 +147,11 @@
                         <strong>{{$project->category->name}}</strong>
                     </div>
 
-                    <div class="meta-block meta-action">
+                    {{-- <div class="meta-block meta-action">
                         <button class="btn-primary" id="openVideoBtn">
                             <i class="fa-solid fa-play"></i> Watch Overview
                         </button>
-                    </div>
+                    </div> --}}
                 </div>
 
                 {{--
@@ -175,7 +175,9 @@
 
                 <div class="project-card">
                     <h2>Overview</h2>
-                    <p>{{$project->description}}</p>
+                    <div class="rich-content">
+                        {!! $project->description !!}
+                    </div>
                 </div>
                 <div class="project-card">
                     <h3>Supported By</h3>
@@ -184,9 +186,8 @@
                         to the success of this initiative.
                     </p>
 
-                    <div class="partners-grid">
+                    {{-- <div class="partners-grid">
 
-                        <!-- Partner -->
                         <div class="partner-card">
                             <img src="https://divafarms.org/storage/donors/ca117411-ccd9-4da0-89ee-b43dd5c2df03.jpg" alt="Partner Name">
                             <span>UNICEF Ghana</span>
@@ -207,7 +208,7 @@
                             <span>Global Donors</span>
                         </div>
 
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="project-card">
                     <h2>Share Feedback</h2>

@@ -47,10 +47,21 @@
             </div>
             @empty
             <div class="item flex-fill">
-                <div class="review-item text-center">
-                    <i class="isax isax-quote-up5 fs-24 text-primary text-opacity-50"></i>
-                    <h5 class="title">No testimonies yet</h5>
-                    <p>Be the first to share your story and inspire others!</p>
+                <div class="review-item text-center py-5 px-3">
+
+                    <!-- ICON -->
+                    <div class="mb-3">
+                        <i class="isax isax-quote-up5 fs-1 text-primary opacity-50"></i>
+                    </div>
+
+                    <!-- TITLE -->
+                    <h5 class="fw-semibold mb-2">No Testimonials Yet</h5>
+
+                    <!-- DESCRIPTION -->
+                    <p class="text-muted mb-0">
+                        Be the first to share your story and inspire others through your experience with us.
+                    </p>
+
                 </div>
             </div>
             @endforelse

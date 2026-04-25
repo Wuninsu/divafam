@@ -26,11 +26,11 @@
             <div class="row g-4">
 
                 {{-- Program Card --}}
-                @foreach($programs as $program)
+                @forelse ($programs as $program)
                 <div class="col-lg-4 col-md-6">
                     <div class="program-card h-100 {{ $program->is_active ? 'border-primary' : '' }}">
 
-                        
+
                         {{-- Image --}}
                         <div class="program-image p-3">
                             <img src="{{asset($program->cover_image ?? setup_data('logo'))}}"
@@ -52,7 +52,28 @@
 
                     </div>
                 </div>
-                @endforeach
+                @empty
+                <div class="col-12">
+                    <div class="doc-empty text-center py-5">
+
+                        <div class="empty-icon mb-3">
+                            <i class="bi bi-diagram-3"></i>
+                        </div>
+
+                        <h5 class="mb-2">No Programs Available</h5>
+
+                        <p class="text-muted mb-3">
+                            There are currently no programs to display. Please check back later or explore other
+                            sections of our work.
+                        </p>
+
+                        <a href="/" class="btn btn-outline-primary btn-sm">
+                            Back to Home
+                        </a>
+
+                    </div>
+                </div>
+                @endforelse
 
             </div>
         </div>
@@ -64,115 +85,116 @@
 
 
 
-   <div wire:ignore.self class="modal fade" id="programModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content shadow-sm rounded-4 overflow-hidden">
+    <div wire:ignore.self class="modal fade" id="programModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content shadow-sm rounded-4 overflow-hidden">
 
-            <!-- HEADER -->
-            <div class="modal-header">
-                <h5 class="modal-title fw-semibold">
-                    <i class="bi bi-diagram-3 me-2 text-success"></i>
-                    Program Details
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-
-            <!-- BODY -->
-            <div class="modal-body pt-3">
-
-                @if ($this->program)
-
-                <div class="row g-4">
-
-                    <!-- IMAGE -->
-                    <div class="col-lg-5">
-                        <div class="program-image-wrapper">
-                            <img src="{{ asset($this->program->image ?? setup_data('logo')) }}"
-                                 class="img-fluid rounded-3 w-100"
-                                 style="height: 240px; object-fit: cover;">
-                        </div>
-                    </div>
-
-                    <!-- DETAILS -->
-                    <div class="col-lg-7">
-
-                        <!-- TITLE -->
-                        <div class="mb-3">
-                            <small class="text-muted d-block mb-1">Program Title</small>
-                            <h5 class="fw-semibold mb-0">
-                                {{ $this->program->name }}
-                            </h5>
-                        </div>
-
-                        <!-- DESCRIPTION -->
-                        <div class="mb-3">
-                            <small class="text-muted d-block mb-1">Description</small>
-                            <p class="text-muted mb-0" style="line-height: 1.6;">
-                                {{ $this->program->description }}
-                            </p>
-                        </div>
-
-                        <!-- STATUS -->
-                        <div class="mt-4">
-                            <span class="badge rounded-pill px-3 py-2
-                                {{ $this->program->is_active ? 'bg-success-subtle text-success' : 'bg-secondary-subtle text-muted' }}">
-                                <i class="bi {{ $this->program->is_active ? 'bi-check-circle' : 'bi-pause-circle' }} me-1"></i>
-                                {{ $this->program->is_active ? 'Active Program' : 'Inactive Program' }}
-                            </span>
-                        </div>
-
-                    </div>
+                <!-- HEADER -->
+                <div class="modal-header">
+                    <h5 class="modal-title fw-semibold">
+                        <i class="bi bi-diagram-3 me-2 text-success"></i>
+                        Program Details
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
 
-                @endif
+                <!-- BODY -->
+                <div class="modal-body pt-3">
+
+                    @if ($this->program)
+
+                    <div class="row g-4">
+
+                        <!-- IMAGE -->
+                        <div class="col-lg-5">
+                            <div class="program-image-wrapper">
+                                <img src="{{ asset($this->program->image ?? setup_data('logo')) }}"
+                                    class="img-fluid rounded-3 w-100" style="height: 240px; object-fit: cover;">
+                            </div>
+                        </div>
+
+                        <!-- DETAILS -->
+                        <div class="col-lg-7">
+
+                            <!-- TITLE -->
+                            <div class="mb-3">
+                                <small class="text-muted d-block mb-1">Program Title</small>
+                                <h5 class="fw-semibold mb-0">
+                                    {{ $this->program->name }}
+                                </h5>
+                            </div>
+
+                            <!-- DESCRIPTION -->
+                            <div class="mb-3">
+                                <small class="text-muted d-block mb-1">Description</small>
+                                <p class="text-muted mb-0" style="line-height: 1.6;">
+                                    {{ $this->program->description }}
+                                </p>
+                            </div>
+
+                            <!-- STATUS -->
+                            <div class="mt-4">
+                                <span
+                                    class="badge rounded-pill px-3 py-2
+                                {{ $this->program->is_active ? 'bg-success-subtle text-success' : 'bg-secondary-subtle text-muted' }}">
+                                    <i
+                                        class="bi {{ $this->program->is_active ? 'bi-check-circle' : 'bi-pause-circle' }} me-1"></i>
+                                    {{ $this->program->is_active ? 'Active Program' : 'Inactive Program' }}
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    @endif
+
+                </div>
+
+                <!-- FOOTER -->
+                <div class="modal-footer border-0 pt-0">
+                    <button type="button" class="btn btn-light px-4" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                </div>
 
             </div>
-
-            <!-- FOOTER -->
-            <div class="modal-footer border-0 pt-0">
-                <button type="button" class="btn btn-light px-4" data-bs-dismiss="modal">
-                    Close
-                </button>
-            </div>
-
         </div>
     </div>
-</div>
-<style>
-    /* PROGRAM MODAL */
-.program-image-wrapper {
-    background: var(--light-500);
-    border: 1px solid var(--border-soft);
-    border-radius: var(--radius);
-    padding: 6px;
-}
+    <style>
+        /* PROGRAM MODAL */
+        .program-image-wrapper {
+            background: var(--light-500);
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius);
+            padding: 6px;
+        }
 
-/* TITLE + LABEL */
-.modal small {
-    font-size: 0.75rem;
-    color: var(--muted);
-    letter-spacing: 0.3px;
-}
+        /* TITLE + LABEL */
+        .modal small {
+            font-size: 0.75rem;
+            color: var(--muted);
+            letter-spacing: 0.3px;
+        }
 
-/* DESCRIPTION */
-.modal p {
-    font-size: 0.9rem;
-    color: var(--muted);
-}
+        /* DESCRIPTION */
+        .modal p {
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
 
-/* BADGE (soft style) */
-.bg-success-subtle {
-    background: var(--brand-soft);
-}
+        /* BADGE (soft style) */
+        .bg-success-subtle {
+            background: var(--brand-soft);
+        }
 
-.text-success {
-    color: var(--brand);
-}
+        .text-success {
+            color: var(--brand);
+        }
 
-.bg-secondary-subtle {
-    background: var(--light-600);
-}
-</style>
+        .bg-secondary-subtle {
+            background: var(--light-600);
+        }
+    </style>
 
     @script
     <script>

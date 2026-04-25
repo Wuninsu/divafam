@@ -51,10 +51,13 @@
 
         {{-- Load more (UI placeholder) --}}
         <div class="text-center mt-5">
-            <button class="btn btn-outline-primary btn-lg px-4" type="button" data-animate="animate__fadeInBottomLeft"
-                data-speed="animate__slow">
-                <i class="fa-solid fa-spinner me-2"></i> Load More
-            </button>
+            <div class="row align-items-center">
+                @if ($mediaItems->hasPages())
+                <div class="mt-3">
+                    {{ $mediaItems->links() }}
+                </div>
+                @endif
+            </div>
         </div>
 
     </div>
