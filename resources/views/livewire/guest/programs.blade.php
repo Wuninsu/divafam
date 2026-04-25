@@ -28,7 +28,7 @@
                 {{-- Program Card --}}
                 @forelse ($programs as $program)
                 <div class="col-lg-4 col-md-6">
-                    <div class="program-card h-100 {{ $program->is_active ? 'border-primary' : '' }}">
+                    <div class="program-card {{ $program->is_active ? 'border-primary' : '' }}">
 
 
                         {{-- Image --}}
