@@ -42,7 +42,7 @@
                             <h5 class="program-title">{{ $program->name }}</h5>
 
                             <p class="program-text">
-                                {{ Str::limit($program->description, 120) }}
+                                {!! Str::limit($program->description, 120) !!}
                             </p>
 
                             {{-- CTA --}}
@@ -128,7 +128,7 @@
                             <div class="mb-3">
                                 <small class="text-muted d-block mb-1">Description</small>
                                 <p class="text-muted mb-0" style="line-height: 1.6;">
-                                    {{ $this->program->description }}
+                                    {!! $this->program->description !!}
                                 </p>
                             </div>
 
