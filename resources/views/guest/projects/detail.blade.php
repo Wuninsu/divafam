@@ -174,10 +174,6 @@
                     <a href="{{route('guest.donate')}}" class="btn-primary btn-block">
                         Donate Now
                     </a>
-
-                    <a href="#" class="btn-outline btn-block">
-                        Become a Volunteer
-                    </a>
                 </div>
 
             </aside>
