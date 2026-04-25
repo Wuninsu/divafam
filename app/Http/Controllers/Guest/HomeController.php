@@ -34,7 +34,7 @@ class HomeController extends Controller
         $impactData = get_home_content_by_type('community_impact');
         $carousel = get_home_content_by_type('carousel');
 
-        $carouselData =[];
+        $carouselData = [];
         if ($carousel) {
             $items = $carousel->carousel_items ?? [];
 
@@ -76,13 +76,13 @@ class HomeController extends Controller
     }
 
 
-     public function partners()
+    public function partners()
     {
         $worksData = get_home_content_by_type('how_it_works');
         $impactData = get_home_content_by_type('community_impact');
         $carousel = get_home_content_by_type('carousel');
 
-        $carouselData =[];
+        $carouselData = [];
         if ($carousel) {
             $items = $carousel->carousel_items ?? [];
 
@@ -109,17 +109,11 @@ class HomeController extends Controller
             ->where('is_active', true)
             ->where('is_approved', true)->latest()->limit(3)->get();
         $faqs = Faq::where('is_active', true)->limit(6)->get();
-        $donors = Donor::all();
-        $testimonies = Inquiry::where('type', '=', 'testimony')->where('status', true)->latest()->limit(5)->get();
+        $activePartners = Donor::where('is_active', true)->get();
+        $pastPartners = Donor::where('is_active', false)->get();
         return view('guest.partners', compact([
-            'featuredProjects',
-            'featuredPosts',
-            'faqs',
-            'donors',
-            'testimonies',
-            'worksData',
-            'impactData',
-            'carouselData'
+            'activePartners',
+            'pastPartners'
         ]));
     }
 }
