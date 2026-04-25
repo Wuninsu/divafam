@@ -105,7 +105,8 @@
                     {{-- <div class="partners-grid">
 
                         <div class="partner-card">
-                            <img src="https://divafarms.org/storage/donors/ca117411-ccd9-4da0-89ee-b43dd5c2df03.jpg" alt="Partner Name">
+                            <img src="https://divafarms.org/storage/donors/ca117411-ccd9-4da0-89ee-b43dd5c2df03.jpg"
+                                alt="Partner Name">
                             <span>UNICEF Ghana</span>
                         </div>
 
@@ -132,51 +133,53 @@
                 </div>
             </div>
 
-            <!-- SIDEBAR -->
-            <aside class="project-sidebar sticky-top" style="top: 90px;">
+            <div class="sticky-top" style="top: 90px;">
+                <!-- SIDEBAR -->
+                <aside class="project-sidebar">
 
-                <!-- PROJECT INFO -->
-                <div class="project-card project-info-card">
-                    <h3 class="card-title">Project Info</h3>
+                    <!-- PROJECT INFO -->
+                    <div class="project-card project-info-card">
+                        <h3 class="card-title">Project Info</h3>
 
-                    <div class="info-list">
-                        <div class="info-row">
-                            <span>Status</span>
-                            <strong class="badge {{$badgeClass}}">{{$project->status}}</strong>
-                        </div>
+                        <div class="info-list">
+                            <div class="info-row">
+                                <span>Status</span>
+                                <strong class="badge {{$badgeClass}}">{{$project->status}}</strong>
+                            </div>
 
-                        <div class="info-row">
-                            <span>Start Date</span>
-                            <strong>{{$project->start_date->format('j M Y')}}</strong>
-                        </div>
+                            <div class="info-row">
+                                <span>Start Date</span>
+                                <strong>{{$project->start_date->format('j M Y')}}</strong>
+                            </div>
 
-                        <div class="info-row">
-                            <span>Beneficiaries</span>
-                            <strong>{{$project->beneficiaries_count}}</strong>
-                        </div>
+                            <div class="info-row">
+                                <span>Beneficiaries</span>
+                                <strong>{{$project->beneficiaries_count}}</strong>
+                            </div>
 
-                        <div class="info-row">
-                            <span>Location</span>
-                            <strong>{{$project->location}}</strong>
+                            <div class="info-row">
+                                <span>Location</span>
+                                <strong>{{$project->location}}</strong>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- CTA -->
-                <div class="project-card project-cta">
-                    <h3 class="card-title">Get Involved</h3>
+                    <!-- CTA -->
+                    <div class="project-card project-cta">
+                        <h3 class="card-title">Get Involved</h3>
 
-                    <p class="cta-text">
-                        Support this project through donations or volunteering.
-                        Every contribution creates measurable impact.
-                    </p>
+                        <p class="cta-text">
+                            Support this project through donations or volunteering.
+                            Every contribution creates measurable impact.
+                        </p>
 
-                    <a href="{{route('guest.donate')}}" class="btn-primary btn-block">
-                        Donate Now
-                    </a>
-                </div>
+                        <a href="{{route('guest.donate')}}" class="btn-primary btn-block">
+                            Donate Now
+                        </a>
+                    </div>
 
-            </aside>
+                </aside>
+            </div>
         </div>
 
     </div>
