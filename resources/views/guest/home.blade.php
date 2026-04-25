@@ -283,11 +283,6 @@
                             </small>
 
                             <h5 class="program-title">{{ $featured->title }}</h5>
-
-                            <p class="program-text">
-                                {!! Str::limit($featured->description, 120) !!}
-                            </p>
-
                             <a href="{{ route('guest.projects.show', $featured->slug) }}" class="btn btn-success w-100">
                                 View Project <i class="fas fa-arrow-right ms-1"></i>
                             </a>
