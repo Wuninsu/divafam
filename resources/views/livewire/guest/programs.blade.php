@@ -41,9 +41,9 @@
                         <div class="program-content">
                             <h5 class="program-title">{{ $program->name }}</h5>
 
-                            <p class="program-text">
+                            {{-- <p class="program-text">
                                 {!! Str::limit($program->description, 120) !!}
-                            </p>
+                            </p> --}}
 
                             {{-- CTA --}}
                             <button type="button" wire:click='readMore({{$program->id}})' class="btn btn-primary"><i
