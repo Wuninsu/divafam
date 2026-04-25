@@ -35632,3 +35632,37 @@ html[data-theme="dark"] .badge-soft i {
         grid-template-columns: 1fr;
     }
 }
+
+/* PROGRAM MODAL */
+.program-image-wrapper {
+    background: var(--light-500);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius);
+    padding: 6px;
+}
+
+/* TITLE + LABEL */
+.modal small {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.3px;
+}
+
+/* DESCRIPTION */
+.modal p {
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+/* BADGE (soft style) */
+.bg-success-subtle {
+    background: var(--brand-soft);
+}
+
+.text-success {
+    color: var(--brand);
+}
+
+.bg-secondary-subtle {
+    background: var(--light-600);
+}

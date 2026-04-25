@@ -20,7 +20,7 @@
     </div>
 </div>
 
-<section class="project">
+<section class="container py-4">
     <div class="project-container">
 
         <!-- HERO -->
