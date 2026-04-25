@@ -79,6 +79,7 @@
                         <tr>
                             <td class="align-middle ps-0">{{ $program->name }}</td>
                             <td class="align-middle">
+                                <img src="{{asset($program->image)}}" width="100" alt="">
                                 <span
                                     class="badge badge-phoenix badge-phoenix-{{ $program->is_active ? 'success' : 'secondary' }} text-capitalized">
                                     {{ $program->is_active ? 'Active' : 'Inactive' }}
