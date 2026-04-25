@@ -33,7 +33,7 @@
 
                         {{-- Image --}}
                         <div class="program-image p-3">
-                            <img src="{{asset($program->cover_image ?? setup_data('logo'))}}"
+                            <img src="{{asset($program->image ?? setup_data('logo'))}}"
                                 alt="{{ $program->name }}">
                         </div>
 
@@ -108,7 +108,7 @@
                         <!-- IMAGE -->
                         <div class="col-lg-5">
                             <div class="program-image-wrapper">
-                                <img src="{{ asset($this->program->image) }}"
+                                <img src="{{ asset($this->program->image ?? setup_data('logo')) }}"
                                     class="img-fluid rounded-3 w-100" style="height: 240px; object-fit: cover;">
                             </div>
                         </div>
