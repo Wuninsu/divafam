@@ -133,7 +133,7 @@
             </div>
 
             <!-- SIDEBAR -->
-            <aside class="project-sidebar">
+            <aside class="project-sidebar sticky-top" style="top: 90px;">
 
                 <!-- PROJECT INFO -->
                 <div class="project-card project-info-card">
