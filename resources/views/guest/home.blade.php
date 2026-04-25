@@ -285,7 +285,7 @@
                             <h5 class="program-title">{{ $featured->title }}</h5>
 
                             <p class="program-text">
-                                {{ Str::limit($featured->description, 120) }}
+                                {!! Str::limit($featured->description, 120) !!}
                             </p>
 
                             <a href="{{ route('guest.projects.show', $featured->slug) }}" class="btn btn-success w-100">
