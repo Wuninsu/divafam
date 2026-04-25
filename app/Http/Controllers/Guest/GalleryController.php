@@ -26,6 +26,7 @@ class GalleryController extends Controller
         $mediaItems = Media::with('project')
             ->latest()
             ->paginate(paginationLimit());
+            // dd( $mediaItems);
 
         return view('guest.gallery', compact('mediaItems'));
     }

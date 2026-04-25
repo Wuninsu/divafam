@@ -73,7 +73,8 @@ class UserForm extends Component
 
         // Handle file upload if a new image is selected
         if ($this->avatar) {
-            if ($filePath && Storage::disk('public')->exists($user->avatar)) {
+            $path = str_replace('/storage/', '', $filePath);
+            if ($filePath && Storage::disk('public')->exists($path)) {
                 Storage::disk('public')->delete($user->avatar);
             }
             $filePath = uploadFile($this->avatar, 'avatars');

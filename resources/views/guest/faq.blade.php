@@ -1,22 +1,24 @@
 @extends('layouts.app')
 @section('content')
 <!-- Breadcrumb -->
-<div class="breadcrumb-bar text-center">
+<div class="breadcrumb-hero text-center">
     <div class="container">
-        <div class="row">
-            <div class="col-md-12 col-12">
-                <h2 class="breadcrumb-title mb-2">FAQ</h2>
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb justify-content-center mb-0">
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">FAQ</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
+        <h1 class="breadcrumb-title">FAQ</h1>
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb justify-content-center mb-0">
+                <li class="breadcrumb-item">
+                    <a href="/">Home</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    FAQ
+                </li>
+            </ol>
+        </nav>
+
     </div>
 </div>
-<!-- /Breadcrumb -->
+
 
 <div class="content">
     <div class="container">

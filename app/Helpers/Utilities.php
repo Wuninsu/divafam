@@ -94,7 +94,7 @@ if (!function_exists('setting_data')) {
     function setup_data($key): ?string
     {
         $setup = \App\Models\Setting::settingData();
-        return $setup[$key] ?? '';
+        return $setup[$key] ?? 'N/A';
     }
 }
 // if (!function_exists('generate_sms_message')) {
@@ -166,6 +166,43 @@ function uploadFile($file, $directory = 'uploads', $customName = null)
 
 }
 
+
+/**
+ * Delete an image from storage and database.
+ *
+ * @param string $imagePath
+ * @param object $imageModel
+ * @return bool
+ */
+function deleteFile($imageModel, $column): bool
+{
+    // Ensure the image path is valid
+    if ($imageModel->$column) {
+        // Get the file path, and remove '/storage/' to get the relative path
+        $filePath = str_replace('/storage/', '', $imageModel->$column);
+
+        // Check if the file exists on the public disk
+        if (Storage::disk('public')->exists($filePath)) {
+            try {
+                // Delete the image from storage
+                Storage::disk('public')->delete($filePath);
+
+                // Log successful deletion
+                Log::info('Deleted image: ' . $imageModel->$column);
+            } catch (\Exception $e) {
+                // Handle error and log
+                Log::error('Error deleting image: ' . $e->getMessage());
+                return false;
+            }
+        } else {
+            // Log if file doesn't exist
+            Log::warning('File not found for deletion: ' . $imageModel->$column);
+            return false;
+        }
+    }
+
+    return true;
+}
 
 /**
  * Delete an image from storage and database.
@@ -284,4 +321,3 @@ if (!function_exists('sendSMS')) {
         return false;
     }
 }
-

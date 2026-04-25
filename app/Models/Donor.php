@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 
 class Donor extends Model
 {
-    use HasFactory, SoftDeletes,Notifiable;
+    use HasFactory, SoftDeletes, Notifiable;
 
     protected $fillable = [
         'uuid',
@@ -21,8 +21,12 @@ class Donor extends Model
         'address',
         'type',
         'logo',
+        'is_active',
     ];
 
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
 
     public function getRouteKeyName()
     {

@@ -26,6 +26,7 @@ class Post extends Model
         'is_featured',
         'cover_image',
         'views',
+        'likes',
     ];
 
     protected $casts = [
@@ -55,7 +56,7 @@ class Post extends Model
     }
 
 
-    public function likes()
+    public function postLikes()
     {
         return $this->hasMany(PostLike::class);
     }

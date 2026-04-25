@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 
 @include('layouts.guest.head')
 
@@ -52,7 +52,54 @@
     <!-- Custom Script -->
     <script src="{{ asset('assets/js/script.js') }}"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+
     <script>
+        // Theme system
+const html = document.documentElement;
+const toggleButtons = document.querySelectorAll(".theme-toggle"); // changed
+
+function loadTheme() {
+    const saved = localStorage.getItem("theme");
+
+    if (saved) {
+        html.setAttribute("data-bs-theme", saved);
+    } else {
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        html.setAttribute("data-bs-theme", prefersDark ? "dark" : "light");
+    }
+
+    updateIcon();
+}
+
+// attach event to ALL buttons
+toggleButtons.forEach(toggleBtn => {
+    toggleBtn.addEventListener("click", () => {
+        const current = html.getAttribute("data-bs-theme");
+        const newTheme = current === "dark" ? "light" : "dark";
+
+        html.setAttribute("data-bs-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
+
+        updateIcon();
+    });
+});
+
+function updateIcon() {
+    const theme = html.getAttribute("data-bs-theme");
+
+    // update ALL icons
+    toggleButtons.forEach(btn => {
+        const icon = btn.querySelector("i");
+        if (icon) {
+            icon.className = theme === "dark" ? "bi bi-sun" : "bi bi-moon";
+        }
+    });
+}
+
+loadTheme();
+
         (function() {
             const darkMode = localStorage.getItem("darkMode");
             const themeClass = darkMode === "enabled" ? "dark-mode" : "light-mode";

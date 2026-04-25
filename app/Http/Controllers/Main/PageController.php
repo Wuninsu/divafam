@@ -156,4 +156,9 @@ class PageController extends Controller
         return view('main.pages.home');
     }
 
+    public function document(){
+        seo()->title('Documents - ' . config('app.name', 'DivaFam'));
+        return view('main.pages.documents');
+    }
+
 }

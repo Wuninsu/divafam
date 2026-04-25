@@ -41,10 +41,16 @@ class Donate extends Component
 
     public string $paymentReference;
 
-
+    public $bankName,$accountNumber,$accountName,$bankBranch;
     public function mount()
     {
         $this->projects = Project::all(); // Load projects
+
+        $this->bankName = setup_data('bank_name');
+        $this->accountNumber = setup_data('bank_account_number');
+        $this->accountName = setup_data('bank_account_name');
+        $this->bankBranch = setup_data('bank_branch');
+
     }
 
 
@@ -166,7 +172,6 @@ class Donate extends Component
             } else {
                 session()->flash('error', 'Payment verification failed or was not successful.');
             }
-
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Payment verification failed: ' . $e->getMessage());
@@ -174,7 +179,10 @@ class Donate extends Component
         }
     }
 
-
+    public function copyAccountNumber()
+    {
+        $this->dispatch('copy-account-number', accountNumber: $this->accountNumber);
+    }
 
     public function render()
     {

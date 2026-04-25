@@ -7,9 +7,7 @@ use App\Models\UserMeta;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-
 use Illuminate\Validation\ValidationException;
-use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password as RulesPassword;
 
 class ProfileShow extends Component
@@ -98,21 +96,27 @@ class ProfileShow extends Component
         try {
             $validated = $this->validate([
                 'current_password' => ['required', 'string', 'current_password'],
-                'password' => ['required', 'string', RulesPassword::defaults(), 'confirmed'],
+                'password' => [
+                    'required',
+                    'string',
+                    'confirmed',
+                    'different:current_password',
+                    RulesPassword::min(12)->letters()->mixedCase()->numbers()
+                        ->symbols()->uncompromised(),
+                ],
             ]);
-        } catch (ValidationException $e) {
+
+            $this->user->update([
+                'password' => Hash::make($validated['password']),
+            ]);
+
             $this->reset('current_password', 'password', 'password_confirmation');
+            flash()->success('Password Updated');
+            $this->dispatch('password-updated');
+        } catch (ValidationException $e) {
 
             throw $e;
         }
-
-        $this->user->update([
-            'password' => Hash::make($validated['password']),
-        ]);
-
-        $this->reset('current_password', 'password', 'password_confirmation');
-        flash()->success('Password Updated');
-        $this->dispatch('password-updated');
     }
 
 

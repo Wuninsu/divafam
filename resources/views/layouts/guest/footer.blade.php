@@ -28,55 +28,66 @@
                             <div class="footer-widget footer-menu">
                                 <h5 class="footer-title">Quick Links</h5>
                                 <ul>
-                                    <li><a href="/">Home</a></li>
-                                    <li><a href="/about">About Us</a></li>
-                                    <li><a href="/programs">Programs</a></li>
-                                    <li><a href="/gallery">Gallery</a></li>
-                                    <li><a href="/contact">Contact</a></li>
+                                    <li><a href="{{ route('guest.home') }}">Home</a></li>
+                                    <li><a href="{{ route('guest.about') }}">About Us</a></li>
+                                    <li><a href="{{ route('guest.projects.index') }}">Projects</a></li>
+                                    <li><a href="{{ route('guest.gallery') }}">Gallery</a></li>
+                                    <li><a href="{{ route('guest.contact') }}">Contact</a></li>
                                 </ul>
                             </div>
                         </div>
 
-                        <!-- Support -->
+                        <!-- Get Involved -->
                         <div class="col-lg-3 col-sm-6">
                             <div class="footer-widget footer-menu">
                                 <h5 class="footer-title">Get Involved</h5>
                                 <ul>
-                                    <li><a href="/volunteer">Volunteer</a></li>
-                                    <li><a href="/donate">Donate</a></li>
-                                    {{-- <li><a href="/events">Events</a></li> --}}
-                                    <li><a href="/blog">Blog</a></li>
+                                    <li><a href="{{ route('guest.donate') }}">Donate</a></li>
+                                    <li><a href="{{ route('guest.donors') }}">Our Donors</a></li>
+                                    <li><a href="{{ route('guest.testimonials') }}">Impact Stories</a></li>
                                 </ul>
                             </div>
                         </div>
-
                         <!-- Newsletter & Contact -->
                         <div class="col-lg-6">
                             <div class="footer-widget footer-contact">
                                 <h5 class="footer-title">Stay Connected</h5>
-                                <div class="subscribe-input">
-                                    @livewire('guest.subscriber-form')
-                                </div>
+                                @livewire('guest.subscriber-form')
 
                                 <div class="footer-contact-info mt-3">
                                     <div class="footer-address d-flex align-items-center">
-                                        <img src="assets/img/icon/icon-20.svg" alt="Location" class="img-fluid me-2">
+                                        <i class="fas fa-location"></i>
                                         <p> {{setup_data('address') ?? 'Tamale, Northern Region, Ghana'}}</p>
                                     </div>
                                     <div class="footer-address d-flex align-items-center">
-                                        <img src="assets/img/icon/icon-19.svg" alt="Email" class="img-fluid me-2">
+                                        <i class="fas fa-message"></i>
                                         <p><a
                                                 href="mailto:{{setup_data('support_email')}}">{{setup_data('support_email')}}</a>
                                         </p>
                                     </div>
                                     <div class="footer-address d-flex align-items-center">
-                                        <img src="assets/img/icon/icon-21.svg" alt="Phone" class="img-fluid me-2">
+                                        <i class="fas fa-phone"></i>
                                         <p>{{setup_data('support_phone')}}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <style>
+                        .footer-contact-info .footer-address i {
+                            /* width: 50px;
+                            height: 50px; */
+                            padding: 10px;
+                            border-radius: 50%;
+                            background: var(--brand-soft-4);
+                            display: inline-flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 1.3rem;
+                            color: var(--brand);
+                            margin-right: 10px;
+                        }
+                    </style>
                 </div><!-- ./Links -->
             </div>
         </div>

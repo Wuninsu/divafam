@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
+            $table->boolean('is_active')->default(true);
             $table->enum('type', ['individual', 'corporate', 'foundation', 'government'])->default('individual');
             $table->string('logo')->nullable(); // For organizations
             $table->softDeletes();

@@ -35,8 +35,8 @@ class BlogsController extends Controller
      */
     public function show(string $slug)
     {
-        $post = Post::with(['author', 'tags', 'category', 'likes.user'])
-            ->withCount('likes')
+        $post = Post::with(['author', 'tags', 'category', 'postLikes.user'])
+            ->withCount('postLikes')
             ->where('slug', $slug)->firstOrFail();
 
         // Load post SEO data (if exists)

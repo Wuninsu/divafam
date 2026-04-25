@@ -13,8 +13,12 @@
                     <h2 class="mb-0">Posts<span class="fw-normal text-body-tertiary ms-3">({{
                             array_sum($statusCounts) }})</span></h2>
                 </div>
-                <div class="col-auto"><a class="btn btn-primary px-5" href="{{ route('posts.create') }}">
-                        <i class="fa-solid fa-plus me-2"></i>Add new Post</a></div>
+                <div class="col-auto">
+                    <a class="btn btn-primary px-5" href="{{ route('posts.create') }}">
+                        <i class="fa-solid fa-plus me-2"></i>Add new Post</a>
+                    <a class="btn btn-dark px-5" href="{{ route('posts.new') }}">
+                        <i class="fa-solid fa-plus me-2"></i>New Post</a>
+                </div>
             </div>
             <div class="row g-3 justify-content-between align-items-end mb-4">
                 <div class="col-12 col-sm-auto">
@@ -78,7 +82,7 @@
                             <td class="align-middle ps-0">{{$post->title}}</td>
                             <td class="align-middle ps-3">{{$post?->category->name}}</td>
                             <td class="align-middle ps-3">
-                              {{$post->author->name}}
+                                {{$post->author->name}}
                             </td>
                             <td class="align-middle ps-3"><span
                                     class="badge bg-{{ $post->is_featured ? 'success' : 'secondary' }}">

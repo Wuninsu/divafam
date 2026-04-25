@@ -18,12 +18,12 @@ class DatabaseSeeder extends Seeder
             SettingSeeder::class,
             TagSeeder::class,
             CategorySeeder::class,
-                // ProjectSeeder::class,
-                // PostSeeder::class,
-                // DonorSeeder::class,
+                ProjectSeeder::class,
+                PostSeeder::class,
+                DonorSeeder::class,
             FaqSeeder::class,
-            // InquirySeeder::class,
-            // HomeSeeder::class,
+            InquirySeeder::class,
+            HomeSeeder::class,
         ]);
     }
 }

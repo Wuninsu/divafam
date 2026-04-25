@@ -14,7 +14,7 @@
                             array_sum($statusCounts) }})</span></h2>
                 </div>
                 @can('create project')
-                <div class="col-auto"><a class="btn btn-primary px-5" href="{{ route('programs.create') }}">
+                <div class="col-auto"><a class="btn btn-primary px-5" href="{{ route('projects.create') }}">
                         <i class="fa-solid fa-plus me-2"></i>Add new project</a></div>
                 @endcan
             </div>
@@ -104,11 +104,11 @@
                                 <div class="btn-group">
                                     @can('view project')
                                     <a class="btn btn-outline-primary btn-sm"
-                                        href="{{ route('programs.show', ['project' => $project->uuid]) }}">Show</a>
+                                        href="{{ route('projects.show', ['project' => $project->uuid]) }}">Show</a>
                                     @endcan
                                     @can('update project')
                                     <a class="btn btn-primary btn-sm"
-                                        href="{{ route('programs.edit', ['project' => $project->uuid]) }}">Edit</a>
+                                        href="{{ route('projects.edit', ['project' => $project->uuid]) }}">Edit</a>
                                     @endcan
                                     @can('delete project')
                                     <button type="button" wire:click='deleteProject({{ $project->id }})'

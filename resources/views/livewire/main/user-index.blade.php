@@ -13,7 +13,7 @@
                     <input type="text" wire:model.live.debounce.1000ms="search" class="form-control"
                         placeholder="Search users by name, ID, email...">
                 </div>
-                <div class="col-md-3 mb-2 mb-sm-0">
+                <div class="col-md-2 mb-2 mb-sm-0">
                     <select class="form-select" wire:model.change="role">
                         <option value="">All Roles</option>
                         @foreach ($roles as $item)
@@ -109,7 +109,7 @@
                                             <i class="fa fa-edit"></i>
                                         </a>
                                         <button type="button" class="btn btn-danger btn-sm"
-                                            @if($user->hasRole('super-admin') ||
+                                            @if($user->hasRole('dev') ||
                                             $user->hasRole('admin'))
                                             disabled
                                             @endif

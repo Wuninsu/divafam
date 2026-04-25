@@ -1,21 +1,19 @@
 <div>
-    <!-- Breadcrumb -->
-    <div class="breadcrumb-bar text-center">
+
+    <div class="breadcrumb-hero text-center">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12 col-12">
-                    <h2 class="breadcrumb-title mb-2">Divafam News</h2>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb justify-content-center mb-0">
-                            <li class="breadcrumb-item"><a href="/">Home</a></li>
-                            <li class="breadcrumb-item"><a href="/news">News</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">News Details</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
+            <h1 class="breadcrumb-title">Divafam News</h1>
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center mb-0">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/news">News</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">News Details</li>
+                </ol>
+            </nav>
         </div>
     </div>
+
 
     <!-- /Breadcrumb -->
 
@@ -49,7 +47,7 @@
                                 <form wire:submit.prevent="toggleLike">
                                     <button type="submit"
                                         class="btn btn-sm {{ $liked ? 'btn-primary' : 'btn-outline-primary' }}">
-                                        <i class="bi bi-hand-thumbs-up"></i> {{ count($post->likes ?? []) }} Likes
+                                        <i class="bi bi-hand-thumbs-up"></i> {{ $totalLikes }} Likes
                                     </button>
                                 </form>
                             </li>
@@ -61,7 +59,9 @@
                     <p>{{ $post->summary }}</p>
 
                     {{-- Content --}}
-                    <div>{!! $post->content !!}</div>
+                    <div class="rich-content">
+                        {!! $post->content !!}
+                    </div>
 
                     {{-- Tags --}}
                     @if ($post->tags->count())

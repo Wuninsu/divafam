@@ -125,7 +125,7 @@
                     </table>
                 </div>
                 <!-- Image Uploads for "Community Impact" -->
-                <div class="input-group mb-3">
+                <div class="input-group">
                     <input type="file" class="form-control mb-2" wire:model="communityImpactImages.0">
                     @error("communityImpactImages.0")
                     <span class="text-danger small">{{ $message }}</span>
@@ -137,6 +137,18 @@
                     @enderror
                 </div>
 
+                <div class="row mb-3">
+                    <div class="col-6">
+                        @if($existingCommunityImpactImages[0])
+                        <img src="{{ asset($existingCommunityImpactImages[0]) }}" width="50">
+                        @endif
+                    </div>
+                    <div class="col-6">
+                        @if($existingCommunityImpactImages[1])
+                        <img src="{{ asset($existingCommunityImpactImages[1]) }}" width="50">
+                        @endif
+                    </div>
+                </div>
                 <!-- Global error summary -->
                 @if ($errors->any())
                 <div class="alert alert-danger">
@@ -222,7 +234,7 @@
                                         <span class="text-danger small">{{ $message }}</span>
                                         @enderror
 
-                                        <img src="{{ $imagePreviews[$index] ?? asset( $carouselItem['image']) }}"
+                                        <img src="{{ $imagePreviews[$index] ?? asset($carouselItem['image'] ?? NO_IMAGE) }}"
                                             alt="Saved Image" style="max-width: 100%; height: auto; margin-top: 3px;">
 
 

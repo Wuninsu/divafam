@@ -34,7 +34,7 @@ class Projects extends Component
 
     public function clearFilters()
     {
-        $this->selectedCategories = [];
+        $this->reset('search', 'status', 'selectedCategories');
     }
 
     public function render()

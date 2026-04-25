@@ -18,7 +18,9 @@ class HomeIndex extends Component
     public $howItWorksImage;
 
     public $communityImpact = [];
-    public $communityImpactImages = [];
+
+    public $communityImpactImages = []; // for uploads
+    public $existingCommunityImpactImages = []; // for stored paths
 
     public $carouselItems = [];
     public $carouselItemsImages = [];
@@ -37,10 +39,13 @@ class HomeIndex extends Component
         $impact = HomeContent::where('type', 'community_impact')->first();
         if ($impact) {
             $this->communityImpact = $impact->community_impact ?? [];
-            $this->communityImpactImages = [
+            // Stored images (strings)
+            $this->existingCommunityImpactImages = [
                 $impact->image_1 ?? null,
                 $impact->image_2 ?? null,
             ];
+            // Upload inputs (start empty)
+            $this->communityImpactImages = [null, null];
         }
 
         // Carousel (multiple records)
@@ -86,11 +91,21 @@ class HomeIndex extends Component
 
     public function saveHowItWorks()
     {
-        $this->validate([
-            'howItWorks.*.title' => 'required|string',
-            'howItWorks.*.description' => 'required|string',
-            'howItWorksImage' => 'nullable|image|max:2048',
-        ]);
+        $this->validate(
+            [
+                'communityImpact.*.title' => 'required|string',
+                'communityImpact.*.description' => 'required|string',
+                'communityImpactImages' => 'nullable|array',
+                'communityImpactImages.*' => 'nullable|image|max:2048',
+            ],
+            [
+                'communityImpact.*.title.required' => 'Each impact item must have a title.',
+                'communityImpact.*.description.required' => 'Each impact item must have a description.',
+
+                'communityImpactImages.*.image' => 'Please upload a valid image file (JPG, PNG, etc).',
+                'communityImpactImages.*.max' => 'Each image must not be larger than 2MB.',
+            ]
+        );
 
         $existing = HomeContent::where('type', 'how_it_works')->first();
 
@@ -98,7 +113,7 @@ class HomeIndex extends Component
         if (empty($this->howItWorks)) {
             if ($existing) {
                 if (!empty($existing->image_1) && Storage::disk('public')->exists($existing->image_1)) {
-                    Storage::disk('public')->delete($existing->image_1);
+                    deleteImage($existing, $existing->image_1);
                 }
                 $existing->delete();
             }
@@ -115,9 +130,9 @@ class HomeIndex extends Component
         if ($this->howItWorksImage && !is_string($this->howItWorksImage)) {
             // Delete old image if exists
             if ($existing && !empty($existing->image_1) && Storage::disk('public')->exists($existing->image_1)) {
-                Storage::disk('public')->delete($existing->image_1);
+                deleteImage($existing, $existing->image_1);
             }
-            $data['image_1'] = $this->howItWorksImage->store('uploads/how-it-works', 'public');
+            $data['image_1'] = uploadFile($this->howItWorksImage, 'uploads/how-it-works');
         } elseif ($existing) {
             // Keep old one if no new upload
             $data['image_1'] = $existing->image_1;
@@ -187,15 +202,36 @@ class HomeIndex extends Component
                 $oldField = "image_" . ($index + 1);
                 if ($existing && !empty($existing->$oldField) && Storage::disk('public')->exists($existing->$oldField)) {
                     Storage::disk('public')->delete($existing->$oldField);
+                    deleteImage($existing, $existing->$oldField);
                 }
                 // Save new one
-                $data[$oldField] = $file->store('uploads/impact', 'public');
+                $data[$oldField] = uploadFile($file, 'uploads/impact');
             } elseif ($existing) {
                 // Preserve old image if no new one uploaded
                 $data["image_" . ($index + 1)] = $existing->{"image_" . ($index + 1)};
             }
         }
 
+        foreach ([1, 2] as $i) {
+            $field = "image_$i";
+
+            // Default to existing image
+            $data[$field] = $this->existingCommunityImpactImages[$i - 1] ?? null;
+
+            // If new file uploaded → replace
+            if (
+                !empty($this->communityImpactImages[$i - 1]) &&
+                !is_string($this->communityImpactImages[$i - 1])
+            ) {
+
+                if (!empty($data[$field])) {
+                    // Storage::disk('public')->delete($data[$field]);
+                    deleteImage($data, $data[$field]);
+                }
+
+                $data[$field] = uploadFile($this->communityImpactImages[$i - 1], 'uploads/impact');
+            }
+        }
         HomeContent::updateOrCreate(
             ['type' => 'community_impact'],
             $data
@@ -272,7 +308,7 @@ class HomeIndex extends Component
         foreach ($validated['carouselItems'] as $index => &$item) {
             // If new image uploaded, store it
             if (!empty($this->carouselItemsImages[$index]) && !is_string($this->carouselItemsImages[$index])) {
-                $path = $this->carouselItemsImages[$index]->store('uploads/slides', 'public');
+                $path = uploadFile($this->carouselItemsImages[$index], 'uploads/slides');
                 $item['image'] = $path;
             } else {
                 // Preserve the old image if available
@@ -298,4 +334,3 @@ class HomeIndex extends Component
         return view('livewire.main.pages.home-index');
     }
 }
-

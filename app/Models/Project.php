@@ -111,4 +111,9 @@ class Project extends Model
     {
         return $this->belongsToMany(User::class, 'project_leads');
     }
+
+    public function program()
+    {
+        return $this->belongsTo(Program::class);
+    }
 }

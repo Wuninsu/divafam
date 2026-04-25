@@ -1,399 +1,551 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="banner-section-two">
+<div style=" overflow-x: hidden;">
+    <div class="banner-section-two">
 
-
-    @if ($carouselData)
-    <div id="bs-carousel" class="carousel slide fade-carousel" data-bs-ride="carousel" data-bs-interval="4000">
-        <!-- Overlay -->
-        <div class="overlay"></div>
-        @if ($carouselData->carousel_items)
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            @foreach($carouselData->carousel_items as $index => $slide)
-            <li data-bs-target="#bs-carousel" data-bs-slide-to="{{ $index }}"
-                class="{{ $index === 0 ? 'active' : '' }}">
-            </li>
-            @endforeach
-        </ol>
-
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-            @foreach($carouselData->carousel_items as $index => $slide)
-            <div class="carousel-item slides {{ $index === 0 ? 'active' : '' }}">
-                <img src="{{ asset($slide['image']) }}" class="d-block w-100" alt="{{ $slide['title'] }}">
-                <div class="hero">
-                    <hgroup>
-                        <h1>{{ $slide['title'] }}</h1>
-                        <h3>{{ $slide['description'] }}</h3>
-                    </hgroup>
-                    @if($slide['button_link'])
-                    <a href="{{ $slide['button_link'] }}" class="btn btn-hero btn-lg" role="button">{{
-                        $slide['button_text'] }}</a>
-                    @else
-                    <button class="btn btn-hero btn-lg" role="button">{{ $slide['button_text'] }}</button>
-                    @endif
+        <section class="mc-hero-slider">
+            <div id="heroCarousel" class="carousel slide mc-hero-carousel" data-bs-ride="carousel"
+                data-bs-interval="6500" data-bs-pause="hover">
+                {{-- Dots --}}
+                <div class="carousel-indicators">
+                    @foreach ($carouselData as $index => $slide)
+                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="{{ $index }}"
+                        class="{{ $index === 0 ? 'active' : '' }}"></button>
+                    @endforeach
                 </div>
-            </div>
-            @endforeach
-        </div>
-        @endif
 
-    </div>
-    @endif
+                <div class="carousel-inner mb-4">
+                    @forelse($carouselData as $index => $slide)
 
+                    <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                        <div class="mc-hero-slide">
+                            <div class="container">
+                                <div class="row align-items-center g-4">
 
-</div>
+                                    {{-- LEFT CONTENT --}}
+                                    <div class="col-lg-7 order-2 order-lg-1">
 
-<!-- benefits -->
-<section class="benefit-section py-5">
-    <div class="container">
-        <div class="section-header text-center mb-5">
-            <span class="fw-medium text-secondary text-decoration-underline mb-2 d-inline-block">Our Impact</span>
-            <h2>Changing Lives Through DIVA-FAM</h2>
-            <p>We are committed to empowering communities through projects, beneficiaries, and sustainable solutions.
-            </p>
-        </div>
+                                        @if(!empty($slide['eyebrow']))
+                                        <div class="mc-eyebrow mb-2">
+                                            <i class="{{ $slide['icon'] ?? 'fa-solid fa-circle' }} me-2"></i>
+                                            {{ $slide['eyebrow'] }}
+                                        </div>
+                                        @endif
 
-        <div class="row">
-            <!-- Beneficiaries -->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card shadow-sm border-0 h-100">
-                    <div class="card-body p-4">
-                        <div class="position-absolute top-0 end-0 mt-n3 me-n4">
-                            <img src="assets/img/shapes/bg-1.png" alt="beneficiaries-shape">
-                        </div>
-                        <div class="p-4 rounded-pill bg-primary-transparent d-inline-flex">
-                            <i class="fas fa-users fs-3 text-primary"></i>
-                        </div>
-                        <h5 class="mt-3 mb-1">Beneficiaries</h5>
-                        <p>Over <strong>{{get_data_counts()['beneficiariesCount']}} individuals</strong> have directly
-                            benefited from our programs.</p>
-                    </div>
-                </div>
-            </div>
+                                        <h1 class="fw-bold mb-3 mc-title">
+                                            {{ $slide['title'] }}
+                                        </h1>
 
-            <!-- Total Projects -->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card shadow-sm border-0 h-100">
-                    <div class="card-body p-4">
-                        <div class="position-absolute top-0 end-0 mt-n3 me-n4">
-                            <img src="assets/img/shapes/bg-2.png" alt="projects-shape">
-                        </div>
-                        <div class="p-4 rounded-pill bg-secondary-transparent d-inline-flex">
-                            <i class="fas fa-project-diagram fs-3 text-secondary"></i>
-                        </div>
-                        <h5 class="mt-3 mb-1">Total Projects</h5>
-                        <p>We have successfully executed <strong>{{get_data_counts()['projectsCount']}} community
-                                projects</strong> across various
-                            sectors.</p>
-                    </div>
-                </div>
-            </div>
+                                        <p class="text-muted mb-4 mc-desc">
+                                            {{ $slide['description'] }}
+                                        </p>
 
-            <!-- Community Support -->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card shadow-sm border-0 h-100">
-                    <div class="card-body p-4">
-                        <div class="position-absolute top-0 end-0 mt-n3 me-n4">
-                            <img src="assets/img/shapes/bg-3.png" alt="support-shape">
-                        </div>
-                        <div class="p-4 rounded-pill bg-skyblue-transparent d-inline-flex">
-                            <i class="fas fa-hands-helping fs-3 text-info"></i>
-                        </div>
-                        <h5 class="mt-3 mb-1">Community Support</h5>
-                        <p>We provide continuous <strong>mentorship, training, and financial support</strong> to
-                            families.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- benefits -->
+                                        {{-- BUTTONS --}}
+                                        <div class="d-flex flex-column flex-sm-row gap-2">
 
+                                            @if(!empty($slide['button_text']))
+                                            <a href="{{ $slide['button_link'] ?? '#' }}"
+                                                class="btn btn-primary btn-lg mc-btn">
+                                                <i class="fa-solid fa-arrow-right me-2"></i>
+                                                {{ $slide['button_text'] }}
+                                            </a>
+                                            @endif
 
-<!-- top courses -->
-<section class="top-courses-sec">
-    <img class="top-courses-bg" src="{{asset('assets/img/bg/bg-20.png')}}" alt="img">
-    <div class="container">
-        <div class="section-header text-center">
-            <span class="fw-medium text-secondary text-decoration-underline mb-2 d-inline-block">Our Partners</span>
-            <h2>Honoring Our Sponsors & Donors</h2>
-            <p>We sincerely appreciate the generous support of our sponsors and donors who make our mission possible.
-            </p>
-        </div>
-        <div class="top-courses-slider lazy">
-            <!-- Sponsor 1 -->
-            @forelse ($donors as $donor)
-            <div>
-                <div class="categories-item categories-item-three mb-0">
-                    <img class="mx-auto" src="{{asset($donor->logo ?? NO_IMAGE)}}" alt="{{$donor->name}}">
-                    {{-- <h6 class="title">{{$donor->name}}</h6> --}}
-                </div>
-            </div>
-            @empty
+                                            @if(!empty($slide['button_text_2']))
+                                            <a href="{{ $slide['button_link_2'] ?? '#' }}"
+                                                class="btn btn-outline-primary btn-lg mc-btn">
+                                                {{ $slide['button_text_2'] }}
+                                            </a>
+                                            @endif
 
-            @endforelse
-        </div>
-        <a href="#" class="btn btn-primary btn-md">View All Sponsors</a>
-    </div>
-</section>
+                                        </div>
 
+                                    </div>
 
-<!-- featured projects -->
-<section class="featured-courses-section">
-    <div class="container">
-        <div class="section-header text-center">
-            <span class="fw-medium text-secondary text-decoration-underline mb-2 d-inline-block">Projects</span>
-            <h2>Our Featured Projects</h2>
-            <p>Explore some of our impactful projects that are transforming lives and communities.</p>
-        </div>
+                                    {{-- RIGHT IMAGE --}}
+                                    <div class="col-lg-5 order-1 order-lg-2">
+                                        <div class="mc-hero-image-wrap">
+                                            <img class="mc-hero-image" src="{{ asset($slide['image'] ?? NO_IMAGE) }}"
+                                                alt="{{ $slide['title'] }}" loading="lazy">
+                                        </div>
+                                    </div>
 
-        <div class="feature-course-slider-2">
-            @forelse ($featuredProjects as $featured)
-            <div>
-                <div class="course-item">
-                    <div class="course-img">
-                        <a href="{{ route('guest.projects.show', ['project' => $featured->slug]) }}">
-                            <img src="{{asset($featured->cover_image ?? NO_IMAGE)}}" alt="{{$featured->slug}}"
-                                class="img-fluid w-100" style="height: 200px; object-fit: cover;">
-                        </a>
-                        @php
-                        $badgeClass = match ($featured->status) {
-                        'ongoing' => 'warning',
-                        'completed' => 'success',
-                        'draft' => 'secondary',
-                        'archived' => 'dark',
-                        'postponed' => 'danger',
-                        default => 'primary',
-                        };
-                        @endphp
-                        <div class="position-absolute start-0 top-0 d-flex align-items-start w-100 z-index-2 p-3">
-                            <div class="badge text-bg-{{$badgeClass}}">{{$featured->status}}</div>
-
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center justify-content-between">
-                        <span class="badge badge-md badge-soft-info rounded-pill">{{$featured->category->name}}</span>
 
+                    @empty
+                    <div class="carousel-item active">
+                        <div class="text-center p-5">
+                            <p>No slides available</p>
+                        </div>
                     </div>
-                    <div class="pb-3 border-bottom mb-3">
-                        <h5><a
-                                href="{{ route('guest.projects.show', ['project' => $featured->slug]) }}">{{$featured->title}}</a>
-                        </h5>
-                    </div>
-
-                    <a href="{{ route('guest.projects.show', ['project' => $featured->slug]) }}"
-                        class="btn btn-success">View Project</a>
+                    @endforelse
                 </div>
-            </div>
-            @empty
-            <div class="col-12 text-center">
-                <div class="alert alert-warning" role="alert">
-                    <strong>Note:</strong> No featured projects available right now.
-                </div>
-            </div>
-            @endforelse
 
-
-
-        </div>
-        <div class="d-flex align-items-center justify-content-center">
-            <a href="{{route('guest.projects.index')}}" class="btn btn-primary btn-md">View All Projects</a>
-        </div>
-    </div>
-</section>
-<!-- /featured course -->
-
-<!-- community-to-learn -->
-@if ($impactData)
-<section class="community-to-learn">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6">
-                <div class="section-header">
-                    <span class="fw-medium text-secondary text-decoration-underline mb-2 d-inline-block">Community
-                        Impact</span>
-                    <h2>Creating a community of change-makers.</h2>
-                    <p>We are dedicated to transforming lives by empowering beneficiaries, supporting women and
-                        children, and building sustainable projects with the help of our sponsors and donors.</p>
-                </div>
-                @if ($impactData->community_impact)
-                @foreach ($impactData->community_impact as $impact)
-                <div class="community-item d-flex align-items-center">
-                    <span class="community-icon-1">
-                        <i class="fas fa-hands-helping"></i>
+                {{-- Controls --}}
+                <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev"
+                    aria-label="Previous slide">
+                    <span class="mc-carousel-control" aria-hidden="true">
+                        <i class="fa-solid fa-arrow-left"></i>
                     </span>
-                    <div>
-                        <h5 class="mb-2">{{$impact['title']}}</h5>
-                        <p class="mb-0">{{$impact['description']}}</p>
+                </button>
+
+                <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next"
+                    aria-label="Next slide">
+                    <span class="mc-carousel-control" aria-hidden="true">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </span>
+                </button>
+            </div>
+        </section>
+
+
+    </div>
+
+
+    <section class="py-5 bg-body-tertiary">
+        <div class="container">
+
+            <!-- Section Header -->
+            <div class="text-center mb-5 mx-auto" style="max-width: 650px;">
+                <span class="text-uppercase small fw-semibold text-muted d-block mb-2">
+                    Our Impact
+                </span>
+                <h2 class="fw-bold">Changing Lives Through DIVA-FAM</h2>
+                <p class="text-muted mb-0">
+                    We empower communities through impactful projects, measurable results, and sustainable solutions.
+                </p>
+            </div>
+
+            <!-- Cards -->
+            <div class="row g-4">
+
+                <!-- Beneficiaries -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm impact-card">
+                        <div class="card-body text-center p-4">
+
+                            <div class="icon-wrapper bg-primary-subtle text-primary mb-3">
+                                <i class="fas fa-users"></i>
+                            </div>
+
+                            <h5 class="fw-semibold">Beneficiaries</h5>
+                            <p class="text-muted mb-0">
+                                Over <strong>{{get_data_counts()['beneficiariesCount']}}+</strong> individuals have
+                                benefited from our programs.
+                            </p>
+
+                        </div>
                     </div>
                 </div>
-                @endforeach
 
-                @endif
+                <!-- Projects -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm impact-card">
+                        <div class="card-body text-center p-4">
 
-                <div class="d-flex align-items-center gap-2">
-                    {{-- <a href="#" class="btn btn-secondary btn-md">Join as Beneficiary</a> --}}
-                    <a href="{{route('guest.donate')}}" class="btn btn-dark btn-md">Partner as Sponsor</a>
+                            <div class="icon-wrapper bg-secondary-subtle text-secondary mb-3">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+
+                            <h5 class="fw-semibold">Total Projects</h5>
+                            <p class="text-muted mb-0">
+                                <strong>{{get_data_counts()['projectsCount']}}</strong> community projects successfully
+                                executed.
+                            </p>
+
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="community-img d-none d-lg-flex">
-                    <img src="{{asset($impactData->image_1 ?? 'assets/diva/img-4.jpg')}}" alt="img"
-                        class="img-fluid community-img-03">
-                    <img src="{{asset($impactData->image_2 ?? 'assets/diva/img-16.jpg')}}" alt="img"
-                        class="img-fluid community-img-04">
+
+                <!-- Support -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm impact-card">
+                        <div class="card-body text-center p-4">
+
+                            <div class="icon-wrapper bg-info-subtle text-info mb-3">
+                                <i class="fas fa-hands-helping"></i>
+                            </div>
+
+                            <h5 class="fw-semibold">Community Support</h5>
+                            <p class="text-muted mb-0">
+                                Ongoing <strong>mentorship, training, and financial support</strong> for families.
+                            </p>
+
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
-    </div>
-</section>
-@endif
+    </section>
 
-<!-- /community-to-learn -->
-
-@if ($worksData)
-<!-- how it works -->
-<div class="how-it-works-sec-two">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6">
-                <div class="me-5" data-aos="fade-up">
-                    <img src="{{asset($worksData->image_1 ?? 'assets/diva/img-13.jpg') }}" class="img-fluid rounded-5"
-                        alt="DivaFam Impact">
-                </div>
+    <section class="py-5 bg-body">
+        <div class="container-fluid">
+            <div class="section-head text-center">
+                <span class="text-uppercase small fw-semibold text-muted d-block mb-2">
+                    Our Partners
+                </span>
+                <h2 class="fw-bold">Honoring Our Sponsors & Donors</h2>
+                <p class="text-muted mb-0">
+                    We appreciate the generous support of our sponsors and donors who make our mission possible.
+                </p>
             </div>
-            <div class="col-lg-6">
-                <div class="how-it-works-content aos" data-aos="fade-up">
-                    <div class="section-header">
-                        <span class="fw-medium text-secondary text-decoration-underline mb-2 d-inline-block">How it
-                            Works</span>
-                        <h2 class="mb-1">Getting Involved with DivaFam</h2>
-                        <p>Together with our sponsors, donors, and community members, we bring projects to life that
-                            create lasting impact.</p>
+
+            <div class="surface p-4 p-lg-5">
+                <div class="partners-marquee" aria-label="Partners logos marquee">
+                    <div class="partners-track">
+                        {{-- track 1 --}}
+                        @foreach ($donors as $don)
+                        <div class="partner-item">
+                            <img class="partner-logo" src="{{ asset($don->logo ?? NO_IMAGE) }}" alt="Partner logo">
+                        </div>
+                        @endforeach
+
+                        {{-- track 2 (duplicate for seamless loop) --}}
+                        @foreach ($donors as $don)
+                        <div class="partner-item">
+                            <img class="partner-logo" src="{{ asset($don->logo ?? NO_IMAGE) }}" alt="Partner logo">
+                        </div>
+                        @endforeach
                     </div>
 
-                    @if ($worksData->steps)
-                    @foreach ($worksData->steps as $index => $step)
-                    <div class="d-flex align-items-center works-items">
-                        <span class="count">0{{$index+1}}</span>
+                    {{-- soft fade edges --}}
+                    <div class="partners-fade partners-fade-left"></div>
+                    <div class="partners-fade partners-fade-right"></div>
+                </div>
+            </div>
+
+            <div class="text-center mt-3">
+                <a href="{{route('guest.parters')}}" class="btn btn-primary px-4">
+                    View All Partners
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="programs-section py-3">
+        <div class="container">
+
+            {{-- Section Header --}}
+            <div class="text-center mb-5">
+                <span class="text-uppercase small fw-semibold text-muted d-block mb-2">
+                    Featured Projects
+                </span>
+                <h2 class="fw-bold">Browse Our Featured Projects</h2>
+                <p class="text-muted">
+                    Discover how our initiatives are creating meaningful impact in communities.
+                </p>
+            </div>
+
+            {{-- Programs Grid --}}
+            <div class="row g-4">
+
+                {{-- Program Card --}}
+                @forelse($featuredProjects as $featured)
+                @php
+                $badgeClass = match ($featured->status) {
+                'ongoing' => 'warning',
+                'completed' => 'success',
+                'draft' => 'secondary',
+                'archived' => 'dark',
+                'postponed' => 'danger',
+                default => 'primary',
+                };
+                @endphp
+                <div class="col-lg-4 col-md-6">
+                    <div class="program-card h-100">
+
+                        {{-- Image --}}
+
+                        <div class="position-relative">
+                            {{-- <img src="{{ asset($featured->cover_image ?? NO_IMAGE) }}" class="card-img-top"
+                                alt="{{ $featured->title }}"> --}}
+                            <div class="program-image p-3">
+                                <img src="{{asset($featured->cover_image ?? NO_IMAGE)}}" alt="{{ $featured->title }}">
+                            </div>
+
+                            <div class="image-overlay"></div>
+
+                            <span class="bg-{{$badgeClass}} position-absolute top-0 start-0 m-4 px-2 rounded-4">
+                                {{ ucfirst($featured->status) }}
+                            </span>
+                        </div>
+                        {{-- Content --}}
+                        <div class="program-content">
+                            <small class="mb-1">
+                                <span class="rounded-4 px-2 bg-success-subtle border">{{ $featured->category->name
+                                    }}</span>
+                            </small>
+
+                            <h5 class="program-title">{{ $featured->title }}</h5>
+
+                            <p class="program-text">
+                                {{ Str::limit($featured->description, 120) }}
+                            </p>
+
+                            <a href="{{ route('guest.projects.show', $featured->slug) }}" class="btn btn-success w-100">
+                                View Project <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+                @empty
+                <div class="col-12">
+                    <div class="alert alert-warning text-center">
+                        No featured projects available at the moment.
+                    </div>
+                </div>
+                @endforelse
+
+            </div>
+        </div>
+
+        <div class="my-4 text-center">
+            <a href="{{ route('guest.projects.index') }}" class="btn btn-outline-success">
+                View All Projects
+            </a>
+        </div>
+    </section>
+
+    <!-- community-to-learn -->
+    @if ($impactData)
+    <section class="community-to-learn">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="section-header">
+                        <span class="text-uppercase small fw-semibold text-muted d-block mb-2">
+                            Our Impact
+                        </span>
+                        <h2>We measure outcomes, not activities.</h2>
+                        <p>We are dedicated to transforming lives by empowering beneficiaries, supporting women and
+                            children, and building sustainable projects with the help of our sponsors and donors.</p>
+                    </div>
+                    @if ($impactData->community_impact)
+                    @foreach ($impactData->community_impact as $impact)
+                    <div class="community-item d-flex align-items-center">
+                        <span class="community-icon-1">
+                            <i class="fas {{$impact['icon']}}"></i>
+                        </span>
                         <div>
-                            <h5 class="mb-1">{{$step['title']}}</h5>
-                            <p>{{$step['description']}}</p>
+                            <h5 class="mb-2">{{$impact['title']}}</h5>
+                            <p class="mb-0">{{$impact['description']}}</p>
                         </div>
                     </div>
                     @endforeach
 
                     @endif
 
+                    <div class="d-flex align-items-center gap-2">
+                        <a href="{{route('guest.about.impact')}}" class="btn btn-dark btn-md">View More</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="community-img d-none d-lg-flex">
+                        <img src="{{asset($impactData->image_1 ?? 'assets/diva/img-4.jpg')}}" alt="img"
+                            class="img-fluid community-img-03">
+                        <img src="{{asset($impactData->image_2 ?? 'assets/diva/img-16.jpg')}}" alt="img"
+                            class="img-fluid community-img-04">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-@endif
+    </section>
+    @endif
 
 
-<!-- how it works -->
-
-<!-- faq -->
-<div class="faq-section faq-banner-bg">
-    <!-- Background Decorations -->
-    <img src="assets/img/bg/bg-21.svg" alt="background" class="d-lg-flex d-none faq-bg2">
-    <img src="assets/img/bg/bg-22.svg" alt="background" class="d-lg-flex d-none faq-bg3">
-
-    <div class="container">
-        <div class="row align-items-center">
-            <!-- FAQ Image -->
-            <div class="col-lg-6">
-                <div class="faq-img" data-aos="fade-up">
-                    <img class="img-fluid rounded-5" src="{{asset(setup_data('home_faq_image') ?? NO_IMAGE)}}"
-                        alt="Divafam FAQ">
-                    <span><i class="isax isax-message-question5"></i></span>
-                </div>
-            </div>
-
-            <!-- FAQ Content -->
-            <div class="col-lg-6">
-                <div class="faq-content">
-                    <div class="section-header" data-aos="fade-up">
-                        <span class="fw-medium text-secondary text-decoration-underline mb-2 d-inline-block">
-                            Your Questions are Answered
-                        </span>
-                        <h2 class="mb-1">Frequently Asked Questions</h2>
-                        <p>Learn more about Divafam’s mission, training, donations, and community impact.</p>
+    @if ($worksData)
+    <!-- how it works -->
+    <div class="how-it-works-sec-two">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="me-5" data-aos="fade-up">
+                        <img src="{{asset($worksData->image_1 ?? 'assets/diva/img-13.jpg') }}"
+                            class="img-fluid rounded-5" alt="DivaFam Impact">
                     </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="how-it-works-content aos" data-aos="fade-up">
+                        <div class="section-header">
+                            <span class="text-uppercase small fw-semibold text-muted d-block mb-2">
+                                How We Work
+                            </span>
+                            <h2 class="mb-1">Getting Involved with DivaFam</h2>
+                            <p>Together with our sponsors, donors, and community members, we bring projects to life that
+                                create lasting impact.</p>
+                        </div>
 
-                    <!-- Accordion -->
-                    <div class="accordion accordion-customicon1 accordions-items-seperate" id="faqAccordion">
-
-                        @foreach($faqs as $index => $faq)
-                        <div class="accordion-item" data-aos="fade-up" data-aos-delay="{{ $index * 50 }}">
-                            <h2 class="accordion-header" id="faqHeading{{ $index }}">
-                                <button class="accordion-button {{ $index !== 0 ? 'collapsed' : '' }}" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#faqCollapse{{ $index }}"
-                                    aria-expanded="{{ $index === 0 ? 'true' : 'false' }}"
-                                    aria-controls="faqCollapse{{ $index }}">
-                                    {{ $faq->question }}
-                                    <i class="isax isax-add fs-20 fw-semibold ms-1"></i>
-                                </button>
-                            </h2>
-                            <div id="faqCollapse{{ $index }}"
-                                class="accordion-collapse collapse {{ $index === 0 ? 'show' : '' }}"
-                                aria-labelledby="faqHeading{{ $index }}" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body pt-0">
-                                    {!! $faq->answer !!}
-                                </div>
+                        @if ($worksData->steps)
+                        @foreach ($worksData->steps as $index => $step)
+                        <div class="d-flex align-items-center works-items">
+                            <span class="count">0{{$index+1}}</span>
+                            <div>
+                                <h5 class="mb-1">{{$step['title']}}</h5>
+                                <p>{{$step['description']}}</p>
                             </div>
                         </div>
                         @endforeach
-                    </div><!-- End Accordion -->
+
+                        @endif
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    @endif
 
-<!-- faq -->
+    <!-- faq -->
+    <div class="faq-section">
+        <div class="container">
+            <div class="row align-items-center">
 
-<div class="about-us">
-    <div class="container">
-        <div class="about-us-content">
-            <div class="row align-items-center justify-content-between">
-                <div class="col-lg-7 aos" data-aos="fade-up">
-                    <div class="about-us-head" data-aos="fade-up">
-                        <h2>What Our Beneficiaries Say ❤️</h2>
-                        <p>Hear directly from women and young people whose lives have been transformed through Divafam’s
-                            work.</p>
+                <div class="col-lg-4 order-2 order-lg-1">
+                    <div class="faq-side-cta p-4 rounded-4 h-100 d-flex flex-column justify-content-center">
+
+                        <div class="mb-3">
+                            <h5 class="fw-bold">Need More Help?</h5>
+                            <p class="text-muted mb-0">
+                                If your question isn’t answered here, our team is ready to assist you.
+                            </p>
+                        </div>
+
+                        <hr>
+
+                        <div class="mb-3">
+                            <h6 class="fw-semibold">Get in Touch</h6>
+                            <p class="text-muted small">
+                                Reach out for inquiries, partnerships, or support.
+                            </p>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <a href="{{ route('guest.contact') }}" class="btn btn-success">
+                                Contact Us
+                            </a>
+
+                            <a href="{{ route('guest.projects.index') }}" class="btn btn-outline-success">
+                                View Our Projects
+                            </a>
+                        </div>
+
                     </div>
-                    <div class="owl-carousel owl-theme nav-bottom" id="review-carousel">
+                </div>
+
+                <!-- FAQ Content -->
+                <div class="col-lg-8 order-1 order-lg-2 mb-4 mb-lg-0">
+                    <div class="faq-content">
+                        <div class="section-header" data-aos="fade-up">
+                            <span class="text-uppercase small fw-semibold text-muted d-block mb-2">
+                                Your Questions are Answered
+                            </span>
+                            <h2 class="mb-1">Frequently Asked Questions</h2>
+                            <p>Learn more about Divafam’s mission, training, donations, and community impact.</p>
+                        </div>
+
+                        <!-- Accordion -->
+                        <div class="accordion accordion-customicon1 accordions-items-seperate" id="faqAccordion">
+
+                            @foreach($faqs as $index => $faq)
+                            <div class="accordion-item" data-aos="fade-up" data-aos-delay="{{ $index * 50 }}">
+                                <h2 class="accordion-header" id="faqHeading{{ $index }}">
+                                    <button class="accordion-button {{ $index !== 0 ? 'collapsed' : '' }}" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#faqCollapse{{ $index }}"
+                                        aria-expanded="{{ $index === 0 ? 'true' : 'false' }}"
+                                        aria-controls="faqCollapse{{ $index }}">
+                                        {{ $faq->question }}
+                                        <i class="isax isax-add fs-20 fw-semibold ms-1"></i>
+                                    </button>
+                                </h2>
+                                <div id="faqCollapse{{ $index }}"
+                                    class="accordion-collapse collapse {{ $index === 0 ? 'show' : '' }}"
+                                    aria-labelledby="faqHeading{{ $index }}" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body pt-0">
+                                        {!! $faq->answer !!}
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div><!-- End Accordion -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="testimonials-section py-5">
+        <div class="container">
+
+            <!-- HEADER -->
+            <div class="text-center mb-5">
+                <span class="text-uppercase small fw-semibold text-muted d-block mb-2">
+                    Testimonies
+                </span>
+                <h2 class="fw-bold">Voices from Our Community</h2>
+                <p class="text-muted">
+                    Real stories from women and youth whose lives have been impacted through our programs.
+                </p>
+            </div>
+
+            <div class="row align-items-center g-4">
+
+                <!-- TESTIMONIALS -->
+                <div class="col-lg-7">
+                    <div class="owl-carousel owl-theme" id="review-carousel">
+
                         @forelse ($testimonies as $testimony)
-                        <div class="item flex-fill">
-                            <div class="review-item">
-                                <i class="isax isax-quote-up5 fs-24 text-primary text-opacity-50"></i>
-                                <h5 class="title">{{$testimony->subject}}</h5>
-                                <p>{{$testimony->message}}</p>
-                                <div class="d-flex align-items-center review-user">
-                                    <div class="me-2">
-                                        <img src="{{asset($testimony->image ?? NO_IMAGE)}}" alt="img"
-                                            class="img-fluid rounded-circle" width="50">
+                        <div class="item">
+                            <div class="card testimonial-card shadow-sm">
+
+                                <div class="card-body">
+
+                                    <!-- QUOTE -->
+                                    <div class="mb-3">
+                                        <i class="isax isax-quote-up5 text-success fs-3 opacity-50"></i>
                                     </div>
-                                    <div>
-                                        <h6 class="fw-medium mb-0">{{$testimony->name}}</h6>
-                                        {{-- <p class="mb-0 small"></p> --}}
+
+                                    <!-- TITLE -->
+                                    <h5 class="fw-semibold">
+                                        {{ $testimony->subject }}
+                                    </h5>
+
+                                    <!-- MESSAGE -->
+                                    <p class="text-muted">
+                                        {{ $testimony->message }}
+                                    </p>
+
+                                    <!-- USER -->
+                                    <div class="d-flex align-items-center mt-3">
+                                        <img src="{{ asset($testimony->image ?? NO_IMAGE) }}"
+                                            class="testimonial-avatar rounded-circle me-2" alt="{{ $testimony->name }}">
+
+                                        <div>
+                                            <h6 class="mb-0 fw-medium">
+                                                {{ $testimony->name }}
+                                            </h6>
+                                            <small class="text-muted">
+                                                Beneficiary
+                                            </small>
+                                        </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
                         @empty
-                        <div class="item flex-fill">
-                            <div class="review-item text-center">
-                                <i class="isax isax-quote-up5 fs-24 text-primary text-opacity-50"></i>
-                                <h5 class="title">No testimonies yet</h5>
-                                <p>Be the first to share your story and inspire others!</p>
+                        <div class="item">
+                            <div class="card border-0 text-center p-4 shadow-sm">
+                                <h5>No testimonies yet</h5>
+                                <p class="text-muted">
+                                    Be the first to share your story and inspire others.
+                                </p>
                             </div>
                         </div>
                         @endforelse
@@ -401,136 +553,90 @@
                     </div>
                 </div>
 
+                <!-- SIDE PANEL (IMAGE + IMPACT) -->
                 <div class="col-lg-5">
-                    <div class="img-section">
-                        <img src="{{asset(setup_data('home_testimony_image')) ?? 'assets/diva/img-4.jpg'}}" alt="img"
-                            class="img-fluid about-img aos" data-aos="zoom-in">
-                        <div class="enrolled-list-cover d-none d-xl-flex aos" data-aos="fade-down">
-                            <div class="enrolled-list">
-                                <div class="avatar-list-stacked">
-                                    {{-- <span class="avatar avatar-rounded">
-                                        <img class="border border-white" src="assets/diva/img-3.jpg" alt="img">
-                                    </span> --}}
-                                    {{-- <span class="avatar avatar-rounded">
-                                        <img class="border border-white" src="assets/diva/img-3.jpg" alt="img">
-                                    </span>
-                                    <span class="avatar avatar-rounded">
-                                        <img class="border border-white" src="assets/diva/img-3.jpg" alt="img">
-                                    </span> --}}
+                    <div class="testimonial-side text-center p-4 rounded-4 h-100">
 
+                        <img src="{{ asset(setup_data('home_testimony_image') ?? NO_IMAGE) }}"
+                            class="img-fluid rounded-4 mb-3" alt="Community impact">
 
-                                </div>
-                                <p class="mb-0 text-light fw-bold text-center">
-                                    <span class="text-secondary">{{get_data_counts()['testimonyCount']}}+</span> Stories
-                                    Shared
-                                </p>
-                            </div>
-                        </div>
-                        <img src="assets/img/bg/arrow.png" alt="img" class="img-fluid arrow d-none d-xl-flex">
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div class="apply-role-section py-5">
-            <div class="row row-gap-4">
-                <!-- Become a Sponsor -->
-                <div class="col-md-6">
-                    <div class="role-item aos aos-init aos-animate shadow-sm p-4 rounded" data-aos="fade-right">
-                        <div class="row align-items-center">
-                            <div class="col-xl-8">
-                                <h5 class="mb-2">Become a Sponsor</h5>
-                                <p class="mb-4">Support our programs and help provide resources for women and youth
-                                    in farming.</p>
-                                <a href="{{route('guest.donate')}}"
-                                    class="btn btn-primary rounded-pill d-inline-flex align-items-center">
-                                    Continue <i class="fas fa-arrow-right ms-2"></i>
-                                </a>
-                            </div>
-                            <div class="col-xl-4 text-center">
-                                <i class="fas fa-hand-holding-usd fa-4x text-primary"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Become a Donor -->
-                <div class="col-md-6">
-                    <div class="role-item student-bg aos aos-init aos-animate shadow-sm p-4 rounded" data-aos="fade-up">
-                        <div class="row align-items-center">
-                            <div class="col-xl-8">
-                                <h5 class="mb-2">Become a Donor</h5>
-                                <p class="mb-4">Contribute to training, tools, and food security projects in local
-                                    communities.</p>
-                                <a href="{{route('guest.donate')}}"
-                                    class="btn btn-light rounded-pill d-inline-flex align-items-center">
-                                    Continue <i class="fas fa-arrow-right ms-2"></i>
-                                </a>
-                            </div>
-                            <div class="col-xl-4 text-center">
-                                <i class="fas fa-donate fa-4x text-dark"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <img src="assets/img/bg/about-bg-01.png" alt="img" class="img-fluid about-bg-01 d-none d-xl-flex">
-        <img src="assets/img/bg/about-bg-02.png" alt="img" class="img-fluid about-bg-02 d-none d-xl-flex">
-    </div>
-</div>
-<div class="blog-section position-relative">
-    <div class="container">
-        <div class="section-header text-center aos aos-init aos-animate" data-aos="fade-up">
-            <span class="section-badge">Blog</span>
-            <h2>Latest Articles &amp; News</h2>
-            <p>Explore curated content to enlighten, entertain and engage global readers.</p>
-        </div>
-        <div class="row row-gap-4 justify-content-center">
-            @forelse ($featuredPosts as $post)
-            <div class="col-lg-4 col-md-6">
-                <div class="blog-card aos aos-init aos-animate" data-aos="zoom-in">
-                    <div class="blog-img">
-                        <a href="{{ route('guest.news.show', ['slug' => $post->slug]) }}"><img class="img-fluid w-100"
-                                style="height: 200px; object-fit: cover;" alt="Img"
-                                src="{{asset($post->cover_image ?? NO_IMAGE)}}"></a>
-                    </div>
-                    <div class="blog-content">
-                        <h5><a href="{{ route('guest.news.show', ['slug' => $post->slug]) }}">{{$post->title}}</a>
+                        <h5 class="fw-bold">
+                            {{ get_data_counts()['testimonyCount'] }}+ Stories Shared
                         </h5>
-                        <p>{{$post->summary}}
+
+                        <p class="text-muted">
+                            Every story represents a life transformed through empowerment, training, and support.
                         </p>
-                        <div class="blog-user d-flex align-items-center justify-content-between">
-                            <div class="d-flex align-items-center">
-                                <a href="#" class="avatar me-2">
-                                    <img src="{{asset($post->author->avatar_url ?? NO_IMAGE)}}" alt="img"
-                                        class="img-fluid">
-                                </a>
-                                <p class="mb-0 d-flex align-items-center"><a href="#"
-                                        class="fw-medium ms-1">{{$post->author->name}}</a></p>
+
+                        <a href="{{ route('guest.testimonials') }}" class="btn btn-outline-success mt-2">
+                            See More
+                        </a>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <div class="blog-section position-relative">
+        <div class="container">
+            <div class="section-header text-center aos aos-init aos-animate" data-aos="fade-up">
+                <span class="text-uppercase small fw-semibold text-muted d-block mb-2">
+                    Our Blog
+                </span>
+                <h2>Latest Articles &amp; News</h2>
+                <p>Explore curated content to enlighten, entertain and engage global readers.</p>
+            </div>
+            <div class="row row-gap-4 justify-content-center">
+                @forelse ($featuredPosts as $post)
+                <div class="col-lg-4 col-md-6">
+                    <div class="blog-card aos aos-init aos-animate" data-aos="zoom-in">
+
+                        <div class="blog-content">
+                            <div class="blog-img">
+                                <a href="{{ route('guest.news.show', ['slug' => $post->slug]) }}"><img
+                                        class="img-fluid w-100" style="height: 200px; object-fit: cover;" alt="Img"
+                                        src="{{asset($post->cover_image ?? NO_IMAGE)}}"></a>
                             </div>
-                            <p class="d-flex align-items-center"><i
-                                    class="isax isax-calendar-1 text-gray-7"></i>{{$post->published_at->format('jS M,
-                                Y')}}</p>
+                            <h5><a href="{{ route('guest.news.show', ['slug' => $post->slug]) }}">{{$post->title}}</a>
+                            </h5>
+                            <p>{{$post->summary}}
+                            </p>
+                            <div class="blog-user d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <a href="#" class="avatar me-2">
+                                        <img src="{{asset($post->author->avatar_url ?? NO_IMAGE)}}" alt="img"
+                                            class="img-fluid">
+                                    </a>
+                                    <p class="mb-0 d-flex align-items-center"><a href="#"
+                                            class="fw-medium ms-1">{{$post->author->name}}</a></p>
+                                </div>
+                                <p class="d-flex align-items-center"><i
+                                        class="isax isax-calendar-1 text-gray-7"></i>{{$post->published_at->format('jS
+                                    M,
+                                    Y')}}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            @empty
-            <div class="col-12 text-center">
-                <div class="alert alert-warning" role="alert">
-                    <strong>Note:</strong> No featured posts available right now.
+                @empty
+                <div class="col-12 text-center">
+                    <div class="alert alert-warning" role="alert">
+                        <strong>Note:</strong> No featured posts available right now.
+                    </div>
                 </div>
-            </div>
-            @endforelse
+                @endforelse
 
-        </div>
-        <div class="text-center mt-3">
-            <a class="btn btn-primary" data-aos="fade-up" href="{{ route('guest.news.index') }}">View All Articles</a>
+            </div>
+            <div class="text-center mt-3">
+                <a class="btn btn-primary" data-aos="fade-up" href="{{ route('guest.news.index') }}">View All
+                    Articles</a>
+            </div>
         </div>
     </div>
-</div>
+    <!-- /Latest Blog -->
 
-<!-- /Latest Blog -->
+</div>
 @endsection

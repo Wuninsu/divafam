@@ -23,10 +23,7 @@ class SettingsIndex extends Component
         'status' => true,
     ];
 
-    public function mount()
-    {
-
-    }
+    public function mount() {}
 
 
     public function edit(Setting $setup)
@@ -148,5 +145,4 @@ class SettingsIndex extends Component
 
         return view('livewire.main.settings-index', compact('setups'));
     }
-
 }

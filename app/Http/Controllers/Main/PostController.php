@@ -156,7 +156,6 @@ class PostController extends Controller
     public function show(string $id)
     {
         seo()->title('View Post - ' . config('app.name', 'DivaFam'));
-
     }
 
     /**
@@ -315,9 +314,15 @@ class PostController extends Controller
         }
     }
 
- 
+
     public function destroy(string $id)
     {
         //
+    }
+
+    public function new()
+    {
+        seo()->title('Create Post - ' . config('app.name', 'DivaFam'));
+        return  view('main.posts.new');
     }
 }

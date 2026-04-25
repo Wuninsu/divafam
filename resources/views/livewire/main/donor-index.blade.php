@@ -34,53 +34,82 @@
                             <th>EMAIL</th>
                             <th>CONTACT</th>
                             <th>TYPE</th>
+                            <th>STATUS</th>
                             <th scope="col" style="width:19%; min-width:200px;">Created</th>
                             <th>ACTION</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @forelse($this->donors as $index => $donor)
-                        <tr>
-                            <td>{{ $index + 1 }}</td>
-                            <td><span class="text-nowrap text-heading">{{ ucfirst($donor->name) }}</span>
-                            </td>
-                            <td class="email align-middle white-space-nowrap">
-                                <a class="fw-semibold" href="mailto:{{ $donor->email }}">{{ $donor->email }}</a>
-                            </td>
-                            <td><span class="text-nowrap text-heading">{{ ucfirst($donor->contact_person) }}</span>
-                            </td>
-                            <td>
-                                @php
-                                $badgeClass = match ($donor->type) {
-                                'individual' => 'info',
-                                'corporate' => 'primary',
-                                'foundation' => 'success',
-                                'government' => 'warning',
-                                default => 'secondary',
-                                };
-                                @endphp
-                                <span class="badge badge-phoenix badge-phoenix-{{ $badgeClass }} text-capitalized">
-                                    {{ ucfirst($donor->type) }}
-                                </span>
-                            </td>
-                            <td>{{ $donor->created_at->format('d M Y, h:i A') }}</td>
-                            <td>
-                                <div class="btn-group">
-                                    <button class="btn btn-sm btn-outline-primary"
-                                        wire:click='editDonor({{ $donor->id }})'>Edit</button>
-                                    <button class="btn btn-sm btn-outline-danger"
-                                        wire:click='confirmDelete({{ $donor->id }})'>Delete</button>
-                                </div>
-                            </td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="5" class="text-center text-muted py-3">
-                                No donors found.
-                            </td>
-                        </tr>
-                        @endforelse
-                    </tbody>
+                  <tbody>
+    @forelse($this->donors as $index => $donor)
+    <tr>
+        <td>{{ $index + 1 }}</td>
+
+        <td>
+            <span class="text-nowrap text-heading">
+                {{ ucfirst($donor->name) }}
+            </span>
+        </td>
+
+        <td class="email align-middle white-space-nowrap">
+            <a class="fw-semibold" href="mailto:{{ $donor->email }}">
+                {{ $donor->email }}
+            </a>
+        </td>
+
+        <td>
+            <span class="text-nowrap text-heading">
+                {{ ucfirst($donor->contact_person) }}
+            </span>
+        </td>
+
+        {{-- Type --}}
+        <td>
+            @php
+            $badgeClass = match ($donor->type) {
+                'individual' => 'info',
+                'corporate' => 'primary',
+                'foundation' => 'success',
+                'government' => 'warning',
+                default => 'secondary',
+            };
+            @endphp
+            <span class="badge badge-phoenix badge-phoenix-{{ $badgeClass }} text-capitalized">
+                {{ ucfirst($donor->type) }}
+            </span>
+        </td>
+
+        {{-- Active Status --}}
+        <td>
+            @if($donor->is_active)
+                <span class="badge bg-success">Active</span>
+            @else
+                <span class="badge bg-danger">Inactive</span>
+            @endif
+        </td>
+
+        <td>{{ $donor->created_at->format('d M Y, h:i A') }}</td>
+
+        <td>
+            <div class="btn-group">
+                <button class="btn btn-sm btn-outline-primary"
+                    wire:click='editDonor({{ $donor->id }})'>
+                    Edit
+                </button>
+                <button class="btn btn-sm btn-outline-danger"
+                    wire:click='confirmDelete({{ $donor->id }})'>
+                    Delete
+                </button>
+            </div>
+        </td>
+    </tr>
+    @empty
+    <tr>
+        <td colspan="6" class="text-center text-muted py-3">
+            No donors found.
+        </td>
+    </tr>
+    @endforelse
+</tbody>
                     <tfoot></tfoot>
                 </table>
                 @if ($this->donors->hasPages())
@@ -152,7 +181,7 @@
                             </div>
 
                             {{-- Type --}}
-                            <div class="mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label class="form-label">Donor Type</label>
                                 <select class="form-select @error('type') is-invalid border-danger @enderror"
                                     wire:model="type">
@@ -166,7 +195,7 @@
                             </div>
 
                             {{-- Logo --}}
-                            <div class="mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label class="form-label">Logo</label>
                                 <input type="file"
                                     class="form-control @error('logo') is-invalid border-danger @enderror"
@@ -179,6 +208,20 @@
                                         class="img-thumbnail" width="100">
                                 </div>
                                 @endif
+                            </div>
+                            {{-- Active Status --}}
+                            <div class="col-12 mb-3">
+                                <div class="form-check form-switch">
+                                    <input type="checkbox"
+                                        class="form-check-input @error('is_active') is-invalid @enderror" id="is_active"
+                                        wire:model="is_active">
+                                    <label class="form-check-label" for="is_active">
+                                        Active
+                                    </label>
+                                    @error('is_active')
+                                    <span class="text-danger small">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
                     </div>

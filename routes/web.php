@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Guest\ContactController;
+use App\Http\Controllers\Guest\ProjectsController;
 use App\Http\Controllers\TrixController;
 use App\Notifications\WelcomeTestNotification;
 use Illuminate\Notifications\Notifiable;
@@ -22,7 +23,10 @@ Route::get('trix/delete/{id}', [TrixController::class, 'destroy'])->name('trix.d
 // Static pages
 Route::get('/', [App\Http\Controllers\Guest\HomeController::class, 'index'])->name('guest.home');
 Route::get('/home', [App\Http\Controllers\Guest\HomeController::class, 'index'])->name('guest.home.redirect');
+Route::get('/partners', [App\Http\Controllers\Guest\HomeController::class, 'partners'])->name('guest.parters');
 Route::get('/about-us', [App\Http\Controllers\Guest\AboutController::class, 'index'])->name('guest.about');
+Route::get('/about/our-team', [App\Http\Controllers\Guest\AboutController::class, 'team'])->name('guest.about.team');
+Route::get('/about/impacts', [App\Http\Controllers\Guest\AboutController::class, 'impact'])->name('guest.about.impact');
 Route::get('/contact-us', [App\Http\Controllers\Guest\ContactController::class, 'index'])->name('guest.contact');
 Route::get('/gallery', [App\Http\Controllers\Guest\GalleryController::class, 'index'])->name('guest.gallery');
 Route::get('/testimonials', [App\Http\Controllers\Guest\TestimonialController::class, 'index'])->name('guest.testimonials');
@@ -51,6 +55,13 @@ Route::controller(App\Http\Controllers\Guest\ProjectsController::class)->group(f
     Route::get('/projects/create', 'create')->name('guest.projects.create');
     Route::post('/projects', 'store')->name('guest.projects.store');
     Route::get('/projects/{project?}', 'show')->name('guest.projects.show');
+
+    Route::get('/programs', 'programs')->name('guest.programs.index');
+});
+
+Route::controller(App\Http\Controllers\Guest\ProgramsController::class)->group(function () {
+    Route::get('/programs', 'index')->name('guest.programs.index');
+    Route::get('/programs/{project?}', 'show')->name('guest.programs.show');
 });
 
 
@@ -77,6 +88,7 @@ Route::get('/test-email', function () {
 
     return 'Welcome test email sent!';
 });
+
 use App\Http\Controllers\Main\{
     DashboardController,
     PostController,
@@ -88,9 +100,6 @@ use App\Http\Controllers\Main\{
     BeneficiaryController,
     CommunityController,
     EventController,
-    UserController,
-    RoleController,
-    SettingController,
     CategoryController,
     FundingController,
 };
@@ -108,6 +117,8 @@ Route::prefix('secured')->middleware(['auth', 'role:admin|dev|editor|director|se
         Route::get('/posts/{post?}/show', 'show')->middleware('can:view post')->name('posts.show');
         Route::get('/posts/edit/{post?}', 'edit')->middleware('can:update post')->name('posts.edit');
         Route::put('/posts/{post?}', 'update')->middleware('can:update post')->name('posts.update');
+
+        Route::get('/posts/new', 'new')->middleware('can:create post')->name('posts.new');
     });
 
     Route::resource('tags', TagController::class)->middleware([
@@ -128,6 +139,7 @@ Route::prefix('secured')->middleware(['auth', 'role:admin|dev|editor|director|se
         Route::get('/pages/faq', 'faq')->name('pages.faq');
         Route::get('/pages/inquires', 'inquiry')->name('pages.inquiry');
         Route::get('/pages/home', 'home')->name('pages.home');
+        Route::get('/pages/documents', 'document')->name('pages.documents');
     });
 
     // Media
@@ -143,9 +155,18 @@ Route::prefix('secured')->middleware(['auth', 'role:admin|dev|editor|director|se
         Route::get('/programs', 'index')->middleware('can:view project')->name('programs.index');
         Route::get('/programs/create', 'create')->middleware('can:create project')->name('programs.create');
         Route::post('/programs', 'store')->middleware('can:create project')->name('programs.store');
-        Route::get('/programs/{project?}/show', 'show')->middleware('can:view project')->name('programs.show');
-        Route::get('/programs/{project?}', 'edit')->middleware('can:update project')->name('programs.edit');
-        Route::post('/programs/{project?}', 'update')->middleware('can:update project')->name('programs.update');
+        Route::get('/programs/{program?}/show', 'show')->middleware('can:view project')->name('programs.show');
+        Route::get('/programs/{program?}', 'edit')->middleware('can:update project')->name('programs.edit');
+        Route::post('/programs/{program?}', 'update')->middleware('can:update project')->name('programs.update');
+    });
+
+    Route::controller(ProjectsController::class)->group(function () {
+        Route::get('/projects', 'index')->middleware('can:view project')->name('projects.index');
+        Route::get('/projects/create', 'create')->middleware('can:create project')->name('projects.create');
+        Route::post('/projects', 'store')->middleware('can:create project')->name('projects.store');
+        Route::get('/projects/{project?}/show', 'show')->middleware('can:view project')->name('projects.show');
+        Route::get('/projects/{project?}', 'edit')->middleware('can:update project')->name('projects.edit');
+        Route::post('/projects/{project?}', 'update')->middleware('can:update project')->name('projects.update');
     });
 
     Route::resource('trainings', TrainingController::class)->middleware([

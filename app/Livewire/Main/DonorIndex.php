@@ -16,7 +16,7 @@ class DonorIndex extends Component
     public $search = '';
     // Modal variables
     public $donorId = null;
-    public $name, $contact_person, $email, $phone, $address, $type, $logo;
+    public $name, $contact_person, $email, $phone, $address, $type, $logo, $is_active;
 
 
     // For delete
@@ -60,6 +60,7 @@ class DonorIndex extends Component
         $this->contact_person = $donor->contact_person;
         $this->type = $donor->type;
         $this->logo = $donor->logo;
+        $this->is_active = $donor->is_active;
         $this->dispatch('show-donor-modal');
     }
 
@@ -72,6 +73,7 @@ class DonorIndex extends Component
             'email' => 'nullable|email|max:255|unique:donors,email,' . $this->donorId,
             'phone' => 'nullable|string|max:20',
             'address' => 'nullable|string|max:500',
+            'is_active' => 'nullable|boolean',
             'type' => 'required|in:individual,organization,corporate,foundation',
             'logo' => $this->donorId
                 ? 'nullable|image|mimes:jpg,jpeg,png|max:2048'   // update case
@@ -107,6 +109,7 @@ class DonorIndex extends Component
                 'address' => $this->address,
                 'type' => $this->type,
                 'logo' => $filePath,
+                'is_active' => $this->is_active,
             ]);
 
             $msg = "donor updated successfully!";
@@ -120,6 +123,7 @@ class DonorIndex extends Component
                 'address' => $this->address,
                 'type' => $this->type,
                 'logo' => $filePath,
+                'is_active' => $this->is_active
             ]);
             $msg = "donor created successfully!";
         }

@@ -101,6 +101,10 @@
                                         class="nav-link {{ request()->routeIs('pages.inquiry') ? 'active' : '' }}"
                                         href="{{ route('pages.inquiry') }}">Testimony & Inquiries</a>
                                 </li>
+                                <li class="nav-item"><a
+                                        class="nav-link {{ request()->routeIs('pages.documents') ? 'active' : '' }}"
+                                        href="{{ route('pages.documents') }}">Documents</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -120,7 +124,8 @@
                     </div> --}}
 
                     @php
-                    $isProgramActive = request()->routeIs(['programs.*', 'beneficiaries.*', 'communities.*']);
+                    $isProgramActive = request()->routeIs(['programs.*', 'projects.*', 'beneficiaries.*',
+                    'communities.*']);
                     @endphp
                     <div class="nav-item-wrapper">
                         <a class="nav-link dropdown-indicator label-1 {{ $isProgramActive ? '' : 'collapsed'}}"
@@ -131,7 +136,7 @@
                                         class="fas fa-caret-{{$isProgramActive ? 'down' : 'right'}}"></span>
                                 </div>
                                 <span class="nav-link-icon"><span data-feather="briefcase"></span></span>
-                                <span class="nav-link-text">Projects</span>
+                                <span class="nav-link-text">Programs</span>
                             </div>
                         </a>
                         <div class="parent-wrapper label-1">
@@ -140,6 +145,12 @@
                                 <li class="nav-item">
                                     <a class="nav-link {{ request()->routeIs('programs.index','programs.create','programs.edit') ? 'active' : '' }}"
                                         href="{{ route('programs.index') }}">
+                                        All Programs
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ request()->routeIs('projects.index','projects.create','projects.edit') ? 'active' : '' }}"
+                                        href="{{ route('projects.index') }}">
                                         All Projects
                                     </a>
                                 </li>
