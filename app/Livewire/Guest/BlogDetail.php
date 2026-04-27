@@ -24,7 +24,7 @@ class BlogDetail extends Component
     {
         $this->post = $post;
         if (Auth::check()) {
-            $this->liked = $post->likes()
+            $this->liked = $post->postLikes()
                 ->where('user_id', Auth::id())
                 ->exists();
         } else {
