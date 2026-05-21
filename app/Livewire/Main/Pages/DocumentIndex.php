@@ -19,7 +19,7 @@ class DocumentIndex extends Component
     public $isEdit = false;
     public $documentId;
 
-    public $title, $description, $file;
+    public $title, $description, $file,$custom_name;
 
     protected function rules()
     {
@@ -43,7 +43,7 @@ class DocumentIndex extends Component
 
         // Handle file upload
         if ($this->file) {
-            $path = uploadFile($this->file, 'uploads/documents');
+            $path = uploadFile($this->file, 'uploads/documents',$this->custom_name);
 
             $data['file_path'] = $path;
             $data['file_type'] = $this->file->getClientOriginalExtension();
@@ -68,6 +68,10 @@ class DocumentIndex extends Component
 
         $this->resetFields();
         $this->dispatch('hide-modal');
+    }
+
+    public function updatedTitle(){
+        $this->custom_name = Str::slug($this->title);
     }
 
     public function edit($id)

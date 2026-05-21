@@ -97,8 +97,17 @@
                         <div class="mb-3">
                             <label class="form-label">Document Name</label>
                             <input type="text" class="form-control @error('title') is-invalid @enderror"
-                                wire:model="title">
+                                wire:model.live="title">
                             @error('title')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Custom File Name</label>
+                            <input type="text" class="form-control @error('custom_name') is-invalid @enderror"
+                                wire:model="custom_name">
+                            @error('custom_name')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
