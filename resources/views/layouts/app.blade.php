@@ -6,7 +6,6 @@
 <body>
     <div class="main-wrapper">
 
-
         <!-- Header -->
         @include('layouts.guest.navbar')
         <!-- /Header -->

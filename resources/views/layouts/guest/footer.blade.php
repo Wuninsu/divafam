@@ -42,7 +42,7 @@
                             <div class="footer-widget footer-menu">
                                 <h5 class="footer-title">Get Involved</h5>
                                 <ul>
-                                    <li><a href="{{ route('guest.donate') }}">Donate</a></li>
+                                    <li><a href="{{ route('guest.donate') }}">Sponsor A Project</a></li>
                                     <li><a href="{{ route('guest.parters') }}">Our Partners</a></li>
                                     <li><a href="{{ route('guest.testimonials') }}">Impact Stories</a></li>
                                 </ul>

@@ -39,77 +39,77 @@
                             <th>ACTION</th>
                         </tr>
                     </thead>
-                  <tbody>
-    @forelse($this->donors as $index => $donor)
-    <tr>
-        <td>{{ $index + 1 }}</td>
+                    <tbody>
+                        @forelse($this->donors as $index => $donor)
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
 
-        <td>
-            <span class="text-nowrap text-heading">
-                {{ ucfirst($donor->name) }}
-            </span>
-        </td>
+                            <td>
+                                <span class="text-nowrap text-heading">
+                                    {{ ucfirst($donor->name) }}
+                                </span>
+                            </td>
 
-        <td class="email align-middle white-space-nowrap">
-            <a class="fw-semibold" href="mailto:{{ $donor->email }}">
-                {{ $donor->email }}
-            </a>
-        </td>
+                            <td class="email align-middle white-space-nowrap">
+                                <a class="fw-semibold" href="mailto:{{ $donor->email }}">
+                                    {{ $donor->email }}
+                                </a>
+                            </td>
 
-        <td>
-            <span class="text-nowrap text-heading">
-                {{ ucfirst($donor->contact_person) }}
-            </span>
-        </td>
+                            <td>
+                                <span class="text-nowrap text-heading">
+                                    {{ ucfirst($donor->contact_person) }}
+                                </span>
+                            </td>
 
-        {{-- Type --}}
-        <td>
-            @php
-            $badgeClass = match ($donor->type) {
-                'individual' => 'info',
-                'corporate' => 'primary',
-                'foundation' => 'success',
-                'government' => 'warning',
-                default => 'secondary',
-            };
-            @endphp
-            <span class="badge badge-phoenix badge-phoenix-{{ $badgeClass }} text-capitalized">
-                {{ ucfirst($donor->type) }}
-            </span>
-        </td>
+                            {{-- Type --}}
+                            <td>
+                                @php
+                                $badgeClass = match ($donor->type) {
+                                'individual' => 'info',
+                                'corporate' => 'primary',
+                                'foundation' => 'success',
+                                'government' => 'warning',
+                                default => 'secondary',
+                                };
+                                @endphp
+                                <span class="badge badge-phoenix badge-phoenix-{{ $badgeClass }} text-capitalized">
+                                    {{ ucfirst($donor->type) }}
+                                </span>
+                            </td>
 
-        {{-- Active Status --}}
-        <td>
-            @if($donor->is_active)
-                <span class="badge bg-success">Active</span>
-            @else
-                <span class="badge bg-danger">Inactive</span>
-            @endif
-        </td>
+                            {{-- Active Status --}}
+                            <td>
+                                @if($donor->is_active)
+                                <span class="badge bg-success">Active</span>
+                                @else
+                                <span class="badge bg-danger">Inactive</span>
+                                @endif
+                            </td>
 
-        <td>{{ $donor->created_at->format('d M Y, h:i A') }}</td>
+                            <td>{{ $donor->created_at->format('d M Y, h:i A') }}</td>
 
-        <td>
-            <div class="btn-group">
-                <button class="btn btn-sm btn-outline-primary"
-                    wire:click='editDonor({{ $donor->id }})'>
-                    Edit
-                </button>
-                <button class="btn btn-sm btn-outline-danger"
-                    wire:click='confirmDelete({{ $donor->id }})'>
-                    Delete
-                </button>
-            </div>
-        </td>
-    </tr>
-    @empty
-    <tr>
-        <td colspan="6" class="text-center text-muted py-3">
-            No donors found.
-        </td>
-    </tr>
-    @endforelse
-</tbody>
+                            <td>
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-outline-primary"
+                                        wire:click='editDonor({{ $donor->id }})'>
+                                        Edit
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger"
+                                        wire:click='confirmDelete({{ $donor->id }})'>
+                                        Delete
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="6" class="text-center text-muted py-3">
+                                No donors found.
+                            </td>
+                        </tr>
+                        @endforelse
+                    </tbody>
                     <tfoot></tfoot>
                 </table>
                 @if ($this->donors->hasPages())
@@ -205,6 +205,12 @@
                                 @if($logo && !$errors->has('logo'))
                                 <div class="mt-2">
                                     <img src="{{ is_string($logo) ? asset($logo) : $logo->temporaryUrl() }}"
+                                        class="img-thumbnail" width="100">
+                                </div>
+
+                                @else
+                                <div class="mt-2">
+                                    <img src="{{ asset($showImage) }}"
                                         class="img-thumbnail" width="100">
                                 </div>
                                 @endif

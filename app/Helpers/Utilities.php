@@ -20,7 +20,7 @@ if (!function_exists('get_data_counts')) {
         return [
             'activeDonors' => Donor::count(),
             'projectsCount' => Project::count(),
-            'beneficiariesCount' => Beneficiary::count() + 100,
+            'beneficiariesCount' => Beneficiary::count() + (int) setup_data('total_beneficiaries'),
             'communitiesCount' => Community::count(),
             'testimonyCount' => Inquiry::where('type', 'testimony')->where('status', true)->count(),
         ];

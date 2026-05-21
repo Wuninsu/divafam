@@ -19,7 +19,8 @@ Route::post('trix/update/{id}', [TrixController::class, 'update'])->name('trix.u
 
 Route::get('trix/delete/{id}', [TrixController::class, 'destroy'])->name('trix.delete');
 
-
+Route::get('about/governance', [App\Http\Controllers\Guest\AboutController::class, 'governance'])
+    ->name('guest.governance');
 // Static pages
 Route::get('/', [App\Http\Controllers\Guest\HomeController::class, 'index'])->name('guest.home');
 Route::get('/home', [App\Http\Controllers\Guest\HomeController::class, 'index'])->name('guest.home.redirect');
@@ -38,7 +39,7 @@ Route::get('/faqs', [App\Http\Controllers\Guest\TermsController::class, 'faq'])-
 
 // Blog routes
 Route::controller(App\Http\Controllers\Guest\DonationController::class)->group(function () {
-    Route::get('/donate', 'donate')->name('guest.donate');
+    Route::get('/sponser-a-project', 'donate')->name('guest.donate');
     Route::get('/donors', 'donors')->name('guest.donors');
 });
 

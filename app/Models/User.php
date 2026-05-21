@@ -32,7 +32,8 @@ class User extends Authenticatable
         'avatar_url',
         'google_id',
         'facebook_id',
-        'is_team_member'
+        'is_team_member',
+        'is_advisory_board_member',
     ];
 
     /**
@@ -55,7 +56,8 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'is_team_member'=>'boolean'
+            'is_team_member'=>'boolean',
+            'is_advisory_board_member'=>'boolean'
         ];
     }
 

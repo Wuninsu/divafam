@@ -60,6 +60,15 @@ class AboutController extends Controller
             ->latest()
             ->get();
 
+              $boardMembers = User::query()
+            ->with(['roles']) // avoid N+1 if roles used in view
+            ->where('is_advisory_board_member', true)
+            ->whereDoesntHave('roles', function ($query) {
+                $query->whereIn('name', ['dev', 'guest', 'donor', 'beneficiary']);
+            })
+            ->latest()
+            ->get();
+
         // DONORS (only necessary fields)
         $donors = Donor::query()
             ->select('id', 'name', 'logo') // adjust based on your schema
@@ -79,6 +88,7 @@ class AboutController extends Controller
         return view('guest.our-team', [
             'more' => $more,
             'teamMembers' => $teamMembers,
+            'boardMembers' => $boardMembers,
             'donors' => $donors,
             'faqs' => $faqs,
         ]);
@@ -102,5 +112,21 @@ class AboutController extends Controller
         $more = optional(get_page_by_slug('impact'))->content;
 
         return view('guest.impact');
+    }
+
+    public function governance()
+    {
+        // SEO
+        seo()
+            ->site(config('app.name') . ' — Governance & Compliance')
+            ->title('Governance & Compliance - ' . config('app.name'))
+            ->description('Learn about the governance, accountability, safeguarding, donor compliance, financial transparency, and institutional systems guiding ' . config('app.name') . ' across Ghana.')
+            ->keywords('NGO governance Ghana, donor compliance NGO, safeguarding policy Ghana, NGO accountability, financial transparency NGO, governance and compliance Africa, climate NGO governance')
+            ->canonical(url()->current())
+            ->twitterCard('summary_large_image')
+            ->image(default: fn() => asset(setup_data('favicon')))
+            ->twitterSite('@divafam');
+
+        return view('guest.governance');
     }
 }

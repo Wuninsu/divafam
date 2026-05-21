@@ -8,8 +8,7 @@
                     </span>
                 </a>
                 <a class="navbar-brand d-flex align-items-center gap-2" href="{{ url('/') }}">
-                    <img src="{{asset(setup_data('logo') ?? NO_IMAGE)}}"
-                        alt="DivaFam Logo" class="brand-logo">
+                    <img src="{{asset(setup_data('logo') ?? NO_IMAGE)}}" alt="DivaFam Logo" class="brand-logo">
                     <div class="d-flex flex-column align-items-start">
                         <div class="brand-name me-2">Diva Fam</div>
                         <div class="brand-tagline">Hope for the marginalized</div>
@@ -29,18 +28,41 @@
                         <a class="nav-link" href="{{ route('guest.home') }}">Home</a>
                     </li>
 
-                    <li class="has-submenu {{ request()->routeIs('guest.about','guest.about.team','guest.about.impact') ? 'active' : '' }}">
-                        <a href="#">About <i class="fas fa-chevron-down"></i></a>
-                        <ul class="submenu">
-                            <li class="{{ request()->routeIs('guest.about') ? 'active' : '' }}"><a
-                                    href="{{ route('guest.about') }}">About Us</a></li>
-                            <li class="{{ request()->routeIs('guest.about.team') ? 'active' : '' }}"><a
-                                    href="{{route('guest.about.team')}}">Our Team</a></li>
-                            <li class="{{ request()->routeIs('guest.about.impact') ? 'active' : '' }}"><a
-                                    href="{{route('guest.about.impact')}}">Our Impact</a></li>
-                        </ul>
-                    </li>
+                    <li class="has-submenu {{ request()->routeIs('guest.about','guest.about.team','guest.about.impact','guest.governance') ? 'active' : '' }}">
 
+                        <a href="#">
+                            About <i class="fas fa-chevron-down"></i>
+                        </a>
+
+                        <ul class="submenu">
+
+                            <li class="{{ request()->routeIs('guest.about') ? 'active' : '' }}">
+                                <a href="{{ route('guest.about') }}">
+                                    About Divafam
+                                </a>
+                            </li>
+
+                            <li class="{{ request()->routeIs('guest.about.team') ? 'active' : '' }}">
+                                <a href="{{ route('guest.about.team') }}">
+                                    Leadership
+                                </a>
+                            </li>
+
+                            <li class="{{ request()->routeIs('guest.about.impact') ? 'active' : '' }}">
+                                <a href="{{ route('guest.about.impact') }}">
+                                    Impact & Reports
+                                </a>
+                            </li>
+
+                            <li class="{{ request()->routeIs('guest.governance') ? 'active' : '' }}">
+                                <a href="{{ route('guest.governance') }}">
+                                    Governance & Compliance
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </li>
                     {{-- Programs --}}
                     <li class="{{ request()->routeIs('guest.programs*') ? 'active' : '' }}">
                         <a href="{{ route('guest.programs.index') }}">Programs</a>
@@ -57,11 +79,12 @@
                     </li>
 
                     {{-- Get Involved --}}
-                    <li class="has-submenu {{ request()->routeIs('guest.donate','guest.donors','guest.parters','guest.testimonials') ? 'active' : '' }}">
+                    <li
+                        class="has-submenu {{ request()->routeIs('guest.donate','guest.donors','guest.parters','guest.testimonials') ? 'active' : '' }}">
                         <a href="#">Get Involved <i class="fas fa-chevron-down"></i></a>
                         <ul class="submenu">
                             <li class="{{ request()->routeIs('guest.donate') ? 'active' : '' }}">
-                                <a href="{{ route('guest.donate') }}">Donate Now</a>
+                                <a href="{{ route('guest.donate') }}">Sponsor A Project</a>
                             </li>
                             <li class="{{ request()->routeIs('guest.parters') ? 'active' : '' }}">
                                 <a href="{{route('guest.parters')}}">Our Partners</a>
@@ -87,7 +110,7 @@
                     </button>
 
                     <a href="{{ route('guest.donate') }}" class="btn-primary donate-btn w-100">
-                        <i class="fas fa-donate me-1"></i> Donate Now
+                        <i class="fas fa-donate me-1"></i> Sponsor A Project
                     </a>
                 </div>
             </div>
@@ -97,7 +120,7 @@
                 </button>
 
                 <a href="{{ route('guest.donate') }}" class="btn-primary donate-btn">
-                    <i class="fas fa-donate me-1"></i> Donate Now
+                    <i class="fas fa-donate me-1"></i> Sponsor A Project
                 </a>
             </div>
         </div>

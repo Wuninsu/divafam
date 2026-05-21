@@ -18,6 +18,7 @@ class DonorIndex extends Component
     public $donorId = null;
     public $name, $contact_person, $email, $phone, $address, $type, $logo, $is_active;
 
+    public $showImage;
 
     // For delete
     public $deleteId = null;
@@ -59,7 +60,7 @@ class DonorIndex extends Component
         $this->address = $donor->address;
         $this->contact_person = $donor->contact_person;
         $this->type = $donor->type;
-        $this->logo = $donor->logo;
+        $this->showImage = $donor->logo;
         $this->is_active = $donor->is_active;
         $this->dispatch('show-donor-modal');
     }
@@ -75,9 +76,7 @@ class DonorIndex extends Component
             'address' => 'nullable|string|max:500',
             'is_active' => 'nullable|boolean',
             'type' => 'required|in:individual,organization,corporate,foundation',
-            'logo' => $this->donorId
-                ? 'nullable|image|mimes:jpg,jpeg,png|max:2048'   // update case
-                : 'nullable|image|mimes:jpg,jpeg,png|max:2048', // create case
+            'logo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
         ];
     }
 
@@ -86,8 +85,8 @@ class DonorIndex extends Component
      */
     public function createOrUpdateDonor()
     {
+        //  dd($this->logo);
         $this->validate();
-
         $donor = Donor::find($this->donorId);
         $filePath = $donor ? $donor->logo : null;
 

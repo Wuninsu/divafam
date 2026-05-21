@@ -17,7 +17,7 @@ class TeamMembers extends Component
         // Query tag with optional search
         return User::query()
             ->whereDoesntHave('roles', function ($query) {
-                $query->whereIn('name', ['dev', 'guest', 'donor','beneficiary']);
+                $query->whereIn('name', ['dev', 'guest', 'donor', 'beneficiary']);
             })
             ->when($this->search, function ($query) {
                 $query->where('name', 'like', '%' . $this->search . '%');
@@ -32,9 +32,17 @@ class TeamMembers extends Component
         $user->is_team_member = !$user->is_team_member;
         $user->save();
 
-        session()->flash('message', 'Team member status updated.');
+        flash('Team member status updated.', 'success');
     }
 
+
+    public function toggleAdvisoryBoardMember($userId)
+    {
+        $user = User::findOrFail($userId);
+        $user->is_advisory_board_member = !$user->is_advisory_board_member;
+        $user->save();
+        flash('Advisory board member status updated.', 'success');
+    }
 
 
 

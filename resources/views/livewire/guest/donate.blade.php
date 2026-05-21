@@ -1,11 +1,11 @@
 <div>
     <div class="breadcrumb-hero text-center">
         <div class="container">
-            <h1 class="breadcrumb-title">Donate</h1>
+            <h1 class="breadcrumb-title">Sponsor A Project</h1>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb justify-content-center mb-0">
                     <li class="breadcrumb-item"><a href="{{ route('guest.home') }}">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Donate</li>
+                    <li class="breadcrumb-item active" aria-current="page">Sponsor A Project</li>
                 </ol>
             </nav>
         </div>
@@ -21,7 +21,7 @@
 
                             <!-- Header -->
                             <div class="text-center mb-4">
-                                <h4 class="fw-bold">Make Donation</h4>
+                                <h4 class="fw-bold">Sponsor A Project</h4>
                                 <p class="text-muted mb-0">
                                     Please use the details below to support Diva Fam
                                 </p>
