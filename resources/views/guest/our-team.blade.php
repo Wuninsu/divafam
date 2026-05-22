@@ -60,7 +60,8 @@
                     </div>
 
                     <p class="small text-muted mt-3">
-                        {{ Str::limit(strip_tags($team->getMeta('biography')), 220) }}
+                        {{-- {{ Str::limit(strip_tags($team->getMeta('biography')), 220) }} --}}
+                        {{ $team->getMeta('biography') }}
                     </p>
 
                     <div class="social-icons mt-3 d-flex gap-3">
