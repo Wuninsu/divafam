@@ -128,8 +128,8 @@
 
         </div>
         <div class="row align-items-center justify-content-between py-2 pe-0 fs-9">
-            @if ($users->hasPages())
-            {{ $users->links() }}
+            @if ($this->users->hasPages())
+            {{ $this->users->links() }}
             @endif
         </div>
         <style>
