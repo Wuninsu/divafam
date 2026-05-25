@@ -103,7 +103,7 @@
                         <div class="ps-md-3 mt-2 mt-md-0">
                             <span class="text-secondary mb-1">Author</span>
                             <h5 class="mb-1 fs-18"><a href="#">{{ $post->author->name ?? 'Unknown' }}</a></h5>
-                            <p>{{ $post->author->bio ?? 'No biography' }}</p>
+                            <p>{{ $post->author->getMeta('biography') ?? 'No biography' }}</p>
                         </div>
                     </div>
 
